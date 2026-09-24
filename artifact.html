@@ -1,0 +1,214 @@
+<title>會議錄影守門員</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="app.css">
+
+<div class="rail">
+  <div class="rail-id">
+    <span class="rec-dot" id="statusDot"></span>
+    <span class="rail-name">會議錄影守門員</span>
+  </div>
+  <div class="rail-clock" id="timer" hidden>00:00:00</div>
+  <div class="rail-state" id="statusText">初始化</div>
+</div>
+
+<div class="alert" id="alertBar" hidden>
+  <span class="alert-mark" id="alertIcon">!</span>
+  <div class="alert-body">
+    <div class="alert-title" id="alertTitle"></div>
+    <div class="alert-detail" id="alertDetail"></div>
+  </div>
+  <button type="button" class="btn ghost sm" id="alertMute">靜音提示</button>
+</div>
+
+<main>
+
+  <p class="lede">
+    錄 Webex、Zoom、Teams 這類會議軟體的螢幕與聲音。全部在你自己的瀏覽器裡跑，
+    影像和聲音不會離開這台電腦。它跟一般錄影工具的差別只有一件事：
+    <strong>它會在開錄前、錄製中、錄完後各驗一次，不讓你錄完才發現沒錄到。</strong>
+  </p>
+
+  <!-- ── 環境自檢 ── -->
+  <section class="panel" id="envCard">
+    <div class="panel-head">
+      <span class="eyebrow">執行環境</span>
+      <h2>這個瀏覽器做得到什麼</h2>
+    </div>
+    <div class="checks" id="envList"></div>
+    <div id="envEscape" hidden>
+      <p class="note">螢幕擷取在嵌入的頁面裡被瀏覽器擋住。把下面這個網址貼到瀏覽器自己的分頁，就是同一個工具、而且功能完整：</p>
+      <code class="urlbox" id="directUrl"></code>
+      <div class="row">
+        <button type="button" class="btn accent" id="btnCopyUrl">複製網址</button>
+        <button type="button" class="btn" id="btnOpenTab">試著直接開新分頁</button>
+        <span class="note" id="copyNote"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 救援 ── -->
+  <section class="panel flagged" id="recoveryCard" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">救援</span>
+      <h2>上次留下來的錄影檔</h2>
+    </div>
+    <p class="note">還存在瀏覽器本機儲存區裡。可能是上次當掉，也可能是匯出後沒清掉。</p>
+    <div id="recoveryList" class="rows"></div>
+  </section>
+
+  <!-- ── 1 設定 ── -->
+  <section class="panel" id="setupCard">
+    <div class="panel-head">
+      <span class="eyebrow">步驟一</span>
+      <h2>設定</h2>
+    </div>
+
+    <div class="field">
+      <label for="btnPickDir">錄完存到哪個資料夾</label>
+      <div class="row">
+        <button type="button" class="btn" id="btnPickDir">選擇資料夾</button>
+        <span class="val" id="dirLabel">尚未選擇</span>
+      </div>
+      <p class="note">錄製過程先寫進瀏覽器的本機儲存區，停止後才複製到這裡。</p>
+    </div>
+
+    <div class="field">
+      <label for="micSelect">麥克風（錄你自己的聲音）</label>
+      <div class="row">
+        <select id="micSelect"></select>
+        <button type="button" class="btn ghost sm" id="btnRefreshMic">重新偵測</button>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="qualitySelect">畫質</label>
+        <select id="qualitySelect"></select>
+      </div>
+      <div class="field">
+        <label for="expectMinutes">預計會議長度（分鐘）</label>
+        <input type="number" id="expectMinutes" value="90" min="5" max="600" step="5">
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">保險機制</span>
+      <label class="check" for="optBackupAudio"><input type="checkbox" id="optBackupAudio" checked><span>另存一份純音訊備份檔，影片萬一壞掉時聲音還在</span></label>
+      <label class="check" for="optAlarm"><input type="checkbox" id="optAlarm" checked><span>出問題時發出提示音</span></label>
+      <label class="check" for="optNotify"><input type="checkbox" id="optNotify" checked><span>出問題時跳桌面通知，你人在會議視窗也看得到</span></label>
+      <label class="check" for="optWakeLock"><input type="checkbox" id="optWakeLock" checked><span>錄製期間不讓螢幕休眠</span></label>
+      <label class="check" for="optDeep"><input type="checkbox" id="optDeep" checked><span>每 5 分鐘做一次深度健檢：試錄 1.2 秒再解碼驗證</span></label>
+    </div>
+
+    <div class="callout">
+      <h3>接下來選畫面時，這一步選錯就沒有聲音</h3>
+      <p>Zoom、Webex、Teams 是獨立的桌面程式，不是網頁分頁。要錄到它們的聲音，
+         在 Chrome 的分享視窗裡必須選「<strong>整個畫面</strong>」，
+         並勾選左下角的「<strong>同時分享系統音訊</strong>」。</p>
+      <p>選「視窗」抓不到任何聲音。下一步會實際驗證，沒過不讓你開始錄。</p>
+    </div>
+
+    <button type="button" class="btn accent lg" id="btnPreflight">選擇畫面並開始檢查</button>
+  </section>
+
+  <!-- ── 2 檢查 ── -->
+  <section class="panel" id="preflightCard" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">步驟二</span>
+      <h2>開錄前檢查</h2>
+    </div>
+    <div id="checkList" class="checks"></div>
+
+    <figure class="screen" id="previewWrap" hidden>
+      <video id="previewVideo" muted playsinline></video>
+      <figcaption>這就是等一下會錄下去的畫面</figcaption>
+    </figure>
+
+    <div class="row" id="preflightActions" hidden>
+      <button type="button" class="btn accent lg" id="btnStart" disabled>開始錄製</button>
+      <button type="button" class="btn ghost" id="btnRecheck">重新檢查</button>
+      <button type="button" class="btn ghost" id="btnCancelPre">取消</button>
+    </div>
+    <label class="check" id="overrideWrap" for="optOverride" hidden>
+      <input type="checkbox" id="optOverride"><span>我知道上面的紅色項目，仍要開始錄</span>
+    </label>
+  </section>
+
+  <!-- ── 3 錄製中 ── -->
+  <section class="panel" id="liveCard" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">步驟三</span>
+      <h2>錄製中</h2>
+    </div>
+
+    <div class="bank">
+      <div class="slot" id="gVideo">
+        <span class="slot-label">畫面</span>
+        <span class="slot-big" id="vFps">–</span>
+        <span class="slot-sub" id="vRes">等待訊號</span>
+      </div>
+
+      <div class="slot" id="gSys">
+        <span class="slot-label">系統音<span class="slot-tag">會議聲音</span></span>
+        <span class="slot-big mono" id="sysDb">−∞ <i>dBFS</i></span>
+        <div class="meter"><div class="meter-fill" id="sysMeter"></div><div class="meter-hold" id="sysHold"></div></div>
+        <span class="slot-sub" id="sysSub">等待訊號</span>
+      </div>
+
+      <div class="slot" id="gMic">
+        <span class="slot-label">麥克風<span class="slot-tag">你的聲音</span></span>
+        <span class="slot-big mono" id="micDb">−∞ <i>dBFS</i></span>
+        <div class="meter"><div class="meter-fill mic" id="micMeter"></div><div class="meter-hold" id="micHold"></div></div>
+        <span class="slot-sub" id="micSub">等待訊號</span>
+      </div>
+
+      <div class="slot" id="gDisk">
+        <span class="slot-label">已安全落地</span>
+        <span class="slot-big mono" id="diskVal">0 MB</span>
+        <span class="slot-sub" id="diskSub">等待資料</span>
+      </div>
+    </div>
+
+    <div class="mixer">
+      <label for="sysGain">系統音音量 <input type="range" id="sysGain" min="0" max="2" step="0.05" value="1"></label>
+      <label for="micGain">麥克風音量 <input type="range" id="micGain" min="0" max="2" step="0.05" value="1"></label>
+    </div>
+
+    <div class="row">
+      <button type="button" class="btn stop lg" id="btnStop">停止並存檔</button>
+      <button type="button" class="btn amber" id="btnReattach" hidden>重新接上畫面，開新的一段</button>
+    </div>
+
+    <span class="eyebrow spaced">事件紀錄</span>
+    <div class="log" id="logBox"></div>
+  </section>
+
+  <!-- ── 4 完成 ── -->
+  <section class="panel" id="doneCard" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">步驟四</span>
+      <h2>完成與驗證</h2>
+    </div>
+    <div id="doneSummary" class="verdict"></div>
+    <div id="verifyList" class="checks"></div>
+    <div id="fileList" class="rows"></div>
+    <figure class="screen">
+      <video id="resultVideo" controls playsinline></video>
+      <figcaption>拉到中間和最後各看一眼，確認整段都在。</figcaption>
+    </figure>
+    <div class="row">
+      <button type="button" class="btn accent" id="btnAgain">再錄一場</button>
+      <button type="button" class="btn ghost" id="btnClearTemp">清除瀏覽器裡的暫存副本</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>錄製他人會議前請先取得對方同意。錄的是整個螢幕，期間跳出來的私人訊息也會被錄進去。</p>
+    <p>需要 Chrome 或 Edge。Firefox 抓不到 Windows 的系統音訊。</p>
+  </footer>
+
+</main>
+
+<script type="module" src="js/app.js"></script>
