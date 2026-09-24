@@ -41,6 +41,10 @@ const el = {
 };
 
 /* ---------------- 狀態 ---------------- */
+// 可以真正錄影的公開版。claude.ai 的 artifact 被放在沙箱 iframe 裡，
+// 瀏覽器政策禁止它擷取螢幕，所以那邊只能把人導到這個網址。
+const PUBLIC_URL = 'https://city2243.github.io/meeting-recorder/';
+
 const MAN_KEY = 'meetingRecorder.manifest';
 const PREF_KEY = 'meetingRecorder.prefs';
 
@@ -229,12 +233,12 @@ async function init() {
   await renderRecovery();
 
   el.btnOpenTab.onclick = () => {
-    const w = window.open(location.href, '_blank', 'noopener');
+    const w = window.open(PUBLIC_URL, '_blank', 'noopener');
     if (!w) el.copyNote.textContent = '這個頁面被禁止開新分頁，請改用上面的網址。';
   };
   el.btnCopyUrl.onclick = async () => {
     try {
-      await navigator.clipboard.writeText(location.href);
+      await navigator.clipboard.writeText(PUBLIC_URL);
       el.copyNote.textContent = '已複製，貼到新分頁的網址列就可以。';
     } catch (e) {
       const r = document.createRange();
@@ -315,7 +319,7 @@ async function renderEnv() {
   if (S.supportsDirectoryPicker()) r4.set('pass', '可以直接存進你指定的資料夾');
   else r4.set('warn', '這個瀏覽器不能選資料夾', '錄完會用一般下載的方式給你檔案。');
 
-  el.directUrl.textContent = location.href;
+  el.directUrl.textContent = PUBLIC_URL;
   el.envEscape.hidden = !needTab;
 }
 
