@@ -76,11 +76,18 @@ function fmtBytes(b) {
 }
 const fmtDur = C.fmtDur;
 
+/**
+ * 場次編號。**一定要帶到秒**：原本只到分鐘，兩個分頁在同一分鐘內按下開始就會
+ * 產生一樣的檔名，第二個會把第一個正在寫的檔案 truncate 掉 —— 是會掉資料的 bug。
+ */
 function stamp() {
   const d = new Date();
   const p = (n) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`;
+  return `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
 }
+
+/** 瀏覽器本機儲存區用的隨機碼，再擋一層同秒開始的碰撞 */
+function uid() { return Math.random().toString(36).slice(2, 8); }
 function clockNow() {
   const d = new Date(), p = (n) => String(n).padStart(2, '0');
   return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
@@ -814,7 +821,7 @@ function updateStartButton() {
    ================================================================ */
 async function startRecording() {
   const sid = stamp();
-  st.session = { sid, startedAt: Date.now(), segments: [], log: [], frames0: st.videoWatch.frames, deepChecks: [] };
+  st.session = { sid, uid: uid(), startedAt: Date.now(), segments: [], log: [], frames0: st.videoWatch.frames, deepChecks: [] };
   st.stopping = false;
   cancelCountdown();
   el.preflightCard.hidden = true;
@@ -839,8 +846,8 @@ async function startRecording() {
 async function startSegment(idx) {
   const sid = st.session.sid;
   const suffix = idx > 1 ? `_第${idx}段` : '';
-  const vOpfs = `${sid}_v${idx}.webm`;
-  const aOpfs = `${sid}_a${idx}.webm`;
+  const vOpfs = `${sid}_${st.session.uid}_v${idx}.webm`;
+  const aOpfs = `${sid}_${st.session.uid}_a${idx}.webm`;
   const vTarget = `會議錄影_${sid}${suffix}.webm`;
   const aTarget = `會議錄影_${sid}${suffix}_音訊備份.webm`;
 

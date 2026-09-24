@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同時錄多場 · 會議錄影守門員</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="rail">
+    <div class="rail-id">
+      <span class="rec-dot" id="statusDot"></span>
+      <span class="rail-name">同時錄多場</span>
+      <span class="beta">實測版</span>
+    </div>
+    <div class="rail-clock" id="timer" hidden>00:00:00</div>
+    <button type="button" class="btn sm" id="btnMark" hidden>標記這一刻</button>
+    <button type="button" class="btn stop sm" id="btnStopAll" hidden>全部停止</button>
+    <div class="rail-state" id="statusText" role="status" aria-live="polite">初始化</div>
+  </div>
+
+  <div class="alert" id="alertBar" role="alert" aria-live="assertive" hidden>
+    <span class="alert-mark" id="alertIcon">!</span>
+    <div class="alert-body">
+      <div class="alert-title" id="alertTitle"></div>
+      <div class="alert-detail" id="alertDetail"></div>
+    </div>
+    <button type="button" class="btn ghost sm" id="alertMute">靜音提示</button>
+  </div>
+</header>
+
+<main>
+
+  <p class="lede">
+    同時錄好幾場會議，每一場各自一個乾淨的音軌。做法是<strong>一場抓一個瀏覽器分頁</strong>——
+    分頁擷取拿到的聲音只有那個分頁的，不會跟其他場混在一起。
+    <a href="./" class="link">只錄一場請用主頁</a>
+  </p>
+
+  <div class="callout warnish">
+    <h3>用之前先知道三件事</h3>
+    <p><strong>會議必須用網頁版參加。</strong>Zoom、Webex 的桌面程式沒辦法單獨抓聲音，
+       它們的聲音只存在於整台電腦的混音裡，多場會糊在一起。</p>
+    <p><strong>選分頁時一定要勾「分享分頁音訊」。</strong>沒勾就只有畫面沒聲音，
+       下一步會擋住不讓你開始。</p>
+    <p><strong>這一版預設不錄麥克風。</strong>你的麥克風會同時收到所有場次的喇叭聲，
+       混進去只會讓每一軌都變髒。建議戴耳機。</p>
+  </div>
+
+  <!-- 全域設定 -->
+  <section class="panel" id="setupCard">
+    <div class="panel-head">
+      <span class="eyebrow">共用設定</span>
+      <h2>所有場次一起套用</h2>
+    </div>
+
+    <div class="field">
+      <span class="field-label">錄完存到哪個資料夾</span>
+      <div class="row">
+        <button type="button" class="btn accent" id="btnUseSaved" hidden>繼續用「<span id="savedName"></span>」</button>
+        <button type="button" class="btn" id="btnPickDir">選擇資料夾</button>
+        <span class="val" id="dirLabel">尚未選擇</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label for="qualitySelect">影像畫質</label>
+        <select id="qualitySelect"></select>
+      </div>
+      <div class="field">
+        <label for="expectMinutes">預計會議長度（分鐘）</label>
+        <input type="number" id="expectMinutes" value="90" min="5" max="600" step="5">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="check" for="optVideo"><input type="checkbox" id="optVideo" checked><span>也錄影像（關掉就只留聲音，容量和 CPU 都省很多）</span></label>
+      <label class="check" for="optAlarm"><input type="checkbox" id="optAlarm" checked><span>出問題時發出提示音</span></label>
+      <label class="check" for="optNotify"><input type="checkbox" id="optNotify" checked><span>出問題時跳桌面通知</span></label>
+    </div>
+
+    <div class="budget" id="budget"></div>
+  </section>
+
+  <!-- 場次 -->
+  <section class="panel" id="slotsCard">
+    <div class="panel-head">
+      <span class="eyebrow">場次</span>
+      <h2>一場一個分頁</h2>
+    </div>
+    <div id="slotList" class="slots"></div>
+    <div class="row">
+      <button type="button" class="btn" id="btnAddSlot">＋ 加一場</button>
+      <span class="note" id="slotHint">先加一場，然後選它要錄哪個分頁。</span>
+    </div>
+    <div class="row">
+      <button type="button" class="btn accent lg" id="btnStartAll" disabled>開始錄製全部</button>
+    </div>
+  </section>
+
+  <!-- 完成 -->
+  <section class="panel" id="doneCard" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">完成</span>
+      <h2>驗證結果與實測數據</h2>
+    </div>
+    <div id="doneList"></div>
+    <div class="row">
+      <button type="button" class="btn accent" id="btnAgain">再錄一輪</button>
+    </div>
+  </section>
+
+  <span class="eyebrow spaced">事件紀錄（所有場次）</span>
+  <div class="log" id="logBox"></div>
+
+  <footer class="foot">
+    <p>錄製他人會議前請先取得對方同意。所有處理都在這台電腦上，不會上傳。</p>
+  </footer>
+
+</main>
+
+<script type="module" src="./js/multi.js"></script>
+</body>
+</html>

@@ -26,11 +26,15 @@ export function pickAudioMime() {
   return cands.find((m) => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || '';
 }
 
-/** 取得螢幕（含系統音）。使用者會看到 Chrome 的分享選單。 */
-export async function getScreen(qualityKey) {
+/**
+ * 取得畫面來源。使用者會看到 Chrome 的分享選單。
+ * @param surface 'monitor'（整個畫面，抓系統混音）或 'browser'（單一分頁，只抓那個分頁的聲音）
+ *
+ * 多場同時錄一定要用 'browser'：系統音是整台電腦的混音，多場會混在一起分不開。
+ */
+export async function getScreen(qualityKey, surface) {
   const q = QUALITY[qualityKey] || QUALITY['1080p15'];
-  // displaySurface: 'monitor' 讓 Chrome 預設就停在「整個畫面」那一頁 —— 這是唯一抓得到系統音的選項
-  const video = { frameRate: { ideal: q.frameRate, max: q.frameRate }, displaySurface: 'monitor' };
+  const video = { frameRate: { ideal: q.frameRate, max: q.frameRate }, displaySurface: surface || 'monitor' };
   if (q.width) { video.width = { ideal: q.width }; video.height = { ideal: q.height }; }
 
   const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -75,8 +79,10 @@ export async function getMic(deviceId) {
 /* ---------------- 混音 ---------------- */
 
 export class AudioMix {
-  constructor() {
-    this.ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000, latencyHint: 'playback' });
+  /** @param sharedCtx 多場同時錄時共用一個 AudioContext，不要每場開一個 */
+  constructor(sharedCtx) {
+    this.ownsCtx = !sharedCtx;
+    this.ctx = sharedCtx || new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000, latencyHint: 'playback' });
     this.dest = this.ctx.createMediaStreamDestination();
     this.sources = {}; // key -> {node, gain, analyser, buf}
   }
@@ -125,7 +131,16 @@ export class AudioMix {
   get audioTrack() { return this.dest.stream.getAudioTracks()[0]; }
 
   async resume() { if (this.ctx.state === 'suspended') await this.ctx.resume(); }
-  close() { try { this.ctx.close(); } catch (e) {} }
+
+  close() {
+    for (const k of Object.keys(this.sources)) {
+      const s = this.sources[k];
+      try { s.node.disconnect(); s.gain.disconnect(); s.analyser.disconnect(); } catch (e) {}
+    }
+    this.sources = {};
+    try { this.dest.disconnect(); } catch (e) {}
+    if (this.ownsCtx) { try { this.ctx.close(); } catch (e) {} }
+  }
 }
 
 /* ---------------- 畫面更新量測 ---------------- */

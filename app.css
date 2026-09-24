@@ -340,3 +340,66 @@ label.check input{margin:5px 0 0; flex:none; accent-color:var(--accent)}
   main{padding-inline:16px}
   .panel{padding:18px 16px}
 }
+
+/* ═════════ 多場同時錄（multi.html） ═════════ */
+
+.beta{
+  font-family:"IBM Plex Mono",Consolas,monospace; font-size:9.5px; letter-spacing:.1em;
+  text-transform:uppercase; padding:2px 6px; border-radius:4px;
+  background:#2A3542; color:var(--accent); border:1px solid #33414F; flex:none;
+}
+.link{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(90,200,216,.4)}
+.link:hover{border-bottom-color:var(--accent)}
+.callout.warnish{background:#241D10; border-color:#4A3A17}
+.callout.warnish h3{color:var(--warn)}
+.bad-text{color:var(--fail)}
+
+.budget{
+  background:#0B0E14; border:1px solid var(--line-soft); border-radius:8px;
+  padding:11px 14px; font-size:12.5px; line-height:1.8; color:var(--ink-dim);
+}
+.budget strong{color:var(--ink)}
+
+/* 場次卡 */
+.slots{display:flex; flex-direction:column; gap:12px}
+.slot-card{
+  background:var(--raise); border:1px solid var(--line); border-radius:var(--r);
+  padding:14px; display:flex; flex-direction:column; gap:11px;
+}
+.slot-card[data-state="ready"]{border-color:#27523C}
+.slot-card[data-state="recording"]{border-color:var(--accent)}
+.slot-card[data-trouble="fatal"]{border-color:var(--fail); background:#241318}
+.slot-card[data-trouble="warn"]{border-color:var(--warn)}
+
+.sc-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.sc-name{
+  flex:1; min-width:180px;
+  background:var(--panel); color:var(--ink); border:1px solid var(--line);
+  border-radius:8px; padding:8px 11px; font:inherit; font-size:14px; font-weight:600;
+}
+.sc-name:disabled{opacity:.7}
+.sc-state{font-size:11.5px; color:var(--ink-dim); white-space:nowrap}
+.slot-card[data-state="ready"] .sc-state{color:var(--ok)}
+.slot-card[data-state="recording"] .sc-state{color:var(--accent)}
+
+.sc-checks .ci{padding:8px 0}
+.sc-gauges{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.sc-g{background:var(--panel); border:1px solid var(--line-soft); border-radius:8px; padding:10px 12px;
+  display:flex; flex-direction:column; gap:2px}
+.sc-gl{font-size:10.5px; letter-spacing:.06em; color:var(--ink-dim)}
+.sc-gv{font-size:19px; font-weight:600; font-variant-numeric:tabular-nums}
+.sc-gv i{font-style:normal; font-size:10px; font-weight:400; color:var(--ink-dim)}
+
+/* 完成頁 */
+.result{margin:0 0 20px; display:flex; flex-direction:column; gap:10px}
+.stress{
+  background:#0B0E14; border:1px solid var(--line); border-radius:var(--r);
+  padding:16px 18px; display:flex; flex-direction:column; gap:6px; margin-top:8px;
+}
+.stress h3{margin:0 0 6px; font-size:14px; color:var(--accent); font-weight:600}
+.st-line{display:flex; align-items:baseline; gap:10px; font-size:12.5px; color:var(--ink-dim); flex-wrap:wrap}
+.st-line b{color:var(--ink); font-family:"IBM Plex Mono",Consolas,monospace; font-weight:500; font-variant-numeric:tabular-nums}
+.st-note{font-size:11px; color:#5E6B7D}
+.st-block{border-top:1px solid var(--line-soft); padding-top:10px; margin-top:6px;
+  display:flex; flex-direction:column; gap:5px}
+.st-name{font-size:13px; font-weight:600; color:var(--ink)}
