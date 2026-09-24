@@ -198,6 +198,71 @@ export async function deleteStored(name) {
   await dir.removeEntry(name);
 }
 
+/* ---------- 記住使用者選的資料夾 ----------
+ *
+ * FileSystemDirectoryHandle 可以直接存進 IndexedDB（localStorage 不行，
+ * 它只能存字串）。下次打開拿回來的 handle 本身是有效的，
+ * 但權限可能退回 'prompt' —— 那就要使用者點一下才能再授權，
+ * 這是瀏覽器的規定，繞不過去。所以介面上要把這一點變成
+ * 「繼續用「XXX」」一顆按鈕，而不是再跑一次選檔視窗。
+ */
+
+const IDB_NAME = 'meetingRecorder';
+const IDB_STORE = 'handles';
+const DIR_KEY = 'outputDir';
+
+function openIDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(IDB_NAME, 1);
+    req.onupgradeneeded = () => {
+      if (!req.result.objectStoreNames.contains(IDB_STORE)) req.result.createObjectStore(IDB_STORE);
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function idbOp(mode, fn) {
+  return openIDB().then((db) => new Promise((resolve, reject) => {
+    const tx = db.transaction(IDB_STORE, mode);
+    const out = fn(tx.objectStore(IDB_STORE));
+    tx.oncomplete = () => resolve(out && out.result !== undefined ? out.result : undefined);
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error);
+  }));
+}
+
+export async function rememberDir(handle) {
+  try { await idbOp('readwrite', (st) => st.put(handle, DIR_KEY)); return true; }
+  catch (e) { console.warn('記不住資料夾：', e); return false; }
+}
+
+export async function recallDir() {
+  try { return (await idbOp('readonly', (st) => st.get(DIR_KEY))) || null; }
+  catch (e) { return null; }
+}
+
+export async function forgetDir() {
+  try { await idbOp('readwrite', (st) => st.delete(DIR_KEY)); } catch (e) {}
+}
+
+/**
+ * 查（或要）資料夾的寫入權限。
+ * request=true 必須在使用者的點擊事件裡呼叫，否則瀏覽器會拒絕。
+ * 回傳 'granted' | 'prompt' | 'denied'。
+ */
+export async function dirPermission(handle, request) {
+  if (!handle) return 'denied';
+  const opts = { mode: 'readwrite' };
+  try {
+    let p = handle.queryPermission ? await handle.queryPermission(opts) : 'granted';
+    if (p !== 'granted' && request && handle.requestPermission) p = await handle.requestPermission(opts);
+    return p;
+  } catch (e) {
+    return 'denied';
+  }
+}
+
 /* ---------- 匯出到使用者的資料夾 ---------- */
 
 export function supportsDirectoryPicker() {

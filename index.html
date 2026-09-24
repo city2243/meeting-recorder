@@ -10,16 +10,26 @@
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
+<header class="topbar">
 <div class="rail">
   <div class="rail-id">
     <span class="rec-dot" id="statusDot"></span>
     <span class="rail-name">會議錄影守門員</span>
   </div>
+
+  <ol class="stepper" id="stepper" aria-label="進度">
+    <li data-n="1">設定</li>
+    <li data-n="2">檢查</li>
+    <li data-n="3">錄製</li>
+    <li data-n="4">驗證</li>
+  </ol>
+
   <div class="rail-clock" id="timer" hidden>00:00:00</div>
-  <div class="rail-state" id="statusText">初始化</div>
+  <button type="button" class="btn stop sm" id="btnStopRail" hidden>停止並存檔</button>
+  <div class="rail-state" id="statusText" role="status" aria-live="polite">初始化</div>
 </div>
 
-<div class="alert" id="alertBar" hidden>
+<div class="alert" id="alertBar" role="alert" aria-live="assertive" hidden>
   <span class="alert-mark" id="alertIcon">!</span>
   <div class="alert-body">
     <div class="alert-title" id="alertTitle"></div>
@@ -27,6 +37,7 @@
   </div>
   <button type="button" class="btn ghost sm" id="alertMute">靜音提示</button>
 </div>
+</header>
 
 <main>
 
@@ -73,12 +84,14 @@
     </div>
 
     <div class="field">
-      <label for="btnPickDir">錄完存到哪個資料夾</label>
+      <span class="field-label">錄完存到哪個資料夾</span>
       <div class="row">
+        <button type="button" class="btn accent" id="btnUseSaved" hidden>繼續用「<span id="savedName"></span>」</button>
         <button type="button" class="btn" id="btnPickDir">選擇資料夾</button>
         <span class="val" id="dirLabel">尚未選擇</span>
+        <button type="button" class="btn ghost sm" id="btnForgetDir" hidden>忘記這個資料夾</button>
       </div>
-      <p class="note">錄製過程先寫進瀏覽器的本機儲存區，停止後才複製到這裡。</p>
+      <p class="note">選過一次就記住，下次打開直接沿用。錄製過程先寫進瀏覽器的本機儲存區，停止後才複製到這裡。</p>
     </div>
 
     <div class="field">
@@ -107,6 +120,7 @@
       <label class="check" for="optNotify"><input type="checkbox" id="optNotify" checked><span>出問題時跳桌面通知，你人在會議視窗也看得到</span></label>
       <label class="check" for="optWakeLock"><input type="checkbox" id="optWakeLock" checked><span>錄製期間不讓螢幕休眠</span></label>
       <label class="check" for="optDeep"><input type="checkbox" id="optDeep" checked><span>每 5 分鐘做一次深度健檢：試錄 1.2 秒再解碼驗證</span></label>
+      <label class="check" for="optAutoStart"><input type="checkbox" id="optAutoStart"><span>檢查全部通過就自動開始錄（會倒數 3 秒，來得及取消）</span></label>
     </div>
 
     <div class="callout">
@@ -132,6 +146,12 @@
       <video id="previewVideo" muted playsinline></video>
       <figcaption>這就是等一下會錄下去的畫面</figcaption>
     </figure>
+
+    <div class="countdown" id="countdown" hidden>
+      <span class="cd-num" id="cdNum">3</span>
+      <span>檢查全部通過，即將自動開始錄製</span>
+      <button type="button" class="btn sm" id="btnCancelAuto">先等一下</button>
+    </div>
 
     <div class="row" id="preflightActions" hidden>
       <button type="button" class="btn accent lg" id="btnStart" disabled>開始錄製</button>
@@ -160,14 +180,16 @@
       <div class="slot" id="gSys">
         <span class="slot-label">系統音<span class="slot-tag">會議聲音</span></span>
         <span class="slot-big mono" id="sysDb">−∞ <i>dBFS</i></span>
-        <div class="meter"><div class="meter-fill" id="sysMeter"></div><div class="meter-hold" id="sysHold"></div></div>
+        <div class="meter"><div class="meter-fill" id="sysMeter"></div><div class="meter-zone"></div><div class="meter-hold" id="sysHold"></div></div>
+        <div class="scale"><span>−60</span><span>−40</span><span>−20</span><span>0</span></div>
         <span class="slot-sub" id="sysSub">等待訊號</span>
       </div>
 
       <div class="slot" id="gMic">
         <span class="slot-label">麥克風<span class="slot-tag">你的聲音</span></span>
         <span class="slot-big mono" id="micDb">−∞ <i>dBFS</i></span>
-        <div class="meter"><div class="meter-fill mic" id="micMeter"></div><div class="meter-hold" id="micHold"></div></div>
+        <div class="meter"><div class="meter-fill mic" id="micMeter"></div><div class="meter-zone"></div><div class="meter-hold" id="micHold"></div></div>
+        <div class="scale"><span>−60</span><span>−40</span><span>−20</span><span>0</span></div>
         <span class="slot-sub" id="micSub">等待訊號</span>
       </div>
 

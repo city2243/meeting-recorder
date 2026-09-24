@@ -18,7 +18,10 @@ const el = {
   envCard: $('envCard'), envList: $('envList'), envEscape: $('envEscape'),
   directUrl: $('directUrl'), btnCopyUrl: $('btnCopyUrl'), btnOpenTab: $('btnOpenTab'), copyNote: $('copyNote'),
   recoveryCard: $('recoveryCard'), recoveryList: $('recoveryList'),
+  stepper: $('stepper'), btnStopRail: $('btnStopRail'),
   setupCard: $('setupCard'), btnPickDir: $('btnPickDir'), dirLabel: $('dirLabel'),
+  btnUseSaved: $('btnUseSaved'), savedName: $('savedName'), btnForgetDir: $('btnForgetDir'),
+  optAutoStart: $('optAutoStart'), countdown: $('countdown'), cdNum: $('cdNum'), btnCancelAuto: $('btnCancelAuto'),
   micSelect: $('micSelect'), btnRefreshMic: $('btnRefreshMic'), qualitySelect: $('qualitySelect'),
   expectMinutes: $('expectMinutes'),
   optBackupAudio: $('optBackupAudio'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
@@ -165,6 +168,7 @@ function prefs() {
     optNotify: el.optNotify.checked,
     optWakeLock: el.optWakeLock.checked,
     optDeep: el.optDeep.checked,
+    optAutoStart: el.optAutoStart.checked,
   };
 }
 function savePrefs() {
@@ -175,7 +179,7 @@ function loadPrefs() {
     const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}');
     if (p.quality) el.qualitySelect.value = p.quality;
     if (p.expectMinutes) el.expectMinutes.value = p.expectMinutes;
-    ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep'].forEach((k) => {
+    ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep', 'optAutoStart'].forEach((k) => {
       if (typeof p[k] === 'boolean') el[k].checked = p[k];
     });
     return p;
@@ -229,6 +233,7 @@ async function init() {
   st.durable = await S.probeDurableWrite();
 
   await renderEnv();
+  await restoreDir();
   await refreshMics(savedPrefs.micId);
   await renderRecovery();
 
@@ -249,10 +254,14 @@ async function init() {
     }
   };
   el.btnPickDir.onclick = pickDir;
+  el.btnUseSaved.onclick = useSavedDir;
+  el.btnForgetDir.onclick = forgetDir;
+  el.btnStopRail.onclick = () => stopRecording('\u4f7f\u7528\u8005\u6309\u4e0b\u505c\u6b62');
+  el.btnCancelAuto.onclick = () => { cancelCountdown(); log('info', '\u5df2\u53d6\u6d88\u81ea\u52d5\u958b\u59cb'); };
   el.btnRefreshMic.onclick = () => refreshMics();
   el.btnPreflight.onclick = startPreflight;
-  el.btnRecheck.onclick = () => runChecks();
-  el.btnCancelPre.onclick = cancelPreflight;
+  el.btnRecheck.onclick = () => { cancelCountdown(); runChecks(); };
+  el.btnCancelPre.onclick = () => { cancelCountdown(); cancelPreflight(); };
   el.btnStart.onclick = startRecording;
   el.btnStop.onclick = () => stopRecording('使用者按下停止');
   el.btnReattach.onclick = reattachScreen;
@@ -262,14 +271,23 @@ async function init() {
   el.optOverride.onchange = updateStartButton;
   el.sysGain.oninput = () => st.mix && st.mix.setGain('sys', Number(el.sysGain.value));
   el.micGain.oninput = () => st.mix && st.mix.setGain('mic', Number(el.micGain.value));
-  [el.qualitySelect, el.expectMinutes, el.optBackupAudio, el.optAlarm, el.optNotify, el.optWakeLock, el.optDeep]
+  [el.qualitySelect, el.expectMinutes, el.optBackupAudio, el.optAlarm, el.optNotify,
+   el.optWakeLock, el.optDeep, el.optAutoStart]
     .forEach((n) => n.addEventListener('change', savePrefs));
 
   window.addEventListener('beforeunload', (e) => {
     if (st.seg) { e.preventDefault(); e.returnValue = '錄影還在進行中，離開會中斷錄影。'; return e.returnValue; }
   });
 
+  setStep(1);
   setStatus('尚未開始', '');
+}
+
+/* ---------------- 步驟指示器 ---------------- */
+function setStep(n) {
+  [...el.stepper.children].forEach((li, i) => {
+    li.className = (i + 1 < n) ? 'done' : (i + 1 === n) ? 'now' : '';
+  });
 }
 
 /* ================================================================
@@ -347,10 +365,65 @@ async function refreshMics(preferId) {
 async function pickDir() {
   try {
     st.dirHandle = await S.pickOutputDir();
-    el.dirLabel.textContent = st.dirHandle.name;
+    st.savedDir = st.dirHandle;
+    await S.rememberDir(st.dirHandle);
+    showDirReady(st.dirHandle.name);
   } catch (e) {
     if (e.name !== 'AbortError') toast('選擇資料夾失敗', e.message);
   }
+}
+
+function showDirReady(name) {
+  el.dirLabel.textContent = name + '（已記住，下次直接用）';
+  el.btnUseSaved.hidden = true;
+  el.btnForgetDir.hidden = false;
+  el.btnPickDir.textContent = '換一個資料夾';
+}
+
+/**
+ * 開頁時先把上次的資料夾拿回來。
+ * 權限還在就直接用；退回 'prompt' 是瀏覽器的規定（重新授權必須由使用者點一下），
+ * 這時至少不要再跑一次選檔視窗，只要按「繼續用」。
+ */
+async function restoreDir() {
+  if (!S.supportsDirectoryPicker()) return;
+  const h = await S.recallDir();
+  if (!h) return;
+  st.savedDir = h;
+  const p = await S.dirPermission(h, false);
+  if (p === 'granted') {
+    st.dirHandle = h;
+    showDirReady(h.name);
+  } else if (p === 'prompt') {
+    el.savedName.textContent = h.name;
+    el.btnUseSaved.hidden = false;
+    el.btnForgetDir.hidden = false;
+    el.btnPickDir.textContent = '換一個資料夾';
+    el.dirLabel.textContent = '上次用這個資料夾，按左邊確認就能沿用';
+  } else {
+    await S.forgetDir();
+    st.savedDir = null;
+  }
+}
+
+async function useSavedDir() {
+  const p = await S.dirPermission(st.savedDir, true);
+  if (p === 'granted') {
+    st.dirHandle = st.savedDir;
+    showDirReady(st.savedDir.name);
+  } else {
+    toast('還是沒拿到寫入權限', '請按「換一個資料夾」重新挑一次。');
+  }
+}
+
+async function forgetDir() {
+  await S.forgetDir();
+  st.savedDir = null;
+  st.dirHandle = null;
+  el.btnUseSaved.hidden = true;
+  el.btnForgetDir.hidden = true;
+  el.btnPickDir.textContent = '選擇資料夾';
+  el.dirLabel.textContent = '尚未選擇';
 }
 
 /* ================================================================
@@ -462,6 +535,7 @@ async function startPreflight() {
 
   el.setupCard.hidden = true;
   el.preflightCard.hidden = false;
+  setStep(2);
   await runChecks();
 }
 
@@ -469,6 +543,7 @@ function cancelPreflight() {
   teardownMedia();
   el.preflightCard.hidden = true;
   el.setupCard.hidden = false;
+  setStep(1);
   setStatus('尚未開始', '');
 }
 
@@ -523,7 +598,8 @@ async function runChecks() {
       r.set('fail', `瀏覽器可用 ${fmtBytes(est.free)}，這場預估需要 ${fmtBytes(needBytes)}`,
         '清一些硬碟空間，或把畫質調低、預計長度調短。'); rec('fail');
     } else {
-      r.set('pass', `可用 ${fmtBytes(est.free)}，預估需要 ${fmtBytes(needBytes)}`); rec('pass');
+      const hrs = (est.free * 8) / (q.videoBitsPerSecond + 128000) / 3600;
+      r.set('pass', `可用 ${fmtBytes(est.free)}，這個畫質大約可以錄 ${hrs.toFixed(1)} 小時（這場預估 ${fmtBytes(needBytes)}）`); rec('pass');
     }
   }
 
@@ -700,10 +776,31 @@ async function runChecks() {
 
   el.preflightActions.hidden = false;
   updateStartButton();
+  cancelCountdown();
   const fails = checkResults.filter((x) => x === 'fail').length;
   const warns = checkResults.filter((x) => x === 'warn').length;
   setStatus(fails ? `${fails} 項未通過` : warns ? `通過（${warns} 項提醒）` : '全部通過', fails ? 'warn' : 'ok');
   if (fails) el.overrideWrap.hidden = false;
+  else if (prefs().optAutoStart) startCountdown(warns);
+}
+
+/* 選了「自動開始」才會跑。倒數看得見、按得掉，不會偷偷开始錄。 */
+function startCountdown(warns) {
+  cancelCountdown();
+  let n = 3;
+  el.cdNum.textContent = n;
+  el.countdown.hidden = false;
+  log('info', warns ? `沒有紅色項目（${warns} 項提醒），3 秒後自動開始` : '檢查全過，3 秒後自動開始');
+  st.cdTimer = setInterval(() => {
+    n -= 1;
+    el.cdNum.textContent = n;
+    if (n <= 0) { cancelCountdown(); startRecording(); }
+  }, 1000);
+}
+
+function cancelCountdown() {
+  if (st.cdTimer) { clearInterval(st.cdTimer); st.cdTimer = null; }
+  el.countdown.hidden = true;
 }
 
 function updateStartButton() {
@@ -719,9 +816,12 @@ async function startRecording() {
   const sid = stamp();
   st.session = { sid, startedAt: Date.now(), segments: [], log: [], frames0: st.videoWatch.frames, deepChecks: [] };
   st.stopping = false;
+  cancelCountdown();
   el.preflightCard.hidden = true;
   el.liveCard.hidden = false;
   el.timer.hidden = false;
+  el.btnStopRail.hidden = false;
+  setStep(3);
   el.logBox.innerHTML = '';
   log('info', `開始錄製（畫質 ${prefs().quality}，編碼 ${st.videoMime}）`);
 
@@ -1050,8 +1150,10 @@ async function stopRecording(reason) {
   const frames = st.videoWatch ? st.videoWatch.frames - st.session.frames0 : null;
   teardownMedia();
 
+  el.btnStopRail.hidden = true;
   el.liveCard.hidden = true;
   el.doneCard.hidden = false;
+  setStep(4);
   el.doneSummary.className = 'verdict';
   el.doneSummary.textContent = '正在驗證檔案…';
   el.verifyList.innerHTML = '';
