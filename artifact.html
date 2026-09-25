@@ -97,6 +97,15 @@
       </div>
     </div>
 
+    <div class="field">
+      <label for="sourceMode">要錄什麼</label>
+      <select id="sourceMode">
+        <option value="monitor">桌面版會議軟體（Zoom / Webex 安裝版）—— 錄整個畫面＋系統音訊</option>
+        <option value="browser">瀏覽器裡的會議（網頁版 / Meet / Teams）—— 只錄那個分頁</option>
+      </select>
+      <p class="hint" id="modeHint"></p>
+    </div>
+
     <div class="grid-2">
       <div class="field">
         <label for="qualitySelect">畫質</label>
@@ -118,12 +127,32 @@
       <label class="check" for="optAutoStart"><input type="checkbox" id="optAutoStart"><span>檢查全部通過就自動開始錄（會倒數 3 秒，來得及取消）</span></label>
     </div>
 
-    <div class="callout">
+    <div class="field">
+      <span class="field-label">無人看管（人不在電腦旁的時候用）</span>
+      <label class="check" for="optSilent"><input type="checkbox" id="optSilent"><span>錄的時候電腦不要把聲音放出來 —— 你用手機開會、電腦在旁邊靜靜地錄，不這樣做兩邊會互相回授（只在錄分頁時有效）</span></label>
+      <label class="check" for="optUnattended"><input type="checkbox" id="optUnattended"><span>開啟無人看管保護</span></label>
+      <div id="unattendedOpts" hidden>
+        <label class="check" for="optAutoStopFatal"><input type="checkbox" id="optAutoStopFatal" checked><span>確定錄不到東西時自動收檔（資料停止寫入、錄影器停擺、寫檔失敗）—— 畫面卡住不算，因為那時聲音通常還在錄</span></label>
+        <label class="check" for="optAutoStopQuiet"><input type="checkbox" id="optAutoStopQuiet"><span>連續靜音超過 <input type="number" id="quietMin" value="20" min="5" max="120" step="5"> 分鐘就收檔（會議散了自動結束；但如果真的安靜那麼久會提早收，尾巴會少）</span></label>
+        <label class="check" for="maxHours2"><span>最長錄 <input type="number" id="maxHours" value="4" min="1" max="12" step="1"> 小時，到了就自動收檔存好</span></label>
+        <p class="hint">⚠ 出門前記得把 Windows 的電源設定改成「永不睡眠」，電腦睡著錄影就停了。</p>
+      </div>
+    </div>
+
+    <div class="callout" id="calloutMonitor">
       <h3>接下來選畫面時，這一步選錯就沒有聲音</h3>
       <p>Zoom、Webex、Teams 是獨立的桌面程式，不是網頁分頁。要錄到它們的聲音，
          在 Chrome 的分享視窗裡必須選「<strong>整個畫面</strong>」，
          並勾選左下角的「<strong>同時分享系統音訊</strong>」。</p>
       <p>選「視窗」抓不到任何聲音。下一步會實際驗證，沒過不讓你開始錄。</p>
+    </div>
+
+    <div class="callout" id="calloutBrowser" hidden>
+      <h3>接下來選分頁時，這一步選錯就沒有聲音</h3>
+      <p>在 Chrome 的分享視窗裡切到「<strong>Chrome 分頁</strong>」，挑會議那個分頁，
+         並把「<strong>同時分享分頁音訊</strong>」勾起來。</p>
+      <p>這個模式拿到的聲音<strong>只有那個分頁的</strong>，不會混到電腦上其他聲音，
+         逐字稿品質最好。下一步會實際驗證，沒勾音訊不讓你開始錄。</p>
     </div>
 
     <button type="button" class="btn accent lg" id="btnPreflight">選擇畫面並開始檢查</button>

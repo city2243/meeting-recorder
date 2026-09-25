@@ -22,6 +22,11 @@ const el = {
   setupCard: $('setupCard'), btnPickDir: $('btnPickDir'), dirLabel: $('dirLabel'),
   btnUseSaved: $('btnUseSaved'), savedName: $('savedName'), btnForgetDir: $('btnForgetDir'),
   optAutoStart: $('optAutoStart'), countdown: $('countdown'), cdNum: $('cdNum'), btnCancelAuto: $('btnCancelAuto'),
+  sourceMode: $('sourceMode'), modeHint: $('modeHint'),
+  calloutMonitor: $('calloutMonitor'), calloutBrowser: $('calloutBrowser'),
+  optSilent: $('optSilent'), optUnattended: $('optUnattended'), unattendedOpts: $('unattendedOpts'),
+  optAutoStopFatal: $('optAutoStopFatal'), optAutoStopQuiet: $('optAutoStopQuiet'),
+  quietMin: $('quietMin'), maxHours: $('maxHours'),
   micSelect: $('micSelect'), btnRefreshMic: $('btnRefreshMic'), qualitySelect: $('qualitySelect'),
   expectMinutes: $('expectMinutes'),
   optBackupAudio: $('optBackupAudio'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
@@ -176,6 +181,13 @@ function prefs() {
     optWakeLock: el.optWakeLock.checked,
     optDeep: el.optDeep.checked,
     optAutoStart: el.optAutoStart.checked,
+    sourceMode: el.sourceMode.value,
+    optSilent: el.optSilent.checked,
+    optUnattended: el.optUnattended.checked,
+    optAutoStopFatal: el.optAutoStopFatal.checked,
+    optAutoStopQuiet: el.optAutoStopQuiet.checked,
+    quietMin: Number(el.quietMin.value) || 20,
+    maxHours: Number(el.maxHours.value) || 4,
   };
 }
 function savePrefs() {
@@ -186,7 +198,11 @@ function loadPrefs() {
     const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}');
     if (p.quality) el.qualitySelect.value = p.quality;
     if (p.expectMinutes) el.expectMinutes.value = p.expectMinutes;
-    ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep', 'optAutoStart'].forEach((k) => {
+    if (p.sourceMode) el.sourceMode.value = p.sourceMode;
+    if (p.quietMin) el.quietMin.value = p.quietMin;
+    if (p.maxHours) el.maxHours.value = p.maxHours;
+    ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep', 'optAutoStart',
+     'optSilent', 'optUnattended', 'optAutoStopFatal', 'optAutoStopQuiet'].forEach((k) => {
       if (typeof p[k] === 'boolean') el[k].checked = p[k];
     });
     return p;
@@ -279,15 +295,31 @@ async function init() {
   el.sysGain.oninput = () => st.mix && st.mix.setGain('sys', Number(el.sysGain.value));
   el.micGain.oninput = () => st.mix && st.mix.setGain('mic', Number(el.micGain.value));
   [el.qualitySelect, el.expectMinutes, el.optBackupAudio, el.optAlarm, el.optNotify,
-   el.optWakeLock, el.optDeep, el.optAutoStart]
+   el.optWakeLock, el.optDeep, el.optAutoStart, el.sourceMode, el.optSilent,
+   el.optUnattended, el.optAutoStopFatal, el.optAutoStopQuiet, el.quietMin, el.maxHours]
     .forEach((n) => n.addEventListener('change', savePrefs));
 
   window.addEventListener('beforeunload', (e) => {
     if (st.seg) { e.preventDefault(); e.returnValue = '錄影還在進行中，離開會中斷錄影。'; return e.returnValue; }
   });
 
+  el.sourceMode.addEventListener('change', renderMode);
+  el.optUnattended.addEventListener('change', renderMode);
+  renderMode();
   setStep(1);
   setStatus('尚未開始', '');
+}
+
+/** 兩種來源模式的說明與提示要跟著換，不然指示會反過來害人選錯 */
+function renderMode() {
+  const browser = el.sourceMode.value === 'browser';
+  el.calloutMonitor.hidden = browser;
+  el.calloutBrowser.hidden = !browser;
+  el.btnPreflight.textContent = browser ? '選擇分頁並開始檢查' : '選擇畫面並開始檢查';
+  el.modeHint.textContent = browser
+    ? '只抓那個分頁的畫面與聲音。電腦上其他聲音（音樂、通知）不會混進來，逐字稿品質最好。'
+    : '抓整個螢幕與整台電腦的混音。桌面版會議軟體只能這樣錄，但其他聲音也會被錄進去。';
+  el.unattendedOpts.hidden = !el.optUnattended.checked;
 }
 
 /* ---------------- 步驟指示器 ---------------- */
@@ -510,7 +542,7 @@ async function startPreflight() {
   } catch (e) {}
 
   try {
-    st.screenStream = await M.getScreen(prefs().quality);
+    st.screenStream = await M.getScreen(prefs().quality, prefs().sourceMode, { silent: prefs().optSilent });
   } catch (e) {
     if (e.name === 'NotAllowedError') {
       toast('沒有取得畫面', '你取消了分享，或這個頁面被瀏覽器禁止擷取螢幕。若是後者，請先按最上方的「在新分頁開啟」。');
@@ -574,6 +606,7 @@ async function runChecks() {
   const add = (name) => { const r = ciRow(el.checkList, name); return r; };
   const rec = (level) => checkResults.push(level);
 
+  const mode = prefs().sourceMode;
   const videoTrack = st.screenStream && st.screenStream.getVideoTracks()[0];
   const sysTrack = st.screenStream && st.screenStream.getAudioTracks()[0];
   const micTrack = st.micStream && st.micStream.getAudioTracks()[0];
@@ -635,8 +668,12 @@ async function runChecks() {
       const surface = s.displaySurface || '未知';
       const nameMap = { monitor: '整個畫面', window: '單一視窗', browser: '瀏覽器分頁' };
       const detail = `${nameMap[surface] || surface}，${s.width || '?'}×${s.height || '?'}，${Math.round(s.frameRate || 0)} fps`;
-      if (surface === 'monitor') { r.set('pass', detail); rec('pass'); }
-      else {
+      if (surface === mode) { r.set('pass', detail); rec('pass'); }
+      else if (mode === 'browser') {
+        r.set('warn', detail + '（不是分頁）',
+          '你選的是「瀏覽器裡的會議」，但抓到的不是分頁。非分頁來源的聲音是整台電腦的混音，會混進音樂與通知。建議重新檢查、改選「Chrome 分頁」。');
+        rec('warn');
+      } else {
         r.set('warn', detail + '（不是整個畫面）',
           'Zoom／Webex 是桌面程式，選「視窗」會抓不到系統聲音，而且對方切換視窗時也錄不到。建議重新檢查並改選「整個畫面」。');
         rec('warn');
@@ -661,25 +698,29 @@ async function runChecks() {
   /* 6. 系統音軌 */
   let sysOk = false;
   {
-    const r = add('系統音訊（會議的聲音）');
+    const r = add(mode === 'browser' ? '這個分頁的聲音' : '系統音訊（會議的聲音）');
     if (!sysTrack) {
-      r.set('fail', '這次分享沒有帶任何系統音訊',
-        '按「重新檢查」重選，在 Chrome 的分享視窗裡選「整個畫面」，並勾選左下角的「同時分享系統音訊」。');
+      r.set('fail', '這次分享沒有帶任何音訊',
+        mode === 'browser'
+          ? '按「重新檢查」重選，在 Chrome 的分享視窗裡切到「Chrome 分頁」，並把「同時分享分頁音訊」勾起來。'
+          : '按「重新檢查」重選，在 Chrome 的分享視窗裡選「整個畫面」，並勾選左下角的「同時分享系統音訊」。');
       rec('fail');
     } else if (sysTrack.readyState !== 'live') {
-      r.set('fail', '系統音訊軌已中斷', '按「重新檢查」重選。'); rec('fail');
+      r.set('fail', '音訊軌已中斷', '按「重新檢查」重選。'); rec('fail');
     } else {
       sysOk = true;
-      r.set('pass', '已取得系統音訊軌：' + (sysTrack.label || '（無名稱）')); rec('pass');
+      r.set('pass', mode === 'browser'
+        ? '已取得這個分頁專屬的音訊軌，不會混到電腦上其他聲音'
+        : '已取得系統音訊軌：' + (sysTrack.label || '（無名稱）')); rec('pass');
     }
   }
 
   /* 7+8+9. 實錄驗證：試錄一小段，放測試音，再把成品解碼回來看 */
   const rTrial = add('試錄並解碼驗證（最關鍵的一項）');
-  const rTone = add('系統音回路（喇叭→錄音）');
+  const rTone = add(mode === 'browser' ? '這 4 秒有沒有收到聲音' : '系統音回路（喇叭→錄音）');
   const rMic = add('麥克風訊號');
   rTrial.set('run', '試錄中，請稍候約 4 秒…');
-  rTone.set('run', '正在播放測試音…');
+  rTone.set('run', mode === 'browser' ? '量測中…' : '正在播放測試音…');
   rMic.set('run', '量測中…');
 
   let trialLevels = { sys: 0, mic: 0 };
@@ -701,7 +742,9 @@ async function runChecks() {
     const pAV = C.trialRecord(avStream, 4000, st.videoMime, { video: q.videoBitsPerSecond, audio: 128000 });
     const pA = st.audioMime ? C.trialRecord(st.mix.stream, 4000, st.audioMime, { audio: 96000 }) : Promise.resolve(null);
     await C.sleep(900);
-    try { await C.playTestTone(1600, 660); } catch (e) {}
+    // 分頁模式不放測試音：分頁擷取只拿得到那個分頁的聲音，
+    // 喇叭放的測試音根本進不來，放了只會得到誤導的失敗。
+    if (mode !== 'browser') { try { await C.playTestTone(1600, 660); } catch (e) {} }
     try { [avBlob, aBlob] = await Promise.all([pAV, pA]); } catch (e) { log('fail', '試錄失敗：' + e.message); }
     await sampler;
   }
@@ -745,13 +788,20 @@ async function runChecks() {
 
   /* 8. 系統音回路 */
   {
-    if (!sysOk) { rTone.set('fail', '沒有系統音訊軌，無法測試', '先解決上面的系統音訊項目。'); rec('fail'); }
-    else if (trialLevels.sys > 0.01) { rTone.set('pass', `測試音有被錄進來（峰值 ${trialLevels.sys.toFixed(3)}）—— 會議的聲音會錄到`); rec('pass'); }
+    if (!sysOk) { rTone.set('fail', '沒有音訊軌，無法測試', '先解決上面的音訊項目。'); rec('fail'); }
+    else if (trialLevels.sys > 0.01) {
+      rTone.set('pass', mode === 'browser'
+        ? `這個分頁有聲音進來（峰值 ${trialLevels.sys.toFixed(3)}）`
+        : `測試音有被錄進來（峰值 ${trialLevels.sys.toFixed(3)}）—— 會議的聲音會錄到`);
+      rec('pass');
+    }
     else {
-      rTone.set('warn', `測試音沒被偵測到（峰值 ${trialLevels.sys.toFixed(4)}）`,
-        '可能是這台電腦的喇叭音量太小或瀏覽器被靜音。請在會議軟體裡放一段聲音，然後按下面的按鈕重測 8 秒。');
+      rTone.set('warn', `這 4 秒沒有收到聲音（峰值 ${trialLevels.sys.toFixed(4)}）`,
+        mode === 'browser'
+          ? '如果會議現在本來就安靜，可以照樣開始；如果它正在講話，代表分享時沒勾「同時分享分頁音訊」。讓那個分頁發出聲音再按下面重測。'
+          : '可能是這台電腦的喇叭音量太小或瀏覽器被靜音。請在會議軟體裡放一段聲音，然後按下面的按鈕重測 8 秒。');
       rec('warn');
-      rTone.addButton('手動重測 8 秒（請讓電腦發出聲音）', async (ev) => {
+      rTone.addButton('重測 8 秒（請讓它發出聲音）', async (ev) => {
         const b = ev.target; b.disabled = true; b.textContent = '量測中…';
         const peak = await C.sampleLevel(st.mix, 'sys', 8000);
         if (peak > 0.01) { rTone.set('pass', `手動重測通過（峰值 ${peak.toFixed(3)}）`); }
@@ -830,7 +880,14 @@ async function startRecording() {
   el.btnStopRail.hidden = false;
   setStep(3);
   el.logBox.innerHTML = '';
-  log('info', `開始錄製（畫質 ${prefs().quality}，編碼 ${st.videoMime}）`);
+  const P0 = prefs();
+  log('info', `開始錄製（${P0.sourceMode === 'browser' ? '分頁模式' : '整螢幕模式'}，畫質 ${P0.quality}，編碼 ${st.videoMime}）`);
+  if (P0.optSilent) log('info', '這台電腦不會把聲音放出來（避免與手機回授）');
+  if (P0.optUnattended) {
+    log('ok', `無人看管保護已開啟：最長 ${P0.maxHours} 小時` +
+      (P0.optAutoStopQuiet ? `、連續靜音 ${P0.quietMin} 分鐘收檔` : '') +
+      (P0.optAutoStopFatal ? '、確定錄不到時自動收檔' : ''));
+  }
 
   await acquireWakeLock();
   await startSegment(1);
@@ -1059,6 +1116,36 @@ function watchdogTick() {
   if (seg.writer.failed) {
     raiseAlert('write', 'fatal', '寫檔發生錯誤', seg.writer.failed.message);
   }
+
+  /* --- 無人看管：沒人盯著的時候，watchdog 要會自己收手 --- */
+  if (prefs().optUnattended) {
+    const up = prefs();
+
+    if (up.maxHours > 0 && recSec > up.maxHours * 3600) {
+      stopRecording(`無人看管：達到最長錄製時間 ${up.maxHours} 小時，自動收檔`);
+      return;
+    }
+
+    if (up.optAutoStopQuiet && up.quietMin > 0) {
+      const quietSec = (now - (seg.lastSysSound || seg.startedAt)) / 1000;
+      if (quietSec > up.quietMin * 60) {
+        stopRecording(`無人看管：連續靜音 ${up.quietMin} 分鐘，判定會議已結束，自動收檔`);
+        return;
+      }
+    }
+
+    // 只在「確定什麼都沒錄到」時自動收檔。
+    // 畫面卡住不算 —— 那時聲音通常還在錄，為了畫面把整場停掉會賠更多。
+    if (up.optAutoStopFatal && recSec > 20) {
+      for (const k of ['disk', 'recstate', 'write']) {
+        const a = st.alerts.get(k);
+        if (a && a.level === 'fatal') {
+          stopRecording(`無人看管：偵測到「${a.title}」，自動收檔保住已錄到的部分`);
+          return;
+        }
+      }
+    }
+  }
 }
 
 async function runDeepCheck() {
@@ -1087,7 +1174,7 @@ async function reattachScreen() {
   if (!st.seg) return;
   el.btnReattach.disabled = true;
   try {
-    const newStream = await M.getScreen(prefs().quality);
+    const newStream = await M.getScreen(prefs().quality, prefs().sourceMode, { silent: prefs().optSilent });
     log('info', '取得新的畫面來源，正在切段…');
 
     await finalizeSegment();

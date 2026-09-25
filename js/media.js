@@ -32,20 +32,25 @@ export function pickAudioMime() {
  *
  * 多場同時錄一定要用 'browser'：系統音是整台電腦的混音，多場會混在一起分不開。
  */
-export async function getScreen(qualityKey, surface) {
+export async function getScreen(qualityKey, surface, opts) {
   const q = QUALITY[qualityKey] || QUALITY['1080p15'];
   const video = { frameRate: { ideal: q.frameRate, max: q.frameRate }, displaySurface: surface || 'monitor' };
   if (q.width) { video.width = { ideal: q.width }; video.height = { ideal: q.height }; }
 
+  const audio = {
+    // 會議聲音要原汁原味，不要被當成「麥克風」處理掉
+    echoCancellation: false,
+    noiseSuppression: false,
+    autoGainControl: false,
+    sampleRate: 48000,
+  };
+  // 錄分頁但不要從這台電腦的喇叭放出來。
+  // 用途：電腦在旁邊靜靜地錄，你用手機開會 —— 不這樣做會互相回授。
+  if (opts && opts.silent) audio.suppressLocalAudioPlayback = true;
+
   const stream = await navigator.mediaDevices.getDisplayMedia({
     video,
-    audio: {
-      // 系統音要原汁原味，不要被當成「麥克風」處理掉
-      echoCancellation: false,
-      noiseSuppression: false,
-      autoGainControl: false,
-      sampleRate: 48000,
-    },
+    audio,
     // 提示瀏覽器預設選「整個螢幕」——Zoom/Webex 是桌面 App，只有整螢幕抓得到系統音
     systemAudio: 'include',
     selfBrowserSurface: 'exclude',
