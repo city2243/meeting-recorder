@@ -16,6 +16,7 @@
 import * as S from './storage.js';
 import * as M from './media.js';
 import * as C from './checks.js';
+import { fw } from './i18n.js';
 
 const SOUND_FLOOR = 0.0027;   // 約 -51 dBFS
 
@@ -243,7 +244,7 @@ export class Slot {
     const u = uid();
 
     this.vTarget = `${sid}_${safe}.webm`;
-    this.aTarget = `${sid}_${safe}_音訊.webm`;
+    this.aTarget = `${sid}_${safe}_${fw('音訊')}.webm`;
     this.vOpfs = `${sid}_${u}_v.webm`;
     this.aOpfs = `${sid}_${u}_a.webm`;
 

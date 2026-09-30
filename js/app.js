@@ -9,6 +9,7 @@ import * as S from './storage.js';
 import * as M from './media.js';
 import * as C from './checks.js';
 import * as L from './license.js';
+import { t, tText, fw, partSuffix, fmtWhen } from './i18n.js';
 
 /* ---------------- DOM ---------------- */
 const $ = (id) => document.getElementById(id);
@@ -156,7 +157,7 @@ function notify(title, body) {
   if (!prefs().optNotify) return;
   try {
     if (window.Notification && Notification.permission === 'granted') {
-      new Notification(title, { body, tag: 'meeting-recorder', requireInteraction: true });
+      new Notification(t(title), { body: t(body), tag: 'meeting-recorder', requireInteraction: true });
     }
   } catch (e) {}
 }
@@ -521,7 +522,7 @@ async function renderRecovery() {
     row.innerHTML = '<span class="fn"></span><span class="meta"></span>';
     row.querySelector('.fn').textContent = target;
     row.querySelector('.meta').textContent =
-      fmtBytes(f.size) + ' · ' + new Date(f.lastModified).toLocaleString('zh-TW') + (exported ? ' · 已匯出過' : ' · 尚未匯出');
+      fmtBytes(f.size) + ' · ' + fmtWhen(f.lastModified) + (exported ? ' · 已匯出過' : ' · 尚未匯出');
 
     const bSave = document.createElement('button');
     bSave.className = 'btn sm accent'; bSave.type = 'button'; bSave.textContent = '另存到資料夾';
@@ -537,7 +538,7 @@ async function renderRecovery() {
     const bDel = document.createElement('button');
     bDel.className = 'btn sm ghost'; bDel.type = 'button'; bDel.textContent = '刪除';
     bDel.onclick = async () => {
-      if (!confirm('確定刪除「' + target + '」？刪掉就救不回來了。')) return;
+      if (!confirm(t('確定刪除「' + target + '」？刪掉就救不回來了。'))) return;
       await S.deleteStored(f.name); renderRecovery();
     };
     row.appendChild(bSave); row.appendChild(bDel);
@@ -546,7 +547,7 @@ async function renderRecovery() {
 }
 
 async function clearTemp() {
-  if (!confirm('把瀏覽器裡的暫存副本全部刪除？請先確認資料夾裡的檔案可以正常播放。')) return;
+  if (!confirm(t('把瀏覽器裡的暫存副本全部刪除？請先確認資料夾裡的檔案可以正常播放。'))) return;
   const files = await S.listStored();
   for (const f of files) { try { await S.deleteStored(f.name); } catch (e) {} }
   writeManifest([]);
@@ -930,11 +931,11 @@ async function startRecording() {
 
 async function startSegment(idx) {
   const sid = st.session.sid;
-  const suffix = idx > 1 ? `_第${idx}段` : '';
+  const suffix = idx > 1 ? partSuffix(idx) : '';
   const vOpfs = `${sid}_${st.session.uid}_v${idx}.webm`;
   const aOpfs = `${sid}_${st.session.uid}_a${idx}.webm`;
-  const vTarget = `會議錄影_${sid}${suffix}.webm`;
-  const aTarget = `會議錄影_${sid}${suffix}_音訊備份.webm`;
+  const vTarget = `${fw('會議錄影')}_${sid}${suffix}.webm`;
+  const aTarget = `${fw('會議錄影')}_${sid}${suffix}_${fw('音訊備份')}.webm`;
 
   const q = M.QUALITY[prefs().quality];
   const videoTrack = st.screenStream.getVideoTracks()[0];
@@ -1306,7 +1307,8 @@ async function stopRecording(reason) {
   setStatus(report.pass ? '完成' : '完成（有問題）', report.pass ? 'ok' : 'warn');
 
   /* --- 匯出 --- */
-  const logText = buildLogText(totalSec, frames, report);
+  const logText = tText(buildLogText(totalSec, frames, report));
+  const logName = `${fw('會議錄影')}_${st.session.sid}_${fw('健康紀錄')}.txt`;
   const files = [];
   for (const sg of segs) {
     files.push({ writer: sg.writer, target: sg.vTarget });
@@ -1322,8 +1324,8 @@ async function stopRecording(reason) {
       } catch (e) { row.fail('存檔失敗：' + e.message); }
     }
     try {
-      await S.writeTextToDir(st.dirHandle, `會議錄影_${st.session.sid}_健康紀錄.txt`, logText);
-      fileRow(`會議錄影_${st.session.sid}_健康紀錄.txt`, '').done('已存檔');
+      await S.writeTextToDir(st.dirHandle, logName, logText);
+      fileRow(logName, '').done('已存檔');
     } catch (e) { log('warn', '健康紀錄存檔失敗：' + e.message); }
 
     const man = readManifest();
@@ -1338,10 +1340,10 @@ async function stopRecording(reason) {
       row.node.appendChild(b);
       row.done('請按下載');
     }
-    const r2 = fileRow(`會議錄影_${st.session.sid}_健康紀錄.txt`, '');
+    const r2 = fileRow(logName, '');
     const b2 = document.createElement('button');
     b2.className = 'btn sm'; b2.type = 'button'; b2.textContent = '下載';
-    b2.onclick = () => S.downloadText(`會議錄影_${st.session.sid}_健康紀錄.txt`, logText);
+    b2.onclick = () => S.downloadText(logName, logText);
     r2.node.appendChild(b2); r2.done('請按下載');
   }
 
@@ -1367,7 +1369,7 @@ function buildLogText(totalSec, frames, report) {
   L.push('會議錄影 健康紀錄');
   L.push('='.repeat(60));
   L.push('場次編號：' + s.sid);
-  L.push('開始時間：' + new Date(s.startedAt).toLocaleString('zh-TW'));
+  L.push('開始時間：' + fmtWhen(s.startedAt));
   L.push('總長度：' + fmtDur(totalSec));
   L.push('畫質設定：' + prefs().quality + '（' + M.QUALITY[prefs().quality].label + '）');
   L.push('編碼格式：' + st.videoMime + ' / ' + st.audioMime);

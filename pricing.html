@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var l=localStorage.getItem('meetingRecorder.lang');if(l==='en'||(!l&&!/^zh/i.test(navigator.language||'')))document.documentElement.classList.add('i18n-pending')}catch(e){}</script>
+<style>html.i18n-pending body{visibility:hidden}</style>
 <title>方案與升級 · 會議錄影守門員</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,6 +127,7 @@
 </main>
 
 <script type="module">
+import './js/i18n.js';
 const PAID_HOST = 'meeting-recorder.etfswing-site.workers.dev';
 const KEY_KEY = 'meetingRecorder.licenseKey';
 const $ = (id) => document.getElementById(id);

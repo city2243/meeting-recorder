@@ -125,6 +125,12 @@ function parseTwDate(s) {
   return Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4] - 8, +m[5], +m[6]);
 }
 
+/** 台北時間的 YYYY-MM-DD（伺服器在 UTC，不能直接用 toLocaleDateString） */
+function twDay(ms) {
+  const t = new Date(ms + 8 * 3600 * 1000), p = (n) => String(n).padStart(2, '0');
+  return `${t.getUTCFullYear()}-${p(t.getUTCMonth() + 1)}-${p(t.getUTCDate())}`;
+}
+
 function addMonths(ms, n) {
   const d = new Date(ms);
   const day = d.getUTCDate();
@@ -428,7 +434,7 @@ async function handleResult(request, env, url) {
     <p>這是你的授權碼：</p>
     <p class="k">${escapeHtml(lic.key)}</p>
     <p class="note">已自動存進這個瀏覽器，回到工具就已經解鎖。請另外抄下來，換電腦時要用。</p>
-    <p class="note">目前付費期間至 ${new Date(lic.paid_through || lic.expires_at).toLocaleDateString('zh-TW')}，
+    <p class="note">目前付費期間至 ${twDay(lic.paid_through || lic.expires_at)}，
       每月自動續扣後會延長。要取消隨時到「<a href="/account.html">我的訂閱</a>」自己按，不用寫信。</p>
     <p><a class="btn" href="/">回到工具</a></p>
     ${saveKey}`));
@@ -441,7 +447,7 @@ function supportLine(env) {
 }
 
 function page(title, body) {
-  return `<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title>
+  return `<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>try{var l=localStorage.getItem('meetingRecorder.lang');if(l==='en'||(!l&&!/^zh/i.test(navigator.language||'')))document.documentElement.classList.add('i18n-pending')}catch(e){}</script><style>html.i18n-pending body{visibility:hidden}</style><title>${escapeHtml(title)}</title>
 <body style="margin:0;background:#0E1117;color:#E7ECF3;font-family:'Microsoft JhengHei UI',system-ui,sans-serif;display:grid;place-items:center;min-height:100vh">
 <main style="max-width:540px;padding:32px 20px;line-height:1.75">
   <h1 style="font-size:20px;margin:0 0 16px">${escapeHtml(title)}</h1>
@@ -453,7 +459,8 @@ function page(title, body) {
  .btn{display:inline-block;background:#5AC8D8;color:#06222A;font-weight:600;text-decoration:none;padding:10px 18px;border-radius:8px;margin-right:8px}
  .btn.ghost{background:transparent;color:#AFBACA;border:1px solid #2B3543}
  a{color:#5AC8D8}
-</style></html>`;
+</style>
+<script type="module" src="/js/i18n.js"></script></html>`;
 }
 
 /* ═════════════ 授權查詢 ═════════════ */

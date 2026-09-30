@@ -11,6 +11,7 @@ import * as M from './media.js';
 import * as C from './checks.js';
 import { Slot } from './slot.js';
 import * as L from './license.js';
+import { t, tText, fw, fmtWhen } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
 const el = {
@@ -107,7 +108,7 @@ function notify(title, body) {
   if (!el.optNotify.checked) return;
   try {
     if (window.Notification && Notification.permission === 'granted') {
-      new Notification(title, { body, tag: 'meeting-multi', requireInteraction: true });
+      new Notification(t(title), { body: t(body), tag: 'meeting-multi', requireInteraction: true });
     }
   } catch (e) {}
 }
@@ -527,8 +528,8 @@ function markAll() {
    ================================================================ */
 async function exportSlot(slot, r) {
   const base = `${slot.sid}_${slot.name.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40)}`;
-  const reportName = `${base}_實測報告.txt`;
-  const report = buildReport(slot, r);
+  const reportName = `${base}_${fw('實測報告')}.txt`;
+  const report = tText(buildReport(slot, r));
   const box = slot.ui.result.querySelector('.sc-files');
 
   if (st.dirHandle) {
@@ -611,7 +612,7 @@ function buildReport(slot, r) {
   L.push('='.repeat(64));
   L.push('場次：' + slot.name);
   L.push('場次編號：' + slot.sid);
-  L.push('開始時間：' + new Date(slot.startedAt).toLocaleString('zh-TW'));
+  L.push('開始時間：' + fmtWhen(slot.startedAt));
   L.push('長度：' + fmtDur(r.seconds));
   L.push('來源：' + slot.surfaceLabel);
   L.push('畫質設定：' + slot.quality + (slot.withVideo ? '' : '（只錄音訊）'));

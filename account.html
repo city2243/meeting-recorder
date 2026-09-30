@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var l=localStorage.getItem('meetingRecorder.lang');if(l==='en'||(!l&&!/^zh/i.test(navigator.language||'')))document.documentElement.classList.add('i18n-pending')}catch(e){}</script>
+<style>html.i18n-pending body{visibility:hidden}</style>
 <title>我的訂閱 · 會議錄影守門員</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,9 +81,10 @@
 </main>
 
 <script type="module">
+import { t, fmtWhen } from './js/i18n.js';
 const $ = (id) => document.getElementById(id);
-const fmt = (ms) => ms ? new Date(ms).toLocaleString('zh-TW', { hour12: false }) : '—';
-const fmtD = (ms) => ms ? new Date(ms).toLocaleDateString('zh-TW') : '—';
+const fmt = (ms) => fmtWhen(ms);
+const fmtD = (ms) => fmtWhen(ms, false);
 const kindName = { first: '首期', 'first-sync': '首期（補查）', period: '每月續扣', 'period-sync': '每月續扣（補查）', cancel: '取消訂閱' };
 let creds = null;
 
@@ -137,7 +140,7 @@ $('lookup').addEventListener('submit', async (e) => {
 
 $('cancel').addEventListener('click', async () => {
   if (!creds) return;
-  if (!confirm('確定要取消訂閱？\n\n系統會通知綠界停止之後的扣款。已經付款的這一期可以繼續用到期滿，不會按比例退款。')) return;
+  if (!confirm(t('確定要取消訂閱？') + '\n\n' + t('系統會通知綠界停止之後的扣款。已經付款的這一期可以繼續用到期滿，不會按比例退款。'))) return;
   $('cancel').disabled = true; $('actMsg').textContent = '正在通知綠界…';
   try {
     const r = await post('/api/account/cancel', creds);
@@ -151,7 +154,7 @@ $('cancel').addEventListener('click', async () => {
 
 $('resetDev').addEventListener('click', async () => {
   if (!creds) return;
-  if (!confirm('清空所有已啟用的裝置？之後每台電腦重新打開工具時會自動重新啟用。')) return;
+  if (!confirm(t('清空所有已啟用的裝置？之後每台電腦重新打開工具時會自動重新啟用。'))) return;
   try {
     const r = await post('/api/account/reset-devices', creds);
     $('actMsg').textContent = `已清空 ${r.removed} 台裝置。`;

@@ -7,6 +7,8 @@
  *   後端做的是發碼、記帳、到期停止發放；不是不可破解的保護。
  */
 
+import { fmtWhen } from './i18n.js';
+
 const API = '/api/entitlement';
 const CACHE_KEY = 'meetingRecorder.entitlement';
 const KEY_KEY = 'meetingRecorder.licenseKey';
@@ -135,7 +137,7 @@ export function mountLicenseBox(container, onChange) {
       ? (ent.plan === 'owner'
           ? '不限場數、不限裝置、不會過期。'
           : `同時最多 ${ent.slots} 場、可用無人看管保護` +
-            (ent.expiresAt ? `。${ent.cancelled ? '已取消訂閱，可用到' : '有效至'} ${new Date(ent.expiresAt).toLocaleDateString('zh-TW')}` : ''))
+            (ent.expiresAt ? `。${ent.cancelled ? '已取消訂閱，可用到' : '有效至'} ${fmtWhen(ent.expiresAt, false)}` : ''))
       : '同時 1 場、無人看管保護未開放。升級後可同時錄 4 場。';
     input.value = pro ? savedKey() : '';
     input.hidden = pro;

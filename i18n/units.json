@@ -1,0 +1,7100 @@
+[
+ {
+  "id": "u0001",
+  "zh": "錄製模式",
+  "kind": "exact",
+  "src": [
+   "artifact.html@attr",
+   "multi.html@attr",
+   "pricing.html@attr"
+  ]
+ },
+ {
+  "id": "u0002",
+  "zh": "進度",
+  "kind": "exact",
+  "src": [
+   "artifact.html@attr"
+  ]
+ },
+ {
+  "id": "u0003",
+  "zh": "Chrome 分享視窗示意圖：選擇整個畫面，並勾選同時分享系統音訊",
+  "kind": "exact",
+  "src": [
+   "artifact.html@attr"
+  ]
+ },
+ {
+  "id": "u0004",
+  "zh": "Chrome 分享視窗示意圖：選擇 Chrome 分頁，並勾選同時分享分頁音訊",
+  "kind": "exact",
+  "src": [
+   "artifact.html@attr",
+   "multi.html@attr"
+  ]
+ },
+ {
+  "id": "u0005",
+  "zh": "會議錄影守門員",
+  "kind": "exact",
+  "src": [
+   "artifact.html@title",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0006",
+  "zh": "錄一場",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html",
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0007",
+  "zh": "同時錄多場",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html",
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0008",
+  "zh": "停止並存檔",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0009",
+  "zh": "初始化",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0010",
+  "zh": "靜音提示",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html",
+   "js/multi.js:677"
+  ]
+ },
+ {
+  "id": "u0011",
+  "zh": "設定",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0012",
+  "zh": "檢查",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0013",
+  "zh": "錄製",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0014",
+  "zh": "驗證",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0015",
+  "zh": "錄 Webex、Zoom、Teams 這類會議軟體的螢幕與聲音。全部在你自己的瀏覽器裡跑， 影像和聲音不會離開這台電腦。它跟一般錄影工具的差別只有一件事：",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0016",
+  "zh": "它會在開錄前、錄製中、錄完後各驗一次，不讓你錄完才發現沒錄到。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0017",
+  "zh": "執行環境",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0018",
+  "zh": "這個瀏覽器做得到什麼",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0019",
+  "zh": "螢幕擷取在嵌入的頁面裡被瀏覽器政策擋住，這一份只能看、不能錄。 可以真正錄影的完整版在下面這個網址，把它貼到瀏覽器自己的分頁就能用：",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0020",
+  "zh": "複製網址",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0021",
+  "zh": "試著直接開新分頁",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0022",
+  "zh": "救援",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0023",
+  "zh": "上次留下來的錄影檔",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0024",
+  "zh": "還存在瀏覽器本機儲存區裡。可能是上次當掉，也可能是匯出後沒清掉。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0025",
+  "zh": "步驟一",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0026",
+  "zh": "錄完存到哪個資料夾",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0027",
+  "zh": "繼續用「",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0028",
+  "zh": "」",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0029",
+  "zh": "選擇資料夾",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html",
+   "js/app.js:492"
+  ]
+ },
+ {
+  "id": "u0030",
+  "zh": "尚未選擇",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html",
+   "js/app.js:493"
+  ]
+ },
+ {
+  "id": "u0031",
+  "zh": "忘記這個資料夾",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0032",
+  "zh": "選過一次就記住，下次打開直接沿用。錄製過程先寫進瀏覽器的本機儲存區，停止後才複製到這裡。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0033",
+  "zh": "麥克風（錄你自己的聲音）",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0034",
+  "zh": "重新偵測",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0035",
+  "zh": "要錄什麼",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0036",
+  "zh": "桌面版會議軟體（Zoom / Webex 安裝版）—— 錄整個畫面＋系統音訊",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0037",
+  "zh": "瀏覽器裡的會議（網頁版 / Meet / Teams）—— 只錄那個分頁",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0038",
+  "zh": "畫質",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0039",
+  "zh": "預計會議長度（分鐘）",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0040",
+  "zh": "保險機制",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0041",
+  "zh": "另存一份純音訊備份檔，影片萬一壞掉時聲音還在",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0042",
+  "zh": "出問題時發出提示音",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0043",
+  "zh": "出問題時跳桌面通知，你人在會議視窗也看得到",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0044",
+  "zh": "錄製期間不讓螢幕休眠",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0045",
+  "zh": "每 5 分鐘做一次深度健檢：試錄 1.2 秒再解碼驗證",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0046",
+  "zh": "檢查全部通過就自動開始錄（會倒數 3 秒，來得及取消）",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0047",
+  "zh": "無人看管（人不在電腦旁的時候用）",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0048",
+  "zh": "錄的時候電腦不要把聲音放出來 —— 你用手機開會、電腦在旁邊靜靜地錄，不這樣做兩邊會互相回授（只在錄分頁時有效）",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0049",
+  "zh": "開啟無人看管保護",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0050",
+  "zh": "確定錄不到東西時自動收檔（資料停止寫入、錄影器停擺、寫檔失敗）—— 畫面卡住不算，因為那時聲音通常還在錄",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0051",
+  "zh": "連續靜音超過",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0052",
+  "zh": "分鐘就收檔（會議散了自動結束；但如果真的安靜那麼久會提早收，尾巴會少）",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0053",
+  "zh": "最長錄",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0054",
+  "zh": "小時，到了就自動收檔存好",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0055",
+  "zh": "⚠ 出門前記得把 Windows 的電源設定改成「永不睡眠」，電腦睡著錄影就停了。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0056",
+  "zh": "接下來選畫面時，這一步選錯就沒有聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0057",
+  "zh": "Zoom、Webex、Teams 是獨立的桌面程式，不是網頁分頁。要錄到它們的聲音， 在 Chrome 的分享視窗裡必須選「",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0058",
+  "zh": "整個畫面",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0059",
+  "zh": "」， 並勾選左下角的「",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0060",
+  "zh": "同時分享系統音訊",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0061",
+  "zh": "」。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0062",
+  "zh": "選「視窗」抓不到任何聲音。下一步會實際驗證，沒過不讓你開始錄。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0063",
+  "zh": "選擇要分享的內容",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0064",
+  "zh": "meeting-recorder 想要分享你的畫面",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0065",
+  "zh": "視窗",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0066",
+  "zh": "Chrome 分頁",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0067",
+  "zh": "螢幕 1",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0068",
+  "zh": "螢幕 2",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0069",
+  "zh": "取消",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0070",
+  "zh": "分享",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0071",
+  "zh": "一定要選「整個畫面」——選「視窗」抓不到任何聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0072",
+  "zh": "左下角勾「同時分享系統音訊」——",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0073",
+  "zh": "沒勾就只有畫面沒聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0074",
+  "zh": "接下來選分頁時，這一步選錯就沒有聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0075",
+  "zh": "在 Chrome 的分享視窗裡切到「",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0076",
+  "zh": "」，挑會議那個分頁， 並把「",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0077",
+  "zh": "同時分享分頁音訊",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0078",
+  "zh": "」勾起來。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0079",
+  "zh": "這個模式拿到的聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0080",
+  "zh": "只有那個分頁的",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0081",
+  "zh": "，不會混到電腦上其他聲音， 逐字稿品質最好。下一步會實際驗證，沒勾音訊不讓你開始錄。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0082",
+  "zh": "Zoom Meeting — 今天這場",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0083",
+  "zh": "Google 試算表",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0084",
+  "zh": "切到「Chrome 分頁」，挑會議那一個",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0085",
+  "zh": "左下角勾「同時分享分頁音訊」——",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0086",
+  "zh": "選擇畫面並開始檢查",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/app.js:346"
+  ]
+ },
+ {
+  "id": "u0087",
+  "zh": "步驟二",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0088",
+  "zh": "開錄前檢查",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0089",
+  "zh": "這就是等一下會錄下去的畫面",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0090",
+  "zh": "檢查全部通過，即將自動開始錄製",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0091",
+  "zh": "先等一下",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0092",
+  "zh": "開始錄製",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/app.js:894"
+  ]
+ },
+ {
+  "id": "u0093",
+  "zh": "重新檢查",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0094",
+  "zh": "我知道上面的紅色項目，仍要開始錄",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0095",
+  "zh": "步驟三",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0096",
+  "zh": "錄製中",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/app.js:928",
+   "js/multi.js:352"
+  ]
+ },
+ {
+  "id": "u0097",
+  "zh": "畫面",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/multi.js:250"
+  ]
+ },
+ {
+  "id": "u0098",
+  "zh": "等待訊號",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "artifact.html",
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0099",
+  "zh": "系統音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0100",
+  "zh": "會議聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0101",
+  "zh": "麥克風",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/app.js:421"
+  ]
+ },
+ {
+  "id": "u0102",
+  "zh": "你的聲音",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0103",
+  "zh": "已安全落地",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/multi.js:250"
+  ]
+ },
+ {
+  "id": "u0104",
+  "zh": "等待資料",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0105",
+  "zh": "系統音音量",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0106",
+  "zh": "麥克風音量",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0107",
+  "zh": "重新接上畫面，開新的一段",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0108",
+  "zh": "事件紀錄",
+  "kind": "exact",
+  "src": [
+   "artifact.html",
+   "js/app.js:1395"
+  ]
+ },
+ {
+  "id": "u0109",
+  "zh": "步驟四",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0110",
+  "zh": "完成與驗證",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0111",
+  "zh": "拉到中間和最後各看一眼，確認整段都在。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0112",
+  "zh": "再錄一場",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0113",
+  "zh": "清除瀏覽器裡的暫存副本",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0114",
+  "zh": "錄製他人會議前請先取得對方同意。錄的是整個螢幕，期間跳出來的私人訊息也會被錄進去。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0115",
+  "zh": "需要 Chrome 或 Edge。Firefox 抓不到 Windows 的系統音訊。",
+  "kind": "exact",
+  "src": [
+   "artifact.html"
+  ]
+ },
+ {
+  "id": "u0116",
+  "zh": "同時錄多場 · 會議錄影守門員",
+  "kind": "exact",
+  "src": [
+   "multi.html@title"
+  ]
+ },
+ {
+  "id": "u0117",
+  "zh": "標記這一刻",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0118",
+  "zh": "全部停止",
+  "kind": "exact",
+  "src": [
+   "multi.html",
+   "js/multi.js:401"
+  ]
+ },
+ {
+  "id": "u0119",
+  "zh": "實測版",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0120",
+  "zh": "同時錄好幾場會議，每一場各自一個乾淨的音軌。做法是",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0121",
+  "zh": "一場抓一個瀏覽器分頁",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0122",
+  "zh": "—— 分頁擷取拿到的聲音只有那個分頁的，不會跟其他場混在一起。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0123",
+  "zh": "用之前先知道三件事",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0124",
+  "zh": "會議必須用網頁版參加。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0125",
+  "zh": "Zoom、Webex 的桌面程式沒辦法單獨抓聲音， 它們的聲音只存在於整台電腦的混音裡，多場會糊在一起。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0126",
+  "zh": "選分頁時一定要勾「分享分頁音訊」。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0127",
+  "zh": "沒勾就只有畫面沒聲音， 下一步會擋住不讓你開始。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0128",
+  "zh": "這一版預設不錄麥克風。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0129",
+  "zh": "你的麥克風會同時收到所有場次的喇叭聲， 混進去只會讓每一軌都變髒。建議戴耳機。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0130",
+  "zh": "教學",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0131",
+  "zh": "一次錄四場，照這個順序按",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0132",
+  "zh": "整個流程約五分鐘。每一場都要各自跑一次 Chrome 的分享視窗，這步不能自動化。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0133",
+  "zh": "開始之前",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0134",
+  "zh": "四場都用網頁版加入",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0135",
+  "zh": "安裝版的 Zoom／Webex 抓不到單獨的聲音，四場會糊成一團。 找會議連結裡的「從瀏覽器加入」。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0136",
+  "zh": "四個分頁先全部開好、加入完成",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0137",
+  "zh": "各自把麥克風和鏡頭關掉，放在同一個 Chrome 視窗裡比較好認。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0138",
+  "zh": "戴耳機",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0139",
+  "zh": "或在共用設定勾「錄的時候電腦不要把聲音放出來」。四場一起從喇叭放你也聽不清楚。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0140",
+  "zh": "電源設定改成永不睡眠",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0141",
+  "zh": "設定 → 系統 → 電源與電池 → 螢幕與睡眠 →「插電時，讓裝置睡眠」設為",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0142",
+  "zh": "永不",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0143",
+  "zh": "。 電腦睡著錄影就停了。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0144",
+  "zh": "正式步驟",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0145",
+  "zh": "選存檔資料夾",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0146",
+  "zh": "在上面的共用設定。選過一次就記住了。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0147",
+  "zh": "畫質選 720p / 15fps",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0148",
+  "zh": "四場同時不要用 1080p，空間和 CPU 都是四倍。 只要逐字稿的話，把「也錄影像」取消勾選，容量從幾 GB 掉到幾百 MB。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0149",
+  "zh": "按兩次「＋ 加一場」湊成四格",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0150",
+  "zh": "預設有兩格。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0151",
+  "zh": "每一格先打名字",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0152",
+  "zh": "例如「台積電法說」「內部週會」。四個檔案只差流水號的話，事後你分不出哪個是哪個。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0153",
+  "zh": "第一格按「選擇這場的分頁」",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0154",
+  "zh": "Chrome 會跳出分享視窗，照下圖的兩個位置操作：",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0155",
+  "zh": "Zoom Meeting — 台積電法說",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0156",
+  "zh": "Webex — 內部週會",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0157",
+  "zh": "Google Meet — 客戶訪談",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0158",
+  "zh": "等約 7 秒，五項檢查要全綠",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0159",
+  "zh": "狀態變成「準備好了」才算過。有紅色的照著紅字修， 通常就是忘了勾分頁音訊。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0160",
+  "zh": "第二、三、四格重複第 5、6 步",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0161",
+  "zh": "每格選各自對應的會議分頁。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0162",
+  "zh": "按「開始錄製 4 場」",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0163",
+  "zh": "四格都「準備好了」之後才按得下去。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0164",
+  "zh": "走之前確認三件事",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0165",
+  "zh": "左上角紅點在閃、四格的音量表都在跳、每格「已安全落地」的數字在增加。 有一格不動就是那一場沒錄到。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0166",
+  "zh": "結束按「全部停止」",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0167",
+  "zh": "會自動驗證每一場、把八個檔案存進資料夾，外加一份實測報告。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0168",
+  "zh": "最容易出錯的四件事",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0169",
+  "zh": "四場的聲音聽起來一樣",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0170",
+  "zh": "你選成「整個畫面」了。整個畫面抓的是整台電腦的混音，四場會混在一起。 回去重選成「Chrome 分頁」。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0171",
+  "zh": "某一場完全沒聲音",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0172",
+  "zh": "分享時忘了勾「同時分享分頁音訊」。檢查會擋下來，硬按開始就會錄到啞的。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0173",
+  "zh": "選錯分頁",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0174",
+  "zh": "選完後那一格會顯示來源，名字對不上就按「重新選擇」。四場一起選很容易挑錯，每格選完看一眼。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0175",
+  "zh": "中途把會議分頁關掉",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0176",
+  "zh": "那一場立刻斷。四場同時，誤觸機率是四倍。錄製期間不要整理分頁。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0177",
+  "zh": "⚠ 四場同時錄我只用合成訊號測過（沒有掉格），",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0178",
+  "zh": "真實會議的上限還沒驗證",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0179",
+  "zh": "。 第一次跑四場時，錄製中請留意每格的 fps 有沒有掉下來。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0180",
+  "zh": "共用設定",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0181",
+  "zh": "所有場次一起套用",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0182",
+  "zh": "影像畫質",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0183",
+  "zh": "也錄影像（關掉就只留聲音，容量和 CPU 都省很多）",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0184",
+  "zh": "出問題時跳桌面通知",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0185",
+  "zh": "場次",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0186",
+  "zh": "一場一個分頁",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0187",
+  "zh": "＋ 加一場",
+  "kind": "exact",
+  "src": [
+   "multi.html",
+   "js/multi.js:209"
+  ]
+ },
+ {
+  "id": "u0188",
+  "zh": "先加一場，然後選它要錄哪個分頁。",
+  "kind": "exact",
+  "src": [
+   "multi.html",
+   "js/multi.js:381"
+  ]
+ },
+ {
+  "id": "u0189",
+  "zh": "開始錄製全部",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0190",
+  "zh": "完成",
+  "kind": "exact",
+  "src": [
+   "multi.html",
+   "js/app.js:1306"
+  ]
+ },
+ {
+  "id": "u0191",
+  "zh": "驗證結果與實測數據",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0192",
+  "zh": "再錄一輪",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0193",
+  "zh": "事件紀錄（所有場次）",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0194",
+  "zh": "錄製他人會議前請先取得對方同意。所有處理都在這台電腦上，不會上傳。",
+  "kind": "exact",
+  "src": [
+   "multi.html"
+  ]
+ },
+ {
+  "id": "u0195",
+  "zh": "你從綠界返回了，這次沒有扣款。想訂閱的話再按一次就好。",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:15"
+  ]
+ },
+ {
+  "id": "u0196",
+  "zh": "這個網址是自用版，沒有接金流。要訂閱請到 <a class=\"link\" href=\"https://",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:22"
+  ]
+ },
+ {
+  "id": "u0197",
+  "zh": "/pricing.html\">正式站",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:22"
+  ]
+ },
+ {
+  "id": "u0198",
+  "zh": "。",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:22",
+   "pricing.html",
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0199",
+  "zh": "付費方案即將開放。",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:25"
+  ]
+ },
+ {
+  "id": "u0200",
+  "zh": "目前可以免費使用單場錄影的全部功能。",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:25"
+  ]
+ },
+ {
+  "id": "u0201",
+  "zh": "請先勾選同意服務條款。",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:34"
+  ]
+ },
+ {
+  "id": "u0202",
+  "zh": "建立訂單中…",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:36"
+  ]
+ },
+ {
+  "id": "u0203",
+  "zh": "建立訂單失敗（",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:44"
+  ]
+ },
+ {
+  "id": "u0204",
+  "zh": "）",
+  "kind": "exact",
+  "src": [
+   "pricing.html<script>:44",
+   "account.html<script>:13",
+   "account.html<script>:27"
+  ]
+ },
+ {
+  "id": "u0205",
+  "zh": "方案與升級 · 會議錄影守門員",
+  "kind": "exact",
+  "src": [
+   "pricing.html@title"
+  ]
+ },
+ {
+  "id": "u0206",
+  "zh": "回到工具",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0207",
+  "zh": "錄影本身完全在你自己的電腦上跑，影像和聲音不會上傳到任何地方。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0208",
+  "zh": "免費版就有完整的三道驗證",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0209",
+  "zh": "—— 開錄前、錄製中、錄完後各驗一次。 付費解鎖的是同時錄多場與無人看管保護。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0210",
+  "zh": "免費",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0211",
+  "zh": "同時錄",
+  "kind": "exact",
+  "src": [
+   "pricing.html",
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0212",
+  "zh": "1 場",
+  "kind": "exact",
+  "src": [
+   "pricing.html",
+   "js/multi.js:214"
+  ]
+ },
+ {
+  "id": "u0213",
+  "zh": "錄製長度不限",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0214",
+  "zh": "開錄前試錄解碼驗證",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0215",
+  "zh": "錄製中 watchdog 與警報",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0216",
+  "zh": "錄完驗證與健康紀錄",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0217",
+  "zh": "當機不掉檔、救援取回",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0218",
+  "zh": "純音訊備份檔",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0219",
+  "zh": "直接使用",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0220",
+  "zh": "/月",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0221",
+  "zh": "免費版的全部，加上：",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0222",
+  "zh": "最多 4 場",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0223",
+  "zh": "，每場獨立音軌",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0224",
+  "zh": "無人看管保護",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0225",
+  "zh": "：靜音自動收檔、最長時數上限、確定錄不到時自動收檔",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0226",
+  "zh": "最多 3 台裝置",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0227",
+  "zh": "隨時可取消，取消後用到當期結束",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0228",
+  "zh": "Email（取消訂閱、查詢訂閱狀態時要用，請填你收得到信的信箱）",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0229",
+  "zh": "我已閱讀並同意",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0230",
+  "zh": "服務條款與退款政策",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0231",
+  "zh": "。 我了解本服務為線上數位服務，",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0232",
+  "zh": "付款後立即開通",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0233",
+  "zh": "，依消費者保護法及 《通訊交易解除權合理例外情事適用準則》，",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0234",
+  "zh": "開通後不適用七日無條件解除權",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0235",
+  "zh": "用信用卡訂閱",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0236",
+  "zh": "先記下你的授權碼",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0237",
+  "zh": "已自動存進這個瀏覽器。付款完成後就算直接關掉分頁，下次打開工具也會自動生效。 換電腦時要用它，請另外抄下來。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0238",
+  "zh": "我記下了，前往綠界付款",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0239",
+  "zh": "誠實說明",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0240",
+  "zh": "你付費前應該知道的事",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0241",
+  "zh": "付費項目是「方便」，不是「不可破解的保護」",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0242",
+  "zh": "錄影完全在你的瀏覽器裡發生， 方案差異是由網頁上的程式判斷的。懂技術的人改幾行就能繞過去。我們沒有把這件事包裝成別的樣子。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0243",
+  "zh": "取消不用寫信",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0244",
+  "zh": "到「",
+  "kind": "exact",
+  "src": [
+   "pricing.html",
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0245",
+  "zh": "我的訂閱",
+  "kind": "exact",
+  "src": [
+   "pricing.html",
+   "pricing.html",
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0246",
+  "zh": "」輸入授權碼和 Email， 按一下就會直接通知綠界停止後續扣款。已付的這一期可以用到期滿。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0247",
+  "zh": "錄製他人會議請先取得同意",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0248",
+  "zh": "各地法規不同，使用前請自行確認。 本工具不會替你取得任何人的同意。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0249",
+  "zh": "iPhone 上錄不到會議聲音",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0250",
+  "zh": "iOS 不讓任何 App 取得通話音訊，這是系統限制。 用手機開會時，請讓電腦也加入同一場會議來錄。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0251",
+  "zh": "常見問題",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0252",
+  "zh": "可以同時錄超過 4 場嗎？",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0253",
+  "zh": "介面不設硬上限，但 Pro 的授權是 4 場。 而且同時錄很多場的真實負載我還沒用真實會議驗證過，超過 4 場請自行評估。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0254",
+  "zh": "錄的檔案會上傳嗎？",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0255",
+  "zh": "不會。整個工具是純前端，檔案只寫進你自己選的資料夾。 伺服器只處理授權碼與付款，碰不到你的錄影內容。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0256",
+  "zh": "怎麼取消訂閱？",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0257",
+  "zh": "」自己按取消， 系統會直接通知綠界停止扣款。已付的這一期照樣可以用到結束，不會按比例退款（詳見服務條款）。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0258",
+  "zh": "換電腦怎麼辦？",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0259",
+  "zh": "在新電腦貼上同一組授權碼即可。同時最多 3 台； 30 天沒用的裝置會自動讓出名額，也可以在「我的訂閱」自己清空。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0260",
+  "zh": "付了錢但沒解鎖？",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0261",
+  "zh": "信用卡通常幾秒內確認；系統也會每 30 分鐘主動向綠界補查。 超過一小時還沒解鎖，請到「我的訂閱」查看狀態。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0262",
+  "zh": "付款由綠界科技 ECPay 處理，本站不會接觸到你的信用卡資料。",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0263",
+  "zh": "我的訂閱（查詢／取消）",
+  "kind": "exact",
+  "src": [
+   "pricing.html"
+  ]
+ },
+ {
+  "id": "u0264",
+  "zh": "服務條款與隱私權政策",
+  "kind": "exact",
+  "src": [
+   "pricing.html",
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0265",
+  "zh": "首期",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:5"
+  ]
+ },
+ {
+  "id": "u0266",
+  "zh": "首期（補查）",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:5"
+  ]
+ },
+ {
+  "id": "u0267",
+  "zh": "每月續扣",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:5"
+  ]
+ },
+ {
+  "id": "u0268",
+  "zh": "每月續扣（補查）",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:5"
+  ]
+ },
+ {
+  "id": "u0269",
+  "zh": "取消訂閱",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:5",
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0270",
+  "zh": "發生錯誤（",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:13"
+  ]
+ },
+ {
+  "id": "u0271",
+  "zh": "站主授權",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:18",
+   "worker/index.js:35"
+  ]
+ },
+ {
+  "id": "u0272",
+  "zh": "付費中",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:19"
+  ]
+ },
+ {
+  "id": "u0273",
+  "zh": "已取消，期滿停用",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:20"
+  ]
+ },
+ {
+  "id": "u0274",
+  "zh": "付款確認中",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:21",
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0275",
+  "zh": "已停用",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:22"
+  ]
+ },
+ {
+  "id": "u0276",
+  "zh": "（",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:27",
+   "js/app.js:1372"
+  ]
+ },
+ {
+  "id": "u0277",
+  "zh": "｜NT${1}/月",
+  "kind": "pattern",
+  "src": [
+   "account.html<script>:28"
+  ]
+ },
+ {
+  "id": "u0278",
+  "zh": "不會過期",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:30"
+  ]
+ },
+ {
+  "id": "u0279",
+  "zh": "不會再扣款",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:31"
+  ]
+ },
+ {
+  "id": "u0280",
+  "zh": "期",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:32"
+  ]
+ },
+ {
+  "id": "u0281",
+  "zh": "成功",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:37"
+  ]
+ },
+ {
+  "id": "u0282",
+  "zh": "未成功",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:37"
+  ]
+ },
+ {
+  "id": "u0283",
+  "zh": "還沒有付款紀錄",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:38"
+  ]
+ },
+ {
+  "id": "u0284",
+  "zh": "最近 30 天使用過的裝置才佔名額，目前 {1} / {2} 台。",
+  "kind": "pattern",
+  "src": [
+   "account.html<script>:41"
+  ]
+ },
+ {
+  "id": "u0285",
+  "zh": "是",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:43"
+  ]
+ },
+ {
+  "id": "u0286",
+  "zh": "否（超過 30 天）",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:43"
+  ]
+ },
+ {
+  "id": "u0287",
+  "zh": "沒有已啟用的裝置",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:44"
+  ]
+ },
+ {
+  "id": "u0288",
+  "zh": "查詢中…",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:52",
+   "js/license.js:148"
+  ]
+ },
+ {
+  "id": "u0289",
+  "zh": "確定要取消訂閱？ 系統會通知綠界停止之後的扣款。已經付款的這一期可以繼續用到期滿，不會按比例退款。",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:60"
+  ]
+ },
+ {
+  "id": "u0290",
+  "zh": "正在通知綠界…",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:61"
+  ]
+ },
+ {
+  "id": "u0291",
+  "zh": "已取消。綠界不會再扣款，Pro 功能可以用到 {1}。",
+  "kind": "pattern",
+  "src": [
+   "account.html<script>:65"
+  ]
+ },
+ {
+  "id": "u0292",
+  "zh": "已取消。",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:66"
+  ]
+ },
+ {
+  "id": "u0293",
+  "zh": "清空所有已啟用的裝置？之後每台電腦重新打開工具時會自動重新啟用。",
+  "kind": "exact",
+  "src": [
+   "account.html<script>:74"
+  ]
+ },
+ {
+  "id": "u0294",
+  "zh": "已清空 {1} 台裝置。",
+  "kind": "pattern",
+  "src": [
+   "account.html<script>:77"
+  ]
+ },
+ {
+  "id": "u0295",
+  "zh": "我的訂閱 · 會議錄影守門員",
+  "kind": "exact",
+  "src": [
+   "account.html@title"
+  ]
+ },
+ {
+  "id": "u0296",
+  "zh": "方案",
+  "kind": "exact",
+  "src": [
+   "account.html",
+   "account.html",
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0297",
+  "zh": "查詢、取消、管理裝置",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0298",
+  "zh": "輸入授權碼和付款時填的 Email。兩個都對才會顯示資料 —— 只有授權碼的人（例如你借給別人用）不能幫你取消。",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0299",
+  "zh": "授權碼",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0300",
+  "zh": "付款時填的 Email",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0301",
+  "zh": "查詢",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0302",
+  "zh": "狀態",
+  "kind": "exact",
+  "src": [
+   "account.html",
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0303",
+  "zh": "可以使用到",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0304",
+  "zh": "下次扣款",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0305",
+  "zh": "已成功扣款",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0306",
+  "zh": "付款紀錄",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0307",
+  "zh": "時間",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0308",
+  "zh": "項目",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0309",
+  "zh": "金額",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0310",
+  "zh": "結果",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0311",
+  "zh": "已啟用的裝置",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0312",
+  "zh": "裝置",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0313",
+  "zh": "最後使用",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0314",
+  "zh": "佔名額",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0315",
+  "zh": "清空所有裝置",
+  "kind": "exact",
+  "src": [
+   "account.html"
+  ]
+ },
+ {
+  "id": "u0316",
+  "zh": "服務條款與隱私權政策 · 會議錄影守門員",
+  "kind": "exact",
+  "src": [
+   "terms.html@title"
+  ]
+ },
+ {
+  "id": "u0317",
+  "zh": "草稿版本。標示",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0318",
+  "zh": "待填",
+  "kind": "exact",
+  "src": [
+   "terms.html",
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0319",
+  "zh": "的地方需由經營者補上後才能正式收費； 建議上線前請熟悉消費爭議的專業人士看過一次。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0320",
+  "zh": "服務條款",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0321",
+  "zh": "會議錄影守門員 Pro 服務條款",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0322",
+  "zh": "一、經營者",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0323",
+  "zh": "本服務由",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0324",
+  "zh": "待填：姓名或公司名稱",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0325",
+  "zh": "（統一編號",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0326",
+  "zh": "待填，個人可免",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0327",
+  "zh": "）提供。 聯絡信箱：",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0328",
+  "zh": "二、服務內容",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0329",
+  "zh": "免費版：同時錄製 1 場會議，含開錄前驗證、錄製中監看、錄完驗證、當機救援等全部功能。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0330",
+  "zh": "Pro：在免費版之外，可同時錄製最多 4 場，並可使用無人看管保護。一組授權碼可在最多 3 台裝置使用。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0331",
+  "zh": "錄影與錄音全程在使用者自己的瀏覽器與電腦上進行，本服務不接收、不儲存任何錄製內容。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0332",
+  "zh": "方案差異由網頁上的程式判斷。本服務不保證防止他人以技術手段繞過限制，亦不因此對付費使用者負擔任何責任。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0333",
+  "zh": "三、費用與自動續扣",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0334",
+  "zh": "Pro 為每月新台幣 299 元，以信用卡定期定額方式，由綠界科技（ECPay）每月自動扣款。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0335",
+  "zh": "首次付款成功即開通，付費期間為一個月；之後每月同日自動扣款並延長一個月。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0336",
+  "zh": "自動扣款失敗時，付費期間屆滿後有 3 日寬限期；綠界會自動重試，連續失敗 6 次將由綠界終止合約。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0337",
+  "zh": "四、取消",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0338",
+  "zh": "使用者可隨時於「",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0339",
+  "zh": "」頁面，輸入授權碼與付款時填寫的 Email 自行取消，無須來信。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0340",
+  "zh": "取消後系統即通知綠界停止後續扣款。已付款之當期可繼續使用至期滿。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0341",
+  "zh": "若因系統或綠界異常，取消後仍被扣款，經營者應於查證後全額退還該筆款項。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0342",
+  "zh": "五、退款與七日解除權",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0343",
+  "zh": "本服務屬「非以有形媒介提供之數位內容或一經提供即為完成之線上服務」。依消費者保護法第 19 條及 《通訊交易解除權合理例外情事適用準則》第 2 條第 5 款，經消費者於付款前勾選同意後， 付款開通後不適用七日無條件解除權。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0344",
+  "zh": "已付款之當期不按比例退款。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0345",
+  "zh": "以下情形全額退還當期費用：重複扣款、取消後仍被扣款、付款成功但因本服務之原因無法開通且經回報後 7 日內未修復。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0346",
+  "zh": "退款申請請來信並附上授權碼，經營者於",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0347",
+  "zh": "待填：例如 7",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0348",
+  "zh": "個工作天內處理。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0349",
+  "zh": "六、使用者責任",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0350",
+  "zh": "錄製他人參與之會議前，使用者應自行取得相關人員同意並遵守所在地法令。本服務不代使用者取得任何同意， 對使用者錄製行為所生之法律責任，由使用者自行負責。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0351",
+  "zh": "七、服務變更與終止",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0352",
+  "zh": "經營者調整價格或方案內容時，應至少於生效 30 日前於本網站公告；已付款之當期不受影響。 經營者終止本服務時，應退還使用者尚未使用之付費期間費用。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0353",
+  "zh": "隱私權政策",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0354",
+  "zh": "我們收集什麼、為什麼",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0355",
+  "zh": "：付款時填寫。只用於查詢與取消訂閱時的身分確認，以及必要的服務通知。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0356",
+  "zh": "授權碼、付款紀錄",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0357",
+  "zh": "：由綠界回傳的交易編號、金額、時間，用於對帳與開通。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0358",
+  "zh": "本服務不會取得信用卡號碼",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0359",
+  "zh": "，卡片資料僅由綠界處理。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0360",
+  "zh": "裝置識別碼",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0361",
+  "zh": "：瀏覽器隨機產生的一串代碼，用來計算同時使用的裝置數。不含任何個人資料。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0362",
+  "zh": "IP 位址",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0363",
+  "zh": "：建立訂單時記錄，只用於防止濫用（每小時建單次數限制），保存不超過 24 小時。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0364",
+  "zh": "錄影與錄音內容",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0365",
+  "zh": "：",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0366",
+  "zh": "完全不收集",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0367",
+  "zh": "。所有錄製內容只存在你自己的電腦。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0368",
+  "zh": "以上資料存放於 Cloudflare（D1 資料庫），不會出售或提供給第三方，法令要求者除外。 如需刪除你的資料，請來信並附上授權碼；已完成之交易紀錄依法保存者不在此限。",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0369",
+  "zh": "最後更新：2026-09-30（草稿）",
+  "kind": "exact",
+  "src": [
+   "terms.html"
+  ]
+ },
+ {
+  "id": "u0370",
+  "zh": "【嚴重】",
+  "kind": "exact",
+  "src": [
+   "js/app.js:123",
+   "js/slot.js:76"
+  ]
+ },
+ {
+  "id": "u0371",
+  "zh": "【注意】",
+  "kind": "exact",
+  "src": [
+   "js/app.js:123",
+   "js/slot.js:76"
+  ]
+ },
+ {
+  "id": "u0372",
+  "zh": "錄影出問題了：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:127"
+  ]
+ },
+ {
+  "id": "u0373",
+  "zh": "⚠ 錄影異常",
+  "kind": "exact",
+  "src": [
+   "js/app.js:128",
+   "js/multi.js:103"
+  ]
+ },
+ {
+  "id": "u0374",
+  "zh": "已恢復正常：{1}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:137"
+  ]
+ },
+ {
+  "id": "u0375",
+  "zh": "（另有 {1} 項待處理）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:152",
+   "js/multi.js:99"
+  ]
+ },
+ {
+  "id": "u0376",
+  "zh": "這個頁面被禁止開新分頁，請改用上面的網址。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:266"
+  ]
+ },
+ {
+  "id": "u0377",
+  "zh": "已複製，貼到新分頁的網址列就可以。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:271"
+  ]
+ },
+ {
+  "id": "u0378",
+  "zh": "複製按鈕被擋了，網址已幫你選起來，按 Ctrl+C。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:277"
+  ]
+ },
+ {
+  "id": "u0379",
+  "zh": "使用者按下停止",
+  "kind": "exact",
+  "src": [
+   "js/app.js:283",
+   "js/app.js:290"
+  ]
+ },
+ {
+  "id": "u0380",
+  "zh": "已取消自動開始",
+  "kind": "exact",
+  "src": [
+   "js/app.js:284"
+  ]
+ },
+ {
+  "id": "u0381",
+  "zh": "恢復提示音",
+  "kind": "exact",
+  "src": [
+   "js/app.js:294",
+   "js/multi.js:677"
+  ]
+ },
+ {
+  "id": "u0382",
+  "zh": "靜音提示音",
+  "kind": "exact",
+  "src": [
+   "js/app.js:294"
+  ]
+ },
+ {
+  "id": "u0383",
+  "zh": "錄影還在進行中，離開會中斷錄影。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:304"
+  ]
+ },
+ {
+  "id": "u0384",
+  "zh": "尚未開始",
+  "kind": "exact",
+  "src": [
+   "js/app.js:315",
+   "js/app.js:614",
+   "js/multi.js:406"
+  ]
+ },
+ {
+  "id": "u0385",
+  "zh": "選擇分頁並開始檢查",
+  "kind": "exact",
+  "src": [
+   "js/app.js:346"
+  ]
+ },
+ {
+  "id": "u0386",
+  "zh": "只抓那個分頁的畫面與聲音。電腦上其他聲音（音樂、通知）不會混進來，逐字稿品質最好。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:348"
+  ]
+ },
+ {
+  "id": "u0387",
+  "zh": "抓整個螢幕與整台電腦的混音。桌面版會議軟體只能這樣錄，但其他聲音也會被錄進去。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:349"
+  ]
+ },
+ {
+  "id": "u0388",
+  "zh": "瀏覽器",
+  "kind": "exact",
+  "src": [
+   "js/app.js:371"
+  ]
+ },
+ {
+  "id": "u0389",
+  "zh": "，支援螢幕與系統音訊擷取",
+  "kind": "exact",
+  "src": [
+   "js/app.js:372"
+  ]
+ },
+ {
+  "id": "u0390",
+  "zh": "不是 Chrome 或 Edge",
+  "kind": "exact",
+  "src": [
+   "js/app.js:373"
+  ]
+ },
+ {
+  "id": "u0391",
+  "zh": "Firefox 抓不到 Windows 的系統音訊，Safari 不支援螢幕錄影。請用 Chrome 或 Edge 開這一頁。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:374"
+  ]
+ },
+ {
+  "id": "u0392",
+  "zh": "螢幕擷取",
+  "kind": "exact",
+  "src": [
+   "js/app.js:376",
+   "js/app.js:648"
+  ]
+ },
+ {
+  "id": "u0393",
+  "zh": "這個瀏覽器沒有螢幕擷取功能",
+  "kind": "exact",
+  "src": [
+   "js/app.js:386"
+  ]
+ },
+ {
+  "id": "u0394",
+  "zh": "請改用 Chrome 或 Edge。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:386"
+  ]
+ },
+ {
+  "id": "u0395",
+  "zh": "這個嵌入頁面被禁止擷取螢幕",
+  "kind": "exact",
+  "src": [
+   "js/app.js:388"
+  ]
+ },
+ {
+  "id": "u0396",
+  "zh": "按下面的「在新分頁開啟」，在自己的分頁裡跑就可以。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:388"
+  ]
+ },
+ {
+  "id": "u0397",
+  "zh": "功能在，但這一頁目前是嵌在別的頁面裡",
+  "kind": "exact",
+  "src": [
+   "js/app.js:391"
+  ]
+ },
+ {
+  "id": "u0398",
+  "zh": "嵌入的頁面常被瀏覽器擋掉螢幕擷取。建議按下面的「在新分頁開啟」再用。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:392"
+  ]
+ },
+ {
+  "id": "u0399",
+  "zh": "可以擷取螢幕與系統音訊",
+  "kind": "exact",
+  "src": [
+   "js/app.js:395"
+  ]
+ },
+ {
+  "id": "u0400",
+  "zh": "當機不掉檔",
+  "kind": "exact",
+  "src": [
+   "js/app.js:398"
+  ]
+ },
+ {
+  "id": "u0401",
+  "zh": "錄到的資料每兩秒直接寫進磁碟，當機或停電都救得回來",
+  "kind": "exact",
+  "src": [
+   "js/app.js:399"
+  ]
+ },
+ {
+  "id": "u0402",
+  "zh": "這個環境不給持久寫檔，錄影只能暫存在記憶體",
+  "kind": "exact",
+  "src": [
+   "js/app.js:400"
+  ]
+ },
+ {
+  "id": "u0403",
+  "zh": "照樣能錄、能存檔，但錄製中途當掉就沒了。在自己的分頁用 Chrome 開通常就有。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:401"
+  ]
+ },
+ {
+  "id": "u0404",
+  "zh": "存檔方式",
+  "kind": "exact",
+  "src": [
+   "js/app.js:403"
+  ]
+ },
+ {
+  "id": "u0405",
+  "zh": "可以直接存進你指定的資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:404"
+  ]
+ },
+ {
+  "id": "u0406",
+  "zh": "這個瀏覽器不能選資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:405"
+  ]
+ },
+ {
+  "id": "u0407",
+  "zh": "錄完會用一般下載的方式給你檔案。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:405"
+  ]
+ },
+ {
+  "id": "u0408",
+  "zh": "不錄麥克風（只錄會議聲音）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:414"
+  ]
+ },
+ {
+  "id": "u0409",
+  "zh": "列舉麥克風失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:427"
+  ]
+ },
+ {
+  "id": "u0410",
+  "zh": "選擇資料夾失敗",
+  "kind": "exact",
+  "src": [
+   "js/app.js:439"
+  ]
+ },
+ {
+  "id": "u0411",
+  "zh": "（已記住，下次直接用）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:444"
+  ]
+ },
+ {
+  "id": "u0412",
+  "zh": "換一個資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:447",
+   "js/app.js:468",
+   "js/multi.js:180"
+  ]
+ },
+ {
+  "id": "u0413",
+  "zh": "上次用這個資料夾，按左邊確認就能沿用",
+  "kind": "exact",
+  "src": [
+   "js/app.js:469",
+   "js/multi.js:174"
+  ]
+ },
+ {
+  "id": "u0414",
+  "zh": "還是沒拿到寫入權限",
+  "kind": "exact",
+  "src": [
+   "js/app.js:482"
+  ]
+ },
+ {
+  "id": "u0415",
+  "zh": "請按「換一個資料夾」重新挑一次。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:482"
+  ]
+ },
+ {
+  "id": "u0416",
+  "zh": "· 已匯出過",
+  "kind": "exact",
+  "src": [
+   "js/app.js:524"
+  ]
+ },
+ {
+  "id": "u0417",
+  "zh": "· 尚未匯出",
+  "kind": "exact",
+  "src": [
+   "js/app.js:524"
+  ]
+ },
+ {
+  "id": "u0418",
+  "zh": "另存到資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:527",
+   "js/app.js:535"
+  ]
+ },
+ {
+  "id": "u0419",
+  "zh": "存檔中…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:532",
+   "js/app.js:1318"
+  ]
+ },
+ {
+  "id": "u0420",
+  "zh": "已存檔 ✓",
+  "kind": "exact",
+  "src": [
+   "js/app.js:534"
+  ]
+ },
+ {
+  "id": "u0421",
+  "zh": "存檔失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:535",
+   "js/app.js:1322"
+  ]
+ },
+ {
+  "id": "u0422",
+  "zh": "刪除",
+  "kind": "exact",
+  "src": [
+   "js/app.js:538"
+  ]
+ },
+ {
+  "id": "u0423",
+  "zh": "確定刪除「",
+  "kind": "exact",
+  "src": [
+   "js/app.js:540"
+  ]
+ },
+ {
+  "id": "u0424",
+  "zh": "」？刪掉就救不回來了。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:540"
+  ]
+ },
+ {
+  "id": "u0425",
+  "zh": "把瀏覽器裡的暫存副本全部刪除？請先確認資料夾裡的檔案可以正常播放。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:549"
+  ]
+ },
+ {
+  "id": "u0426",
+  "zh": "已清除。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:554"
+  ]
+ },
+ {
+  "id": "u0427",
+  "zh": "這個環境沒有「當機不掉檔」的保障",
+  "kind": "exact",
+  "src": [
+   "js/app.js:562"
+  ]
+ },
+ {
+  "id": "u0428",
+  "zh": "錄影會暫存在記憶體，錄製中途當掉就沒了。建議在自己的分頁用 Chrome 開這一頁。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:563"
+  ]
+ },
+ {
+  "id": "u0429",
+  "zh": "沒有取得畫面",
+  "kind": "exact",
+  "src": [
+   "js/app.js:576"
+  ]
+ },
+ {
+  "id": "u0430",
+  "zh": "你取消了分享，或這個頁面被瀏覽器禁止擷取螢幕。若是後者，請先按最上方的「在新分頁開啟」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:576"
+  ]
+ },
+ {
+  "id": "u0431",
+  "zh": "取得畫面失敗",
+  "kind": "exact",
+  "src": [
+   "js/app.js:579"
+  ]
+ },
+ {
+  "id": "u0432",
+  "zh": "麥克風取得失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:586"
+  ]
+ },
+ {
+  "id": "u0433",
+  "zh": "檢查中…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:632"
+  ]
+ },
+ {
+  "id": "u0434",
+  "zh": "瀏覽器能力",
+  "kind": "exact",
+  "src": [
+   "js/app.js:644"
+  ]
+ },
+ {
+  "id": "u0435",
+  "zh": "WebM 影像編碼",
+  "kind": "exact",
+  "src": [
+   "js/app.js:647"
+  ]
+ },
+ {
+  "id": "u0436",
+  "zh": "缺少：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:649"
+  ]
+ },
+ {
+  "id": "u0437",
+  "zh": "、",
+  "kind": "exact",
+  "src": [
+   "js/app.js:649",
+   "js/multi.js:633",
+   "worker/index.js:229"
+  ]
+ },
+ {
+  "id": "u0438",
+  "zh": "請改用 Chrome 或 Edge 的最新版本。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:649"
+  ]
+ },
+ {
+  "id": "u0439",
+  "zh": "沒有持久寫檔能力（當機可能掉檔）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:651"
+  ]
+ },
+ {
+  "id": "u0440",
+  "zh": "建議改用 Chrome / Edge。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:651"
+  ]
+ },
+ {
+  "id": "u0441",
+  "zh": "編碼 {1}；持久寫檔可用",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:653"
+  ]
+ },
+ {
+  "id": "u0442",
+  "zh": "儲存空間",
+  "kind": "exact",
+  "src": [
+   "js/app.js:659",
+   "js/slot.js:228",
+   "js/slot.js:229"
+  ]
+ },
+ {
+  "id": "u0443",
+  "zh": "無法查詢可用空間",
+  "kind": "exact",
+  "src": [
+   "js/app.js:664"
+  ]
+ },
+ {
+  "id": "u0444",
+  "zh": "自己確認硬碟還有",
+  "kind": "exact",
+  "src": [
+   "js/app.js:664"
+  ]
+ },
+ {
+  "id": "u0445",
+  "zh": "以上。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:664"
+  ]
+ },
+ {
+  "id": "u0446",
+  "zh": "瀏覽器可用 {1}，這場預估需要 {2}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:666"
+  ]
+ },
+ {
+  "id": "u0447",
+  "zh": "清一些硬碟空間，或把畫質調低、預計長度調短。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:667"
+  ]
+ },
+ {
+  "id": "u0448",
+  "zh": "可用 {1}，這個畫質大約可以錄 {2} 小時（這場預估 {3}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:670"
+  ]
+ },
+ {
+  "id": "u0449",
+  "zh": "存檔資料夾可寫入",
+  "kind": "exact",
+  "src": [
+   "js/app.js:676"
+  ]
+ },
+ {
+  "id": "u0450",
+  "zh": "尚未選擇資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:679"
+  ]
+ },
+ {
+  "id": "u0451",
+  "zh": "錄完會改用瀏覽器下載的方式存檔。建議先回上一步選一個資料夾。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:679"
+  ]
+ },
+ {
+  "id": "u0452",
+  "zh": "這個瀏覽器不支援選資料夾",
+  "kind": "exact",
+  "src": [
+   "js/app.js:681"
+  ]
+ },
+ {
+  "id": "u0453",
+  "zh": "錄完會用一般下載的方式存檔。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:681"
+  ]
+ },
+ {
+  "id": "u0454",
+  "zh": "「{1}」寫入測試通過",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:684"
+  ]
+ },
+ {
+  "id": "u0455",
+  "zh": "寫入測試失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:685"
+  ]
+ },
+ {
+  "id": "u0456",
+  "zh": "換一個資料夾（不要選唯讀或雲端同步中的位置）。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:685"
+  ]
+ },
+ {
+  "id": "u0457",
+  "zh": "畫面來源",
+  "kind": "exact",
+  "src": [
+   "js/app.js:691",
+   "js/slot.js:140",
+   "js/slot.js:143"
+  ]
+ },
+ {
+  "id": "u0458",
+  "zh": "沒有可用的畫面來源",
+  "kind": "exact",
+  "src": [
+   "js/app.js:693"
+  ]
+ },
+ {
+  "id": "u0459",
+  "zh": "按「重新檢查」重選畫面。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:693"
+  ]
+ },
+ {
+  "id": "u0460",
+  "zh": "未知",
+  "kind": "exact",
+  "src": [
+   "js/app.js:696",
+   "js/app.js:1375",
+   "js/slot.js:116"
+  ]
+ },
+ {
+  "id": "u0461",
+  "zh": "單一視窗",
+  "kind": "exact",
+  "src": [
+   "js/app.js:697",
+   "js/slot.js:120"
+  ]
+ },
+ {
+  "id": "u0462",
+  "zh": "瀏覽器分頁",
+  "kind": "exact",
+  "src": [
+   "js/app.js:697",
+   "js/slot.js:120"
+  ]
+ },
+ {
+  "id": "u0463",
+  "zh": "{1}，{2}×{3}，{4} fps",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:698"
+  ]
+ },
+ {
+  "id": "u0464",
+  "zh": "（不是分頁）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:701"
+  ]
+ },
+ {
+  "id": "u0465",
+  "zh": "你選的是「瀏覽器裡的會議」，但抓到的不是分頁。非分頁來源的聲音是整台電腦的混音，會混進音樂與通知。建議重新檢查、改選「Chrome 分頁」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:702"
+  ]
+ },
+ {
+  "id": "u0466",
+  "zh": "（不是整個畫面）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:705"
+  ]
+ },
+ {
+  "id": "u0467",
+  "zh": "Zoom／Webex 是桌面程式，選「視窗」會抓不到系統聲音，而且對方切換視窗時也錄不到。建議重新檢查並改選「整個畫面」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:706"
+  ]
+ },
+ {
+  "id": "u0468",
+  "zh": "畫面正在更新",
+  "kind": "exact",
+  "src": [
+   "js/app.js:714",
+   "js/slot.js:163",
+   "js/slot.js:164"
+  ]
+ },
+ {
+  "id": "u0469",
+  "zh": "2.5 秒只收到 {1} 張畫格（感測器 {2}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:719"
+  ]
+ },
+ {
+  "id": "u0470",
+  "zh": "畫面來源可能被最小化或已停止分享。按「重新檢查」重選。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:720"
+  ]
+ },
+ {
+  "id": "u0471",
+  "zh": "2.5 秒收到 {1} 張畫格（約 {2} fps）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:722"
+  ]
+ },
+ {
+  "id": "u0472",
+  "zh": "這個分頁的聲音",
+  "kind": "exact",
+  "src": [
+   "js/app.js:729"
+  ]
+ },
+ {
+  "id": "u0473",
+  "zh": "系統音訊（會議的聲音）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:729"
+  ]
+ },
+ {
+  "id": "u0474",
+  "zh": "這次分享沒有帶任何音訊",
+  "kind": "exact",
+  "src": [
+   "js/app.js:731"
+  ]
+ },
+ {
+  "id": "u0475",
+  "zh": "按「重新檢查」重選，在 Chrome 的分享視窗裡切到「Chrome 分頁」，並把「同時分享分頁音訊」勾起來。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:733"
+  ]
+ },
+ {
+  "id": "u0476",
+  "zh": "按「重新檢查」重選，在 Chrome 的分享視窗裡選「整個畫面」，並勾選左下角的「同時分享系統音訊」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:734"
+  ]
+ },
+ {
+  "id": "u0477",
+  "zh": "音訊軌已中斷",
+  "kind": "exact",
+  "src": [
+   "js/app.js:737",
+   "js/slot.js:154"
+  ]
+ },
+ {
+  "id": "u0478",
+  "zh": "按「重新檢查」重選。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:737"
+  ]
+ },
+ {
+  "id": "u0479",
+  "zh": "已取得這個分頁專屬的音訊軌，不會混到電腦上其他聲音",
+  "kind": "exact",
+  "src": [
+   "js/app.js:741"
+  ]
+ },
+ {
+  "id": "u0480",
+  "zh": "已取得系統音訊軌：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:742"
+  ]
+ },
+ {
+  "id": "u0481",
+  "zh": "（無名稱）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:742"
+  ]
+ },
+ {
+  "id": "u0482",
+  "zh": "試錄並解碼驗證（最關鍵的一項）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:747"
+  ]
+ },
+ {
+  "id": "u0483",
+  "zh": "這 4 秒有沒有收到聲音",
+  "kind": "exact",
+  "src": [
+   "js/app.js:748"
+  ]
+ },
+ {
+  "id": "u0484",
+  "zh": "系統音回路（喇叭→錄音）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:748"
+  ]
+ },
+ {
+  "id": "u0485",
+  "zh": "麥克風訊號",
+  "kind": "exact",
+  "src": [
+   "js/app.js:749"
+  ]
+ },
+ {
+  "id": "u0486",
+  "zh": "試錄中，請稍候約 4 秒…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:750"
+  ]
+ },
+ {
+  "id": "u0487",
+  "zh": "量測中…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:751",
+   "js/app.js:752",
+   "js/app.js:833"
+  ]
+ },
+ {
+  "id": "u0488",
+  "zh": "正在播放測試音…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:751"
+  ]
+ },
+ {
+  "id": "u0489",
+  "zh": "試錄失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:776",
+   "js/slot.js:185",
+   "js/checks.js:30"
+  ]
+ },
+ {
+  "id": "u0490",
+  "zh": "試錄產出 {1}，等於沒錄到",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:783"
+  ]
+ },
+ {
+  "id": "u0491",
+  "zh": "換一個畫質再試；若持續失敗，重開瀏覽器。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:784"
+  ]
+ },
+ {
+  "id": "u0492",
+  "zh": "試錄檔無法解碼：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:787",
+   "js/slot.js:194"
+  ]
+ },
+ {
+  "id": "u0493",
+  "zh": "換一個畫質再試。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:787",
+   "js/slot.js:185",
+   "js/slot.js:191"
+  ]
+ },
+ {
+  "id": "u0494",
+  "zh": "試錄檔裡沒有影像",
+  "kind": "exact",
+  "src": [
+   "js/app.js:788",
+   "js/slot.js:195"
+  ]
+ },
+ {
+  "id": "u0495",
+  "zh": "按「重新檢查」重選畫面來源。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:788"
+  ]
+ },
+ {
+  "id": "u0496",
+  "zh": "；音訊樣本只有 {1} bytes 又解不開，幾乎確定沒聲音",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:796"
+  ]
+ },
+ {
+  "id": "u0497",
+  "zh": "；聲音解碼失敗（",
+  "kind": "exact",
+  "src": [
+   "js/app.js:797"
+  ]
+ },
+ {
+  "id": "u0498",
+  "zh": "；但聲音是一片數位靜音（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:799"
+  ]
+ },
+ {
+  "id": "u0499",
+  "zh": "；聲音峰值 {1}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:802",
+   "js/slot.js:208"
+  ]
+ },
+ {
+  "id": "u0500",
+  "zh": "；沒有可驗證的音訊樣本",
+  "kind": "exact",
+  "src": [
+   "js/app.js:804",
+   "js/slot.js:210"
+  ]
+ },
+ {
+  "id": "u0501",
+  "zh": "影像 {1}×{2}、{3} / 4 秒{4}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:806"
+  ]
+ },
+ {
+  "id": "u0502",
+  "zh": "影像有了但聲音是空的。檢查：①分享時有沒有勾「同時分享系統音訊」 ②Windows 音量混音器裡瀏覽器有沒有被靜音。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:809"
+  ]
+ },
+ {
+  "id": "u0503",
+  "zh": "聲音沒驗證成功，開錄後請盯著音量條確認有跳動。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:811"
+  ]
+ },
+ {
+  "id": "u0504",
+  "zh": "沒有音訊軌，無法測試",
+  "kind": "exact",
+  "src": [
+   "js/app.js:819"
+  ]
+ },
+ {
+  "id": "u0505",
+  "zh": "先解決上面的音訊項目。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:819"
+  ]
+ },
+ {
+  "id": "u0506",
+  "zh": "這個分頁有聲音進來（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:822"
+  ]
+ },
+ {
+  "id": "u0507",
+  "zh": "測試音有被錄進來（峰值 {1}）—— 會議的聲音會錄到",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:823"
+  ]
+ },
+ {
+  "id": "u0508",
+  "zh": "這 4 秒沒有收到聲音（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:827"
+  ]
+ },
+ {
+  "id": "u0509",
+  "zh": "如果會議現在本來就安靜，可以照樣開始；如果它正在講話，代表分享時沒勾「同時分享分頁音訊」。讓那個分頁發出聲音再按下面重測。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:829"
+  ]
+ },
+ {
+  "id": "u0510",
+  "zh": "可能是這台電腦的喇叭音量太小或瀏覽器被靜音。請在會議軟體裡放一段聲音，然後按下面的按鈕重測 8 秒。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:830"
+  ]
+ },
+ {
+  "id": "u0511",
+  "zh": "重測 8 秒（請讓它發出聲音）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:832"
+  ]
+ },
+ {
+  "id": "u0512",
+  "zh": "手動重測通過（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:835"
+  ]
+ },
+ {
+  "id": "u0513",
+  "zh": "手動重測仍是靜音（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:836"
+  ]
+ },
+ {
+  "id": "u0514",
+  "zh": "確認 Windows 音量混音器裡 Chrome 沒有被靜音，且分享時有勾「同時分享系統音訊」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:836"
+  ]
+ },
+ {
+  "id": "u0515",
+  "zh": "再測一次",
+  "kind": "exact",
+  "src": [
+   "js/app.js:837",
+   "js/app.js:857"
+  ]
+ },
+ {
+  "id": "u0516",
+  "zh": "已選擇不錄麥克風",
+  "kind": "exact",
+  "src": [
+   "js/app.js:844"
+  ]
+ },
+ {
+  "id": "u0517",
+  "zh": "沒有取得麥克風",
+  "kind": "exact",
+  "src": [
+   "js/app.js:846"
+  ]
+ },
+ {
+  "id": "u0518",
+  "zh": "檢查瀏覽器的麥克風權限，或在上一步選「不錄麥克風」。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:846"
+  ]
+ },
+ {
+  "id": "u0519",
+  "zh": "有收到聲音（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:848"
+  ]
+ },
+ {
+  "id": "u0520",
+  "zh": "麥克風安靜無聲（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:850"
+  ]
+ },
+ {
+  "id": "u0521",
+  "zh": "對著麥克風說話，再按下面的按鈕重測 6 秒。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:850"
+  ]
+ },
+ {
+  "id": "u0522",
+  "zh": "說句話，重測 6 秒",
+  "kind": "exact",
+  "src": [
+   "js/app.js:852"
+  ]
+ },
+ {
+  "id": "u0523",
+  "zh": "請說話…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:853"
+  ]
+ },
+ {
+  "id": "u0524",
+  "zh": "重測通過（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:855"
+  ]
+ },
+ {
+  "id": "u0525",
+  "zh": "重測仍無聲（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:856"
+  ]
+ },
+ {
+  "id": "u0526",
+  "zh": "確認選對麥克風、Windows 沒把它靜音。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:856"
+  ]
+ },
+ {
+  "id": "u0527",
+  "zh": "{1} 項未通過",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:867"
+  ]
+ },
+ {
+  "id": "u0528",
+  "zh": "通過（{1} 項提醒）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:867"
+  ]
+ },
+ {
+  "id": "u0529",
+  "zh": "全部通過",
+  "kind": "exact",
+  "src": [
+   "js/app.js:867",
+   "js/multi.js:588"
+  ]
+ },
+ {
+  "id": "u0530",
+  "zh": "沒有紅色項目（{1} 項提醒），3 秒後自動開始",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:878"
+  ]
+ },
+ {
+  "id": "u0531",
+  "zh": "檢查全過，3 秒後自動開始",
+  "kind": "exact",
+  "src": [
+   "js/app.js:878"
+  ]
+ },
+ {
+  "id": "u0532",
+  "zh": "仍要開始錄製（有未通過項目）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:894"
+  ]
+ },
+ {
+  "id": "u0533",
+  "zh": "分頁模式",
+  "kind": "exact",
+  "src": [
+   "js/app.js:912"
+  ]
+ },
+ {
+  "id": "u0534",
+  "zh": "整螢幕模式",
+  "kind": "exact",
+  "src": [
+   "js/app.js:912"
+  ]
+ },
+ {
+  "id": "u0535",
+  "zh": "開始錄製（{1}，畫質 {2}，編碼 {3}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:912"
+  ]
+ },
+ {
+  "id": "u0536",
+  "zh": "這台電腦不會把聲音放出來（避免與手機回授）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:913"
+  ]
+ },
+ {
+  "id": "u0537",
+  "zh": "無人看管保護已開啟：最長 {1} 小時",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:915"
+  ]
+ },
+ {
+  "id": "u0538",
+  "zh": "、連續靜音 {1} 分鐘收檔",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:916"
+  ]
+ },
+ {
+  "id": "u0539",
+  "zh": "、確定錄不到時自動收檔",
+  "kind": "exact",
+  "src": [
+   "js/app.js:917"
+  ]
+ },
+ {
+  "id": "u0540",
+  "zh": "_第{1}段",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:933"
+  ]
+ },
+ {
+  "id": "u0541",
+  "zh": "會議錄影_{1}{2}.webm",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:936"
+  ]
+ },
+ {
+  "id": "u0542",
+  "zh": "會議錄影_{1}{2}_音訊備份.webm",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:937"
+  ]
+ },
+ {
+  "id": "u0543",
+  "zh": "寫檔失敗",
+  "kind": "exact",
+  "src": [
+   "js/app.js:952"
+  ]
+ },
+ {
+  "id": "u0544",
+  "zh": "錄影器發生錯誤",
+  "kind": "exact",
+  "src": [
+   "js/app.js:954"
+  ]
+ },
+ {
+  "id": "u0545",
+  "zh": "備份音訊寫檔失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:962"
+  ]
+ },
+ {
+  "id": "u0546",
+  "zh": "（含音訊備份）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:980"
+  ]
+ },
+ {
+  "id": "u0547",
+  "zh": "第 {1} 段開始寫入：{2}{3}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:980"
+  ]
+ },
+ {
+  "id": "u0548",
+  "zh": "⚠ 這個環境只能暫存在記憶體，錄製中當掉會沒有",
+  "kind": "exact",
+  "src": [
+   "js/app.js:981"
+  ]
+ },
+ {
+  "id": "u0549",
+  "zh": "心跳 Worker 失敗，改用一般計時器（背景分頁可能被節流）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1003",
+   "js/multi.js:503"
+  ]
+ },
+ {
+  "id": "u0550",
+  "zh": "監看心跳已啟動（不受背景分頁節流影響）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1007"
+  ]
+ },
+ {
+  "id": "u0551",
+  "zh": "心跳 Worker 無法建立，改用一般計時器：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1009"
+  ]
+ },
+ {
+  "id": "u0552",
+  "zh": "{1}×{2} · 累計 {3} 格",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1071"
+  ]
+ },
+ {
+  "id": "u0553",
+  "zh": "畫面分享已中斷",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1075"
+  ]
+ },
+ {
+  "id": "u0554",
+  "zh": "有人按了 Chrome 的「停止共用」，或來源視窗關了。聲音仍在錄；按「重新接上畫面」可以接著錄新的一段。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1076"
+  ]
+ },
+ {
+  "id": "u0555",
+  "zh": "畫面停止更新",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1080"
+  ]
+ },
+ {
+  "id": "u0556",
+  "zh": "已經 {1} 秒沒有新畫格（感測器 {2}）。分享來源可能被最小化了。",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1081"
+  ]
+ },
+ {
+  "id": "u0557",
+  "zh": "已安靜 {1} 秒",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1099",
+   "js/app.js:1116"
+  ]
+ },
+ {
+  "id": "u0558",
+  "zh": "訊號正常",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1099",
+   "js/app.js:1116"
+  ]
+ },
+ {
+  "id": "u0559",
+  "zh": "會議聲音已經兩分鐘沒有任何波形",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1102"
+  ]
+ },
+ {
+  "id": "u0560",
+  "zh": "如果會議正在講話，代表抓錯音源了，建議停下來重新開始。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1103"
+  ]
+ },
+ {
+  "id": "u0561",
+  "zh": "無訊號",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1106",
+   "js/app.js:1376"
+  ]
+ },
+ {
+  "id": "u0562",
+  "zh": "這次分享沒有帶系統音訊",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1107"
+  ]
+ },
+ {
+  "id": "u0563",
+  "zh": "未使用",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1119"
+  ]
+ },
+ {
+  "id": "u0564",
+  "zh": "這場沒有錄麥克風",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1120"
+  ]
+ },
+ {
+  "id": "u0565",
+  "zh": "平均 {1} MB/分",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1130"
+  ]
+ },
+ {
+  "id": "u0566",
+  "zh": "· {1} 段",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1131"
+  ]
+ },
+ {
+  "id": "u0567",
+  "zh": "已經",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1135"
+  ]
+ },
+ {
+  "id": "u0568",
+  "zh": "秒沒有新資料寫進磁碟",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1135"
+  ]
+ },
+ {
+  "id": "u0569",
+  "zh": "錄影可能已經停住。建議按「停止並存檔」保住現有內容，再重新開始。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1136"
+  ]
+ },
+ {
+  "id": "u0570",
+  "zh": "錄影器不在錄製狀態（",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1142"
+  ]
+ },
+ {
+  "id": "u0571",
+  "zh": "請按「停止並存檔」保住目前內容。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1142"
+  ]
+ },
+ {
+  "id": "u0572",
+  "zh": "寫檔發生錯誤",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1145"
+  ]
+ },
+ {
+  "id": "u0573",
+  "zh": "無人看管：達到最長錄製時間 {1} 小時，自動收檔",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1153"
+  ]
+ },
+ {
+  "id": "u0574",
+  "zh": "無人看管：連續靜音 {1} 分鐘，判定會議已結束，自動收檔",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1160"
+  ]
+ },
+ {
+  "id": "u0575",
+  "zh": "無人看管：偵測到「{1}」，自動收檔保住已錄到的部分",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1171"
+  ]
+ },
+ {
+  "id": "u0576",
+  "zh": "{1} 失敗：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1184"
+  ]
+ },
+ {
+  "id": "u0577",
+  "zh": "深度健檢沒過：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1185"
+  ]
+ },
+ {
+  "id": "u0578",
+  "zh": "編碼管線可能出事了，建議停止存檔後重開一場。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1185"
+  ]
+ },
+ {
+  "id": "u0579",
+  "zh": "{1} 通過（峰值 {2}）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1188"
+  ]
+ },
+ {
+  "id": "u0580",
+  "zh": "（近乎靜音）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1189"
+  ]
+ },
+ {
+  "id": "u0581",
+  "zh": "深度健檢通過：編碼與解碼正常，1.2 秒樣本峰值 {1}{2}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1189"
+  ]
+ },
+ {
+  "id": "u0582",
+  "zh": "畫面分享已停止",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1196"
+  ]
+ },
+ {
+  "id": "u0583",
+  "zh": "聲音還在錄。按「重新接上畫面」可以選新的畫面、接著錄成第",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1197"
+  ]
+ },
+ {
+  "id": "u0584",
+  "zh": "段。",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1197"
+  ]
+ },
+ {
+  "id": "u0585",
+  "zh": "取得新的畫面來源，正在切段…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1206"
+  ]
+ },
+ {
+  "id": "u0586",
+  "zh": "新的系統音訊已接上",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1217"
+  ]
+ },
+ {
+  "id": "u0587",
+  "zh": "新的分享沒有帶系統音訊，這一段只會有麥克風",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1219"
+  ]
+ },
+ {
+  "id": "u0588",
+  "zh": "重新接上畫面失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1229"
+  ]
+ },
+ {
+  "id": "u0589",
+  "zh": "重新接上畫面失敗",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1230"
+  ]
+ },
+ {
+  "id": "u0590",
+  "zh": "第 {1} 段收檔完成：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1252"
+  ]
+ },
+ {
+  "id": "u0591",
+  "zh": "收檔中…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1263"
+  ]
+ },
+ {
+  "id": "u0592",
+  "zh": "收檔中",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1264",
+   "js/multi.js:404"
+  ]
+ },
+ {
+  "id": "u0593",
+  "zh": "停止錄製（",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1265"
+  ]
+ },
+ {
+  "id": "u0594",
+  "zh": "正在驗證檔案…",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1280"
+  ]
+ },
+ {
+  "id": "u0595",
+  "zh": "讀取錄影檔",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1294"
+  ]
+ },
+ {
+  "id": "u0596",
+  "zh": "錄好了，長度 {1}，有幾項提醒請看下面。",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1304"
+  ]
+ },
+ {
+  "id": "u0597",
+  "zh": "錄好了，長度 {1}，所有驗證項目都通過。",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1304"
+  ]
+ },
+ {
+  "id": "u0598",
+  "zh": "⚠ 驗證發現問題（長度 {1}）。檔案仍已保存，請看下面哪一項沒過。",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1305"
+  ]
+ },
+ {
+  "id": "u0599",
+  "zh": "完成（有問題）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1306"
+  ]
+ },
+ {
+  "id": "u0600",
+  "zh": "已存到「{1}」 · {2}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1321"
+  ]
+ },
+ {
+  "id": "u0601",
+  "zh": "會議錄影_{1}_健康紀錄.txt",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1325",
+   "js/app.js:1326",
+   "js/app.js:1341"
+  ]
+ },
+ {
+  "id": "u0602",
+  "zh": "已存檔",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1326"
+  ]
+ },
+ {
+  "id": "u0603",
+  "zh": "健康紀錄存檔失敗：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1327"
+  ]
+ },
+ {
+  "id": "u0604",
+  "zh": "下載",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1336",
+   "js/app.js:1343",
+   "js/multi.js:575"
+  ]
+ },
+ {
+  "id": "u0605",
+  "zh": "請按下載",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1339",
+   "js/app.js:1345"
+  ]
+ },
+ {
+  "id": "u0606",
+  "zh": "會議錄影 健康紀錄",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1367"
+  ]
+ },
+ {
+  "id": "u0607",
+  "zh": "場次編號：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1369",
+   "js/multi.js:613"
+  ]
+ },
+ {
+  "id": "u0608",
+  "zh": "開始時間：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1370",
+   "js/multi.js:614"
+  ]
+ },
+ {
+  "id": "u0609",
+  "zh": "總長度：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1371"
+  ]
+ },
+ {
+  "id": "u0610",
+  "zh": "畫質設定：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1372",
+   "js/multi.js:617"
+  ]
+ },
+ {
+  "id": "u0611",
+  "zh": "編碼格式：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1373"
+  ]
+ },
+ {
+  "id": "u0612",
+  "zh": "分段數：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1374"
+  ]
+ },
+ {
+  "id": "u0613",
+  "zh": "總畫格數：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1375"
+  ]
+ },
+ {
+  "id": "u0614",
+  "zh": "（平均 {1} fps）",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1375"
+  ]
+ },
+ {
+  "id": "u0615",
+  "zh": "系統音峰值：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1377"
+  ]
+ },
+ {
+  "id": "u0616",
+  "zh": "麥克風峰值：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1377"
+  ]
+ },
+ {
+  "id": "u0617",
+  "zh": "檔案",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1379"
+  ]
+ },
+ {
+  "id": "u0618",
+  "zh": "錄完驗證",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1386"
+  ]
+ },
+ {
+  "id": "u0619",
+  "zh": "[{1}] {2}：{3}",
+  "kind": "pattern",
+  "src": [
+   "js/app.js:1388",
+   "js/multi.js:624"
+  ]
+ },
+ {
+  "id": "u0620",
+  "zh": "錄製期間深度健檢",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1390"
+  ]
+ },
+ {
+  "id": "u0621",
+  "zh": "（未啟用或時間不足 5 分鐘）",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1393"
+  ]
+ },
+ {
+  "id": "u0622",
+  "zh": "螢幕休眠鎖被釋放",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1406"
+  ]
+ },
+ {
+  "id": "u0623",
+  "zh": "已鎖定螢幕不休眠",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1407"
+  ]
+ },
+ {
+  "id": "u0624",
+  "zh": "無法鎖定螢幕不休眠：",
+  "kind": "exact",
+  "src": [
+   "js/app.js:1408",
+   "js/multi.js:646"
+  ]
+ },
+ {
+  "id": "u0625",
+  "zh": "錄影出問題：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:102"
+  ]
+ },
+ {
+  "id": "u0626",
+  "zh": "（只錄音訊）",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:153",
+   "js/multi.js:617",
+   "js/slot.js:277"
+  ]
+ },
+ {
+  "id": "u0627",
+  "zh": "每場每小時約 {1}{2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:153"
+  ]
+ },
+ {
+  "id": "u0628",
+  "zh": "目前 {1} 場、可用 {2} → 大約可以錄",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:156"
+  ]
+ },
+ {
+  "id": "u0629",
+  "zh": "{3} 小時",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:156"
+  ]
+ },
+ {
+  "id": "u0630",
+  "zh": "⚠ 以預計長度算會超過可用空間，請降畫質或減少場次",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:158"
+  ]
+ },
+ {
+  "id": "u0631",
+  "zh": "（已記住）",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:178"
+  ]
+ },
+ {
+  "id": "u0632",
+  "zh": "選擇資料夾失敗：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:189"
+  ]
+ },
+ {
+  "id": "u0633",
+  "zh": "還是沒拿到資料夾寫入權限，請按「選擇資料夾」重挑。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:195"
+  ]
+ },
+ {
+  "id": "u0634",
+  "zh": "已達同時 {1} 場上限",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:209"
+  ]
+ },
+ {
+  "id": "u0635",
+  "zh": "你的方案可同時錄 {1} 場。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:213"
+  ]
+ },
+ {
+  "id": "u0636",
+  "zh": "免費版一次只能錄",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:214"
+  ]
+ },
+ {
+  "id": "u0637",
+  "zh": "。要同時錄多場請",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:214"
+  ]
+ },
+ {
+  "id": "u0638",
+  "zh": "升級 Pro",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:214"
+  ]
+ },
+ {
+  "id": "u0639",
+  "zh": "（同時 4 場）。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:214"
+  ]
+ },
+ {
+  "id": "u0640",
+  "zh": "{1}｜{2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:235"
+  ]
+ },
+ {
+  "id": "u0641",
+  "zh": "尚未選擇來源",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250",
+   "js/multi.js:351"
+  ]
+ },
+ {
+  "id": "u0642",
+  "zh": "移除",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250",
+   "js/multi.js:366"
+  ]
+ },
+ {
+  "id": "u0643",
+  "zh": "選擇這場的分頁",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250",
+   "js/multi.js:358"
+  ]
+ },
+ {
+  "id": "u0644",
+  "zh": "開始錄這一場",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250"
+  ]
+ },
+ {
+  "id": "u0645",
+  "zh": "停止這一場",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250"
+  ]
+ },
+ {
+  "id": "u0646",
+  "zh": "這場的聲音",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:250"
+  ]
+ },
+ {
+  "id": "u0647",
+  "zh": "會議",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:292"
+  ]
+ },
+ {
+  "id": "u0648",
+  "zh": "會議 {1}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:293",
+   "js/slot.js:34"
+  ]
+ },
+ {
+  "id": "u0649",
+  "zh": "{1} 正在錄或收檔，不能移除。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:302"
+  ]
+ },
+ {
+  "id": "u0650",
+  "zh": "{1}：取消了分享，或瀏覽器不允許。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:320"
+  ]
+ },
+ {
+  "id": "u0651",
+  "zh": "{1}：取得來源失敗 —— {2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:321"
+  ]
+ },
+ {
+  "id": "u0652",
+  "zh": "等待你選擇分頁…",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:351"
+  ]
+ },
+ {
+  "id": "u0653",
+  "zh": "檢查中／未通過",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:351"
+  ]
+ },
+ {
+  "id": "u0654",
+  "zh": "準備好了",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:352"
+  ]
+ },
+ {
+  "id": "u0655",
+  "zh": "收檔與驗證中…",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:352"
+  ]
+ },
+ {
+  "id": "u0656",
+  "zh": "已完成",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:352"
+  ]
+ },
+ {
+  "id": "u0657",
+  "zh": "重新選擇",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:358"
+  ]
+ },
+ {
+  "id": "u0658",
+  "zh": "清除這一格",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:366"
+  ]
+ },
+ {
+  "id": "u0659",
+  "zh": "準備好的 {1} 場一起開始",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:378"
+  ]
+ },
+ {
+  "id": "u0660",
+  "zh": "準備好的一起開始",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:378"
+  ]
+ },
+ {
+  "id": "u0661",
+  "zh": "有 {1} 場沒通過檢查，要先修好才能開始。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:382"
+  ]
+ },
+ {
+  "id": "u0662",
+  "zh": "{1} 場錄製中。每一格可以各自停止；也可以隨時再加一場、各自開始。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:383"
+  ]
+ },
+ {
+  "id": "u0663",
+  "zh": "每一格準備好就可以各自按「開始錄這一場」。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:384"
+  ]
+ },
+ {
+  "id": "u0664",
+  "zh": "替每一格選好分頁，檢查通過就能開始。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:385"
+  ]
+ },
+ {
+  "id": "u0665",
+  "zh": "全部停止（{1} 場）",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:401"
+  ]
+ },
+ {
+  "id": "u0666",
+  "zh": "錄製中 · {1} 場",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:403"
+  ]
+ },
+ {
+  "id": "u0667",
+  "zh": "已完成的場次在下方",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:405"
+  ]
+ },
+ {
+  "id": "u0668",
+  "zh": "你的方案同時最多錄 {1} 場。",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:412"
+  ]
+ },
+ {
+  "id": "u0669",
+  "zh": "{1} 啟動失敗：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:427"
+  ]
+ },
+ {
+  "id": "u0670",
+  "zh": "停止「{1}」",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:447"
+  ]
+ },
+ {
+  "id": "u0671",
+  "zh": "正在驗證這一場的檔案…",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:455"
+  ]
+ },
+ {
+  "id": "u0672",
+  "zh": "未錄影像",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:487"
+  ]
+ },
+ {
+  "id": "u0673",
+  "zh": "監看心跳已啟動",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:507"
+  ]
+ },
+ {
+  "id": "u0674",
+  "zh": "（此頁在背景）",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:520"
+  ]
+ },
+ {
+  "id": "u0675",
+  "zh": "（此頁在前景）",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:520"
+  ]
+ },
+ {
+  "id": "u0676",
+  "zh": "已標記這一刻",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:522"
+  ]
+ },
+ {
+  "id": "u0677",
+  "zh": "{1}_實測報告.txt",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:530"
+  ]
+ },
+ {
+  "id": "u0678",
+  "zh": "✕ {1}：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:541",
+   "js/multi.js:565"
+  ]
+ },
+ {
+  "id": "u0679",
+  "zh": "已存進「{1}」：",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:542"
+  ]
+ },
+ {
+  "id": "u0680",
+  "zh": "下載實測報告",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:551"
+  ]
+ },
+ {
+  "id": "u0681",
+  "zh": "已存檔：{1}（{2}）",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:561"
+  ]
+ },
+ {
+  "id": "u0682",
+  "zh": "✓ {1}（{2}）",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:562"
+  ]
+ },
+ {
+  "id": "u0683",
+  "zh": "{1} 存檔失敗：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:564"
+  ]
+ },
+ {
+  "id": "u0684",
+  "zh": "中位 {1}／最低 {2}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:584"
+  ]
+ },
+ {
+  "id": "u0685",
+  "zh": "驗證發現問題，請看下面哪一項沒過",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:588"
+  ]
+ },
+ {
+  "id": "u0686",
+  "zh": "有提醒",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:588"
+  ]
+ },
+ {
+  "id": "u0687",
+  "zh": "fps 目標 {1}｜前景 {2}｜背景 {3}｜低於一半 {4}%｜靜音 {5}%",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:591"
+  ]
+ },
+ {
+  "id": "u0688",
+  "zh": "存檔中…",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:586"
+  ]
+ },
+ {
+  "id": "u0689",
+  "zh": "多場錄製 單場實測報告",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:610"
+  ]
+ },
+ {
+  "id": "u0690",
+  "zh": "場次：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:612"
+  ]
+ },
+ {
+  "id": "u0691",
+  "zh": "長度：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:615"
+  ]
+ },
+ {
+  "id": "u0692",
+  "zh": "來源：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:616"
+  ]
+ },
+ {
+  "id": "u0693",
+  "zh": "整頁監看心跳最大延遲：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:618"
+  ]
+ },
+ {
+  "id": "u0694",
+  "zh": "檔案：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:620"
+  ]
+ },
+ {
+  "id": "u0695",
+  "zh": "(未錄影像)",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:620"
+  ]
+ },
+ {
+  "id": "u0696",
+  "zh": "驗證：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:623"
+  ]
+ },
+ {
+  "id": "u0697",
+  "zh": "實測：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:627"
+  ]
+ },
+ {
+  "id": "u0698",
+  "zh": "目標 fps {1}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:628"
+  ]
+ },
+ {
+  "id": "u0699",
+  "zh": "中位 {1} 最低 {2} p10 {3}（{4} 秒）",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:629",
+   "js/multi.js:630"
+  ]
+ },
+ {
+  "id": "u0700",
+  "zh": "無樣本",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:629",
+   "js/multi.js:630"
+  ]
+ },
+ {
+  "id": "u0701",
+  "zh": "前景 fps {1}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:629"
+  ]
+ },
+ {
+  "id": "u0702",
+  "zh": "背景 fps {1}",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:630"
+  ]
+ },
+ {
+  "id": "u0703",
+  "zh": "fps 低於目標一半：{1} 秒（{2}%）",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:631"
+  ]
+ },
+ {
+  "id": "u0704",
+  "zh": "靜音秒數佔比：{1}%",
+  "kind": "pattern",
+  "src": [
+   "js/multi.js:632"
+  ]
+ },
+ {
+  "id": "u0705",
+  "zh": "標記：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:633"
+  ]
+ },
+ {
+  "id": "u0706",
+  "zh": "事件紀錄：",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:636"
+  ]
+ },
+ {
+  "id": "u0707",
+  "zh": "還有場次在錄影或收檔，離開會中斷。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:682"
+  ]
+ },
+ {
+  "id": "u0708",
+  "zh": "多場模式就緒。每一場請選一個瀏覽器分頁，並記得勾「分享分頁音訊」。",
+  "kind": "exact",
+  "src": [
+   "js/multi.js:692"
+  ]
+ },
+ {
+  "id": "u0709",
+  "zh": "已恢復正常：",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:83"
+  ]
+ },
+ {
+  "id": "u0710",
+  "zh": "已接上來源：{1}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:110"
+  ]
+ },
+ {
+  "id": "u0711",
+  "zh": "「{1}」的分享已中斷",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:126",
+   "js/slot.js:305"
+  ]
+ },
+ {
+  "id": "u0712",
+  "zh": "分頁被關掉、或有人按了「停止共用」。這一場的畫面已經停了，請盡快按停止保住現有內容。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:127"
+  ]
+ },
+ {
+  "id": "u0713",
+  "zh": "沒有可用的來源",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:140"
+  ]
+ },
+ {
+  "id": "u0714",
+  "zh": "按「重新選擇」再挑一次。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:140",
+   "js/slot.js:154"
+  ]
+ },
+ {
+  "id": "u0715",
+  "zh": "瀏覽器分頁，{1}×{2}，{3} fps",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:143"
+  ]
+ },
+ {
+  "id": "u0716",
+  "zh": "{1}（不是分頁）",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:145"
+  ]
+ },
+ {
+  "id": "u0717",
+  "zh": "非分頁來源的聲音是整台電腦的混音，會跟其他場混在一起，逐字稿會廢掉。除非這場真的只能用桌面程式，否則請重選成分頁。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:146"
+  ]
+ },
+ {
+  "id": "u0718",
+  "zh": "這一場的聲音",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:151",
+   "js/slot.js:154",
+   "js/slot.js:156"
+  ]
+ },
+ {
+  "id": "u0719",
+  "zh": "這次分享沒有帶音訊",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:151"
+  ]
+ },
+ {
+  "id": "u0720",
+  "zh": "重新選擇時，在分享視窗裡把「分享分頁音訊」勾起來。沒勾就只有畫面沒聲音。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:152"
+  ]
+ },
+ {
+  "id": "u0721",
+  "zh": "已取得這個分頁專屬的音訊軌（不會混到其他場）",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:156"
+  ]
+ },
+ {
+  "id": "u0722",
+  "zh": "2.2 秒只收到 {1} 張畫格（感測器 {2}）",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:163"
+  ]
+ },
+ {
+  "id": "u0723",
+  "zh": "來源可能已經停了，請重新選擇。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:163"
+  ]
+ },
+ {
+  "id": "u0724",
+  "zh": "2.2 秒收到 {1} 張（約 {2} fps）",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:164"
+  ]
+ },
+ {
+  "id": "u0725",
+  "zh": "試錄並解碼驗證",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:185",
+   "js/slot.js:191",
+   "js/slot.js:194"
+  ]
+ },
+ {
+  "id": "u0726",
+  "zh": "只產出 {1} bytes，等於沒錄到",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:191"
+  ]
+ },
+ {
+  "id": "u0727",
+  "zh": "重新選擇來源。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:195"
+  ]
+ },
+ {
+  "id": "u0728",
+  "zh": "；音訊樣本只有 {1} bytes 又解不開",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:202"
+  ]
+ },
+ {
+  "id": "u0729",
+  "zh": "；音訊解碼失敗（",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:203"
+  ]
+ },
+ {
+  "id": "u0730",
+  "zh": "；這 4 秒完全沒有聲音",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:205"
+  ]
+ },
+ {
+  "id": "u0731",
+  "zh": "影像 {1}×{2}、{3} KB / 4 秒{4}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:212"
+  ]
+ },
+ {
+  "id": "u0732",
+  "zh": "檢查分享時有沒有勾「分享分頁音訊」。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:213"
+  ]
+ },
+ {
+  "id": "u0733",
+  "zh": "影像沒問題，但這 4 秒沒有任何聲音。如果這場現在本來就安靜，可以照樣開始，錄製中我會繼續盯著；如果它正在講話，代表音訊沒抓到。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:217"
+  ]
+ },
+ {
+  "id": "u0734",
+  "zh": "開錄後請盯著音量條確認有跳動。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:218"
+  ]
+ },
+ {
+  "id": "u0735",
+  "zh": "查不到可用空間",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:228"
+  ]
+ },
+ {
+  "id": "u0736",
+  "zh": "自己確認還有 {1} GB 以上。",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:228"
+  ]
+ },
+ {
+  "id": "u0737",
+  "zh": "剩 {1} GB，這一場預估要 {2} GB",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:229"
+  ]
+ },
+ {
+  "id": "u0738",
+  "zh": "降畫質、縮短預計長度，或關掉其中一場。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:229"
+  ]
+ },
+ {
+  "id": "u0739",
+  "zh": "剩 {1} GB（所有場次共用），這一場預估 {2} MB",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:230"
+  ]
+ },
+ {
+  "id": "u0740",
+  "zh": "{1}_{2}_音訊.webm",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:246"
+  ]
+ },
+ {
+  "id": "u0741",
+  "zh": "「{1}」音訊寫檔失敗",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:253"
+  ]
+ },
+ {
+  "id": "u0742",
+  "zh": "「{1}」影像寫檔失敗",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:263"
+  ]
+ },
+ {
+  "id": "u0743",
+  "zh": "「{1}」錄影器錯誤",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:264"
+  ]
+ },
+ {
+  "id": "u0744",
+  "zh": "開始錄製：{1}{2}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:277"
+  ]
+ },
+ {
+  "id": "u0745",
+  "zh": "⚠ 這個環境只能暫存在記憶體",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:278"
+  ]
+ },
+ {
+  "id": "u0746",
+  "zh": "分頁被關掉或按了「停止共用」，請盡快停止保住現有內容。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:305"
+  ]
+ },
+ {
+  "id": "u0747",
+  "zh": "「{1}」畫面停止更新",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:307"
+  ]
+ },
+ {
+  "id": "u0748",
+  "zh": "已經 {1} 秒沒有新畫格（感測器 {2}）。",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:308"
+  ]
+ },
+ {
+  "id": "u0749",
+  "zh": "「{1}」已經三分鐘沒有聲音",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:316"
+  ]
+ },
+ {
+  "id": "u0750",
+  "zh": "如果這場正在講話，代表音訊沒抓到；如果本來就安靜，忽略即可。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:317"
+  ]
+ },
+ {
+  "id": "u0751",
+  "zh": "「{1}」已經 {2} 秒沒有新資料落地",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:322"
+  ]
+ },
+ {
+  "id": "u0752",
+  "zh": "建議按停止保住現有內容。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:322"
+  ]
+ },
+ {
+  "id": "u0753",
+  "zh": "「{1}」錄音器不在錄製狀態（{2}）",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:326"
+  ]
+ },
+ {
+  "id": "u0754",
+  "zh": "請按停止保住目前內容。",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:326"
+  ]
+ },
+ {
+  "id": "u0755",
+  "zh": "標記 @ {1}s：{2}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:336"
+  ]
+ },
+ {
+  "id": "u0756",
+  "zh": "收檔完成：影像 {1}、音訊 {2}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:355"
+  ]
+ },
+ {
+  "id": "u0757",
+  "zh": "沒有音訊檔",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:378"
+  ]
+ },
+ {
+  "id": "u0758",
+  "zh": "聲音內容",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:379",
+   "js/slot.js:380",
+   "js/slot.js:382"
+  ]
+ },
+ {
+  "id": "u0759",
+  "zh": "整段幾乎是數位靜音（峰值 {1}）",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:380"
+  ]
+ },
+ {
+  "id": "u0760",
+  "zh": "峰值 {1}、長度 {2}",
+  "kind": "pattern",
+  "src": [
+   "js/slot.js:382"
+  ]
+ },
+ {
+  "id": "u0761",
+  "zh": "靜音佔比",
+  "kind": "exact",
+  "src": [
+   "js/slot.js:383",
+   "js/checks.js:235",
+   "js/checks.js:236"
+  ]
+ },
+ {
+  "id": "u0762",
+  "zh": "讀取影片中繼資料逾時（檔案可能損毀或不完整）",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:95"
+  ]
+ },
+ {
+  "id": "u0763",
+  "zh": "瀏覽器無法解碼這個檔案",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:99"
+  ]
+ },
+ {
+  "id": "u0764",
+  "zh": "編碼器沒有產出資料",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:160"
+  ]
+ },
+ {
+  "id": "u0765",
+  "zh": "產出的資料解碼失敗：",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:162"
+  ]
+ },
+ {
+  "id": "u0766",
+  "zh": "影片檔大小",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:186",
+   "js/checks.js:189"
+  ]
+ },
+ {
+  "id": "u0767",
+  "zh": "只有 {1} bytes —— 等於沒錄到",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:186"
+  ]
+ },
+ {
+  "id": "u0768",
+  "zh": "{1} MB（平均每分鐘 {2} MB）",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:189"
+  ]
+ },
+ {
+  "id": "u0769",
+  "zh": "影片可播放性",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:195"
+  ]
+ },
+ {
+  "id": "u0770",
+  "zh": "影像軌",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:197",
+   "js/checks.js:198"
+  ]
+ },
+ {
+  "id": "u0771",
+  "zh": "檔案裡沒有影像（寬高為 0）",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:197"
+  ]
+ },
+ {
+  "id": "u0772",
+  "zh": "影片長度",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:202",
+   "js/checks.js:204",
+   "js/checks.js:206"
+  ]
+ },
+ {
+  "id": "u0773",
+  "zh": "讀到 {1} 秒，實際錄了 {2} 秒",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:202"
+  ]
+ },
+ {
+  "id": "u0774",
+  "zh": "檔案 {1} 秒 vs 實際錄製 {2} 秒，差 {3} 秒（多半是 webm 長度標記不準，用播放器拉到最後確認一下）",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:204"
+  ]
+ },
+ {
+  "id": "u0775",
+  "zh": "備份音訊只有 {1} bytes（依錄製長度預期約 {2} KB）而且解不開 —— 幾乎確定整段沒有聲音",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:223"
+  ]
+ },
+ {
+  "id": "u0776",
+  "zh": "備份音訊解碼失敗：",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:225"
+  ]
+ },
+ {
+  "id": "u0777",
+  "zh": "整段幾乎是數位靜音（峰值 {1}）—— 這就是「錄到畫面沒錄到聲音」",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:230"
+  ]
+ },
+ {
+  "id": "u0778",
+  "zh": "峰值 {1}、平均 {2}",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:232"
+  ]
+ },
+ {
+  "id": "u0779",
+  "zh": "{1}%（大半時間沒聲音，確認是不是抓錯音源）",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:235"
+  ]
+ },
+ {
+  "id": "u0780",
+  "zh": "最長連續靜音",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:237",
+   "js/checks.js:238"
+  ]
+ },
+ {
+  "id": "u0781",
+  "zh": "{1}（中間可能斷過）",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:237"
+  ]
+ },
+ {
+  "id": "u0782",
+  "zh": "音訊長度",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:239"
+  ]
+ },
+ {
+  "id": "u0783",
+  "zh": "{1} KB，約為名目碼率的 {2}%",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:243"
+  ]
+ },
+ {
+  "id": "u0784",
+  "zh": "音訊資料量",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:244",
+   "js/checks.js:245",
+   "js/checks.js:246"
+  ]
+ },
+ {
+  "id": "u0785",
+  "zh": "—— 小到不合理，等於整段沒有聲音",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:244"
+  ]
+ },
+ {
+  "id": "u0786",
+  "zh": "（偏低，可能大半時間是靜音）",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:245"
+  ]
+ },
+ {
+  "id": "u0787",
+  "zh": "沒有備份音訊檔可驗（主影片的聲音請自己播放確認）",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:248"
+  ]
+ },
+ {
+  "id": "u0788",
+  "zh": "畫面更新",
+  "kind": "exact",
+  "src": [
+   "js/checks.js:254",
+   "js/checks.js:255"
+  ]
+ },
+ {
+  "id": "u0789",
+  "zh": "全程平均只有 {1} fps —— 畫面幾乎沒在更新",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:254"
+  ]
+ },
+ {
+  "id": "u0790",
+  "zh": "全程 {1} 張畫格，平均 {2} fps",
+  "kind": "pattern",
+  "src": [
+   "js/checks.js:255"
+  ]
+ },
+ {
+  "id": "u0791",
+  "zh": "720p / 15fps（最省，文字仍清楚）",
+  "kind": "exact",
+  "src": [
+   "js/media.js:9"
+  ]
+ },
+ {
+  "id": "u0792",
+  "zh": "1080p / 15fps（推薦：簡報會議）",
+  "kind": "exact",
+  "src": [
+   "js/media.js:10"
+  ]
+ },
+ {
+  "id": "u0793",
+  "zh": "1080p / 30fps（有動畫或影片時）",
+  "kind": "exact",
+  "src": [
+   "js/media.js:11"
+  ]
+ },
+ {
+  "id": "u0794",
+  "zh": "原生解析度 / 30fps（檔案最大）",
+  "kind": "exact",
+  "src": [
+   "js/media.js:12"
+  ]
+ },
+ {
+  "id": "u0795",
+  "zh": "未知的寫檔錯誤",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:29"
+  ]
+ },
+ {
+  "id": "u0796",
+  "zh": "寫檔 worker 崩潰：",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:32"
+  ]
+ },
+ {
+  "id": "u0797",
+  "zh": ".__能力測試.tmp",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:61"
+  ]
+ },
+ {
+  "id": "u0798",
+  "zh": "沒有 OPFS",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:63"
+  ]
+ },
+ {
+  "id": "u0799",
+  "zh": "持久寫檔測試大小不符",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:72"
+  ]
+ },
+ {
+  "id": "u0800",
+  "zh": "持久寫檔測試失敗：",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:74"
+  ]
+ },
+ {
+  "id": "u0801",
+  "zh": "持久寫檔開檔失敗，改用記憶體：",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:162"
+  ]
+ },
+ {
+  "id": "u0802",
+  "zh": "記不住資料夾：",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:237"
+  ]
+ },
+ {
+  "id": "u0803",
+  "zh": ".__錄影工具寫入測試.tmp",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:279"
+  ]
+ },
+ {
+  "id": "u0804",
+  "zh": "寫入測試檔大小不符（",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:286"
+  ]
+ },
+ {
+  "id": "u0805",
+  "zh": "bytes）",
+  "kind": "exact",
+  "src": [
+   "js/storage.js:286"
+  ]
+ },
+ {
+  "id": "u0806",
+  "zh": "連不上授權伺服器",
+  "kind": "exact",
+  "src": [
+   "js/license.js:87"
+  ]
+ },
+ {
+  "id": "u0807",
+  "zh": "授權碼格式不對，應該像 MR-XXXX-XXXX-XXXX",
+  "kind": "exact",
+  "src": [
+   "js/license.js:94"
+  ]
+ },
+ {
+  "id": "u0808",
+  "zh": "這組授權碼無法使用",
+  "kind": "exact",
+  "src": [
+   "js/license.js:101",
+   "worker/index.js:464"
+  ]
+ },
+ {
+  "id": "u0809",
+  "zh": "目前：免費版",
+  "kind": "exact",
+  "src": [
+   "js/license.js:111",
+   "js/license.js:133"
+  ]
+ },
+ {
+  "id": "u0810",
+  "zh": "啟用",
+  "kind": "exact",
+  "src": [
+   "js/license.js:111"
+  ]
+ },
+ {
+  "id": "u0811",
+  "zh": "移除授權碼",
+  "kind": "exact",
+  "src": [
+   "js/license.js:111"
+  ]
+ },
+ {
+  "id": "u0812",
+  "zh": "看方案與升級",
+  "kind": "exact",
+  "src": [
+   "js/license.js:111"
+  ]
+ },
+ {
+  "id": "u0813",
+  "zh": "目前：站主授權",
+  "kind": "exact",
+  "src": [
+   "js/license.js:133"
+  ]
+ },
+ {
+  "id": "u0814",
+  "zh": "目前：Pro",
+  "kind": "exact",
+  "src": [
+   "js/license.js:133"
+  ]
+ },
+ {
+  "id": "u0815",
+  "zh": "不限場數、不限裝置、不會過期。",
+  "kind": "exact",
+  "src": [
+   "js/license.js:136"
+  ]
+ },
+ {
+  "id": "u0816",
+  "zh": "同時最多 {1} 場、可用無人看管保護",
+  "kind": "pattern",
+  "src": [
+   "js/license.js:137"
+  ]
+ },
+ {
+  "id": "u0817",
+  "zh": "已取消訂閱，可用到",
+  "kind": "exact",
+  "src": [
+   "js/license.js:138"
+  ]
+ },
+ {
+  "id": "u0818",
+  "zh": "有效至",
+  "kind": "exact",
+  "src": [
+   "js/license.js:138"
+  ]
+ },
+ {
+  "id": "u0819",
+  "zh": "。{1} {2}",
+  "kind": "pattern",
+  "src": [
+   "js/license.js:138"
+  ]
+ },
+ {
+  "id": "u0820",
+  "zh": "同時 1 場、無人看管保護未開放。升級後可同時錄 4 場。",
+  "kind": "exact",
+  "src": [
+   "js/license.js:139"
+  ]
+ },
+ {
+  "id": "u0821",
+  "zh": "已啟用",
+  "kind": "exact",
+  "src": [
+   "js/license.js:151"
+  ]
+ },
+ {
+  "id": "u0822",
+  "zh": "已移除，回到免費版。",
+  "kind": "exact",
+  "src": [
+   "js/license.js:158"
+  ]
+ },
+ {
+  "id": "u0823",
+  "zh": "會議錄影守門員 Pro",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:33"
+  ]
+ },
+ {
+  "id": "u0824",
+  "zh": "特店編號不符",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:220"
+  ]
+ },
+ {
+  "id": "u0825",
+  "zh": "金額不符（收到 {1}，應為 {2}）",
+  "kind": "pattern",
+  "src": [
+   "worker/index.js:221"
+  ]
+ },
+ {
+  "id": "u0826",
+  "zh": "模擬付款，不開通",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:222"
+  ]
+ },
+ {
+  "id": "u0827",
+  "zh": "｜",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:229"
+  ]
+ },
+ {
+  "id": "u0828",
+  "zh": "補查：已付款",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:260"
+  ]
+ },
+ {
+  "id": "u0829",
+  "zh": "補查：定期扣款",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:274"
+  ]
+ },
+ {
+  "id": "u0830",
+  "zh": "付費方案尚未開放，敬請期待。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:293"
+  ]
+ },
+ {
+  "id": "u0831",
+  "zh": "沒有這個方案",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:302"
+  ]
+ },
+ {
+  "id": "u0832",
+  "zh": "請填一個有效的 Email（取消訂閱和查詢時要用）",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:304"
+  ]
+ },
+ {
+  "id": "u0833",
+  "zh": "請先勾選同意服務條款與「數位服務一經提供即不適用七日解除權」",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:307"
+  ]
+ },
+ {
+  "id": "u0834",
+  "zh": "操作太頻繁，請一小時後再試。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:314"
+  ]
+ },
+ {
+  "id": "u0835",
+  "zh": "CheckMacValue 驗證失敗",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:364"
+  ]
+ },
+ {
+  "id": "u0836",
+  "zh": "找不到對應授權，需人工對帳",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:379"
+  ]
+ },
+ {
+  "id": "u0837",
+  "zh": "找不到這筆訂單",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:407"
+  ]
+ },
+ {
+  "id": "u0838",
+  "zh": "請確認連結是否完整。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:407"
+  ]
+ },
+ {
+  "id": "u0839",
+  "zh": "綠界還在回報結果，通常一兩分鐘內完成。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0840",
+  "zh": "這是你的授權碼，",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0841",
+  "zh": "已自動存進這個瀏覽器",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0842",
+  "zh": "，請也另外抄下來。 就算現在關掉這一頁，付款確認後打開工具就會自動生效。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0843",
+  "zh": "重新確認",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417"
+  ]
+ },
+ {
+  "id": "u0844",
+  "zh": "回到工具",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:417",
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0845",
+  "zh": "付款完成",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0846",
+  "zh": "這是你的授權碼：",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0847",
+  "zh": "已自動存進這個瀏覽器，回到工具就已經解鎖。請另外抄下來，換電腦時要用。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0848",
+  "zh": "目前付費期間至 {2}， 每月自動續扣後會延長。要取消隨時到「",
+  "kind": "pattern",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0849",
+  "zh": "我的訂閱",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0850",
+  "zh": "」自己按，不用寫信。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:427"
+  ]
+ },
+ {
+  "id": "u0851",
+  "zh": "有任何問題請寫信到",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:439"
+  ]
+ },
+ {
+  "id": "u0852",
+  "zh": "，並附上授權碼。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:439"
+  ]
+ },
+ {
+  "id": "u0853",
+  "zh": "查無這組授權碼",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:461"
+  ]
+ },
+ {
+  "id": "u0854",
+  "zh": "這組授權碼來自測試環境，無法在正式環境使用",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:462"
+  ]
+ },
+ {
+  "id": "u0855",
+  "zh": "付款尚未確認，通常一兩分鐘內完成",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:463"
+  ]
+ },
+ {
+  "id": "u0856",
+  "zh": "訂閱已取消，付費期間已結束",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:465"
+  ]
+ },
+ {
+  "id": "u0857",
+  "zh": "這組授權碼已過期",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:465"
+  ]
+ },
+ {
+  "id": "u0858",
+  "zh": "沒有授權碼",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:472"
+  ]
+ },
+ {
+  "id": "u0859",
+  "zh": "這組授權碼最近 30 天已在 {1} 台裝置使用，達到 {2} 台上限。",
+  "kind": "pattern",
+  "src": [
+   "worker/index.js:501"
+  ]
+ },
+ {
+  "id": "u0860",
+  "zh": "可到「我的訂閱」頁面自己清空裝置後重新啟用。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:502"
+  ]
+ },
+ {
+  "id": "u0861",
+  "zh": "請輸入授權碼和付款時填的 Email",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:527"
+  ]
+ },
+ {
+  "id": "u0862",
+  "zh": "授權碼或 Email 不正確",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:529"
+  ]
+ },
+ {
+  "id": "u0863",
+  "zh": "站主授權不需要取消",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:575"
+  ]
+ },
+ {
+  "id": "u0864",
+  "zh": "已向綠界取消定期定額",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:606"
+  ]
+ },
+ {
+  "id": "u0865",
+  "zh": "取消失敗：",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:606"
+  ]
+ },
+ {
+  "id": "u0866",
+  "zh": "綠界沒有確認取消，後續扣款可能還會發生。請稍後再試一次；若持續失敗請來信，我們會人工處理並退還取消後被扣的款項。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:611"
+  ]
+ },
+ {
+  "id": "u0867",
+  "zh": "伺服器發生錯誤，請稍後再試。",
+  "kind": "exact",
+  "src": [
+   "worker/index.js:679"
+  ]
+ }
+]
