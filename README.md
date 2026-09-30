@@ -190,6 +190,33 @@
 
 ---
 
+## 英文版（中文／英文切換）
+
+每一頁頂欄右邊都有「中文｜EN」切換鈕，按了立刻換，**錄影中切換也不會中斷錄影**。
+選擇會記住；第一次來、瀏覽器語言不是中文的訪客，預設就是英文。
+
+英文模式下，連產出的東西也是英文：
+
+| 中文模式 | 英文模式 |
+|---|---|
+| `會議錄影_20260924_1430.webm` | `Meeting_20260924_1430.webm` |
+| `…_音訊備份.webm` | `…_audio-backup.webm` |
+| `…_健康紀錄.txt` | `…_health-log.txt` |
+| `…_第2段` | `…_part2` |
+
+條款頁的英文版僅供閱讀方便，內容有歧義時以中文版為準（頁面上有註明）。
+
+### 之後改了介面文字，英文要怎麼跟上
+
+翻譯是「顯示層」做的：程式裡照樣寫中文，頁面顯示時才換成英文。
+新增或改了中文字串，英文模式就會看到那段沒翻（直接露出中文），照這三步補：
+
+1. `node tools/extract_i18n.mjs i18n/units.json` —— 重新抽出所有中文字串
+2. 只翻新增的那幾段，補進 `i18n/en.json`
+3. `python tools/build_i18n.py` —— 會檢查沒漏翻、譯文沒殘留中文、`{1}` 佔位數量一致，全過才產出 `js/i18n-en.js`
+
+---
+
 ## 已知限制
 
 - **只能用 Chrome 或 Edge。** Firefox 抓不到 Windows 的系統音訊，Safari 不支援。
@@ -213,6 +240,8 @@ js/checks.js            三道關卡：開錄前試錄驗證、錄製中深度�
 js/storage.js           持久寫檔、救援、串流匯出
 js/opfs-worker.js       實際寫磁碟的 worker（sync access handle，寫完就 flush）
 js/ticker-worker.js     不受背景分頁節流的心跳
+js/i18n.js              中文／英文切換（顯示層翻譯、切換鈕、英文檔名）
+js/i18n-en.js           英文翻譯表（由 tools/build_i18n.py 產生，不要手改）
 ```
 
 ### 三個踩過的坑（改動前先看這裡）
@@ -229,3 +258,8 @@ js/ticker-worker.js     不受背景分頁節流的心跳
 
 3. **不要用 `'createSyncAccessHandle' in FileSystemFileHandle.prototype` 判斷能力。**
    那個方法只掛在 Worker scope，主執行緒查永遠是 false。改成實際寫一個測試檔驗證。
+
+4. **翻譯改屬性（placeholder 等）時，一定要記得「上次是我自己寫的」。**
+   `setAttribute` 就算寫入一樣的值也會觸發 MutationObserver；某段沒被翻到時，
+   它會「翻 → 觸發 → 再翻」無限循環，整頁卡死（多場版英文模式曾因此凍住）。
+   `js/i18n.js` 的 `wroteAttr` 就是這道防護，不要拿掉。
