@@ -11,6 +11,22 @@
 </head>
 <body>
 
+<svg class="sprite" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-tab" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 9h19M7 4.5v4.5"/></symbol>
+  <symbol id="i-mic-off" viewBox="0 0 24 24"><path d="M9 4.5a3 3 0 0 1 6 0v5a3 3 0 0 1-.5 1.7M12 15.5v4M8 19.5h8M5.5 10.5a6.5 6.5 0 0 0 9 6"/><path d="M4 3.5l16 17"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13.5" width="4.5" height="7" rx="2"/><rect x="17" y="13.5" width="4.5" height="7" rx="2"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M6.8 6.6a8 8 0 1 0 10.4 0"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6.5a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8.5 8.5 0 1 1 16 0"/><path d="M12 17l4-5"/><circle cx="12" cy="17" r="1.4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M12 9v6M9 12h6"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.5 11V5a1.5 1.5 0 0 1 1.5-1.5h6l9 9-7.5 7.5z"/><circle cx="8" cy="8" r="1.3"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="13" rx="2"/><path d="M2.5 8.5h19"/><path d="M8 20.5h8"/><path d="M12 11v4M10 13l2-2 2 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.4"/></symbol>
+  <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" stroke="none"/></symbol>
+</defs></svg>
+
 <header class="topbar">
   <div class="rail">
     <div class="rail-id">
@@ -58,58 +74,125 @@
       <span class="eyebrow">教學</span>
       <h2>一次錄四場，照這個順序按</h2>
     </div>
-
-    <p class="note">整個流程大約五分鐘。每一場都要各自跑一次 Chrome 的分享視窗，這步不能自動化，
-      所以開會前請留時間。</p>
+    <p class="note">整個流程約五分鐘。每一場都要各自跑一次 Chrome 的分享視窗，這步不能自動化。</p>
 
     <h3 class="howto-h">開始之前</h3>
-    <ol class="howto">
-      <li><b>四場會議全部用網頁版加入。</b>Zoom、Webex 的安裝版桌面程式抓不到單獨的聲音，
-        四場會糊成一團。網頁版通常是會議連結裡的「從瀏覽器加入」。</li>
-      <li><b>四個會議分頁先全部開好、全部加入完成</b>，各自把麥克風和鏡頭關掉。
-        建議放在同一個 Chrome 視窗裡，等一下比較好認。</li>
-      <li><b>戴耳機</b>，或在下面勾「錄的時候電腦不要把聲音放出來」。四場同時從喇叭放出來
-        你也聽不清楚。</li>
-      <li><b>把電腦電源設定改成永不睡眠。</b>設定 → 系統 → 電源與電池 → 螢幕與睡眠 →
-        「插電時，讓裝置睡眠」設為<b>永不</b>。電腦睡著錄影就停了。</li>
-    </ol>
+    <div class="steps prep">
+      <div class="step">
+        <svg class="ic"><use href="#i-tab"/></svg>
+        <div><b>四場都用網頁版加入</b><span>安裝版的 Zoom／Webex 抓不到單獨的聲音，四場會糊成一團。
+          找會議連結裡的「從瀏覽器加入」。</span></div>
+      </div>
+      <div class="step">
+        <svg class="ic"><use href="#i-mic-off"/></svg>
+        <div><b>四個分頁先全部開好、加入完成</b><span>各自把麥克風和鏡頭關掉，放在同一個 Chrome 視窗裡比較好認。</span></div>
+      </div>
+      <div class="step">
+        <svg class="ic"><use href="#i-headphones"/></svg>
+        <div><b>戴耳機</b><span>或在共用設定勾「錄的時候電腦不要把聲音放出來」。四場一起從喇叭放你也聽不清楚。</span></div>
+      </div>
+      <div class="step">
+        <svg class="ic"><use href="#i-power"/></svg>
+        <div><b>電源設定改成永不睡眠</b><span>設定 → 系統 → 電源與電池 → 螢幕與睡眠 →「插電時，讓裝置睡眠」設為<b>永不</b>。
+          電腦睡著錄影就停了。</span></div>
+      </div>
+    </div>
 
     <h3 class="howto-h">正式步驟</h3>
-    <ol class="howto" start="5">
-      <li>在上面的<b>共用設定</b>選好存檔資料夾（選過一次就記住了）。</li>
-      <li>畫質選 <b>720p / 15fps</b>。四場同時錄不要用 1080p —— 空間和 CPU 都是四倍。
-        只想要逐字稿的話，把<b>「也錄影像」取消勾選</b>，容量會從幾 GB 掉到幾百 MB。</li>
-      <li>看下面<b>場次</b>區，預設有兩格，按兩次<b>「＋ 加一場」</b>湊成四格。</li>
-      <li><b>每一格先打名字</b>（例如「台積電法說」「內部週會」）。
-        四個檔案只差流水號的話，事後你分不出哪個是哪個。</li>
-      <li>第一格按<b>「選擇這場的分頁」</b>。Chrome 跳出分享視窗後：
-        <ul>
-          <li>上面切到 <b>「Chrome 分頁」</b> 這個頁籤（不是「整個畫面」，不是「視窗」）</li>
-          <li>清單裡挑<b>第一場會議</b>那個分頁</li>
-          <li>左下角把 <b>「同時分享分頁音訊」</b> 勾起來 —— <b>沒勾就只有畫面沒聲音</b></li>
-          <li>按「分享」</li>
-        </ul>
-      </li>
-      <li>等約 7 秒，那一格會自動跑完五項檢查。<b>五項全綠</b>、狀態變成「準備好了」才算過。
-        有紅色的照著紅字提示修，通常就是忘了勾分頁音訊。</li>
-      <li><b>第二、三、四格重複第 9、10 步。</b>每格選各自對應的會議分頁。</li>
-      <li>四格都「準備好了」之後，按最下面的 <b>「開始錄製 4 場」</b>。</li>
-      <li><b>走之前確認三件事</b>：左上角紅點在閃、四格的音量表都有在跳動、
-        每格的「已安全落地」數字每隔幾秒在增加。有一格不動就是那一場沒錄到。</li>
-      <li>會議結束按 <b>「全部停止」</b>。它會自動驗證每一場、把八個檔案存進你選的資料夾，
-        外加一份實測報告。</li>
-    </ol>
+    <div class="steps numbered">
+      <div class="step"><span class="n">1</span>
+        <svg class="ic"><use href="#i-folder"/></svg>
+        <div><b>選存檔資料夾</b><span>在上面的共用設定。選過一次就記住了。</span></div>
+      </div>
+      <div class="step"><span class="n">2</span>
+        <svg class="ic"><use href="#i-gauge"/></svg>
+        <div><b>畫質選 720p / 15fps</b><span>四場同時不要用 1080p，空間和 CPU 都是四倍。
+          只要逐字稿的話，把「也錄影像」取消勾選，容量從幾 GB 掉到幾百 MB。</span></div>
+      </div>
+      <div class="step"><span class="n">3</span>
+        <svg class="ic"><use href="#i-plus"/></svg>
+        <div><b>按兩次「＋ 加一場」湊成四格</b><span>預設有兩格。</span></div>
+      </div>
+      <div class="step"><span class="n">4</span>
+        <svg class="ic"><use href="#i-tag"/></svg>
+        <div><b>每一格先打名字</b><span>例如「台積電法說」「內部週會」。四個檔案只差流水號的話，事後你分不出哪個是哪個。</span></div>
+      </div>
+      <div class="step wide"><span class="n">5</span>
+        <svg class="ic"><use href="#i-share"/></svg>
+        <div><b>第一格按「選擇這場的分頁」</b><span>Chrome 會跳出分享視窗，照下圖的兩個位置操作：</span>
+          
+<figure class="illus">
+  <svg viewBox="0 0 620 330" role="img" aria-label="Chrome 分享視窗示意圖：選擇 Chrome 分頁，並勾選同時分享分頁音訊">
+    <rect x="14" y="14" width="592" height="302" rx="12" class="dlg"/>
+    <text x="34" y="46" class="t-title">選擇要分享的內容</text>
+    <text x="34" y="66" class="t-dim">meeting-recorder 想要分享你的畫面</text>
+
+    <rect x="34" y="84" width="148" height="30" rx="7" class="tab"/>
+    <text x="108" y="104" class="t-tab" text-anchor="middle">整個畫面</text>
+    <rect x="190" y="84" width="122" height="30" rx="7" class="tab"/>
+    <text x="251" y="104" class="t-tab" text-anchor="middle">視窗</text>
+    <rect x="320" y="84" width="150" height="30" rx="7" class="tab on"/>
+    <text x="395" y="104" class="t-tab on" text-anchor="middle">Chrome 分頁</text>
+    <circle cx="500" cy="99" r="12" class="pin"/><text x="500" y="104" class="t-pin" text-anchor="middle">1</text>
+
+    <rect x="34" y="128" width="436" height="34" rx="7" class="row on"/>
+    <rect x="46" y="138" width="14" height="14" rx="3" class="fav"/>
+    <text x="70" y="150" class="t-row on">Zoom Meeting — 台積電法說</text>
+    <rect x="34" y="168" width="436" height="30" rx="7" class="row"/>
+    <text x="70" y="188" class="t-row">Webex — 內部週會</text>
+    <rect x="34" y="204" width="436" height="30" rx="7" class="row"/>
+    <text x="70" y="224" class="t-row">Google Meet — 客戶訪談</text>
+
+    <rect x="34" y="250" width="232" height="32" rx="7" class="chk on"/>
+    <rect x="46" y="258" width="16" height="16" rx="4" class="box on"/>
+    <path d="M50 266l4 4 7-8" class="tick"/>
+    <text x="72" y="271" class="t-chk on">同時分享分頁音訊</text>
+    <circle cx="292" cy="266" r="12" class="pin"/><text x="292" y="271" class="t-pin" text-anchor="middle">2</text>
+
+    <rect x="406" y="250" width="64" height="32" rx="7" class="btn-ghost"/>
+    <text x="438" y="271" class="t-btn" text-anchor="middle">取消</text>
+    <rect x="482" y="250" width="86" height="32" rx="7" class="btn-go"/>
+    <text x="525" y="271" class="t-go" text-anchor="middle">分享</text>
+  </svg>
+  <figcaption>
+    <span><b class="pin-n">1</b> 切到「Chrome 分頁」，挑會議那一個</span>
+    <span><b class="pin-n">2</b> 左下角勾「同時分享分頁音訊」——<b>沒勾就只有畫面沒聲音</b></span>
+  </figcaption>
+</figure>
+
+        </div>
+      </div>
+      <div class="step"><span class="n">6</span>
+        <svg class="ic"><use href="#i-check"/></svg>
+        <div><b>等約 7 秒，五項檢查要全綠</b><span>狀態變成「準備好了」才算過。有紅色的照著紅字修，
+          通常就是忘了勾分頁音訊。</span></div>
+      </div>
+      <div class="step"><span class="n">7</span>
+        <svg class="ic"><use href="#i-share"/></svg>
+        <div><b>第二、三、四格重複第 5、6 步</b><span>每格選各自對應的會議分頁。</span></div>
+      </div>
+      <div class="step"><span class="n">8</span>
+        <svg class="ic"><use href="#i-rec"/></svg>
+        <div><b>按「開始錄製 4 場」</b><span>四格都「準備好了」之後才按得下去。</span></div>
+      </div>
+      <div class="step"><span class="n">9</span>
+        <svg class="ic"><use href="#i-eye"/></svg>
+        <div><b>走之前確認三件事</b><span>左上角紅點在閃、四格的音量表都在跳、每格「已安全落地」的數字在增加。
+          有一格不動就是那一場沒錄到。</span></div>
+      </div>
+      <div class="step"><span class="n">10</span>
+        <svg class="ic"><use href="#i-stop"/></svg>
+        <div><b>結束按「全部停止」</b><span>會自動驗證每一場、把八個檔案存進資料夾，外加一份實測報告。</span></div>
+      </div>
+    </div>
 
     <h3 class="howto-h">最容易出錯的四件事</h3>
     <div class="pitfalls">
-      <div><b>四場的聲音聽起來一樣</b><span>代表你選成「整個畫面」了。整個畫面抓的是整台電腦的混音，
-        四場會混在一起。回去重選成「Chrome 分頁」。</span></div>
-      <div><b>某一場完全沒聲音</b><span>分享時忘了勾「同時分享分頁音訊」。檢查會擋下來，
-        但如果你硬按開始就會錄到啞的。</span></div>
-      <div><b>選錯分頁</b><span>選完後那一格會顯示來源，名字對不上就按「重新選擇」。
-        四場一起選很容易挑錯，每格選完看一眼。</span></div>
-      <div><b>中途把會議分頁關掉</b><span>那一場立刻斷。四場同時，誤觸機率是四倍。
-        錄製期間不要整理分頁。</span></div>
+      <div><b>四場的聲音聽起來一樣</b><span>你選成「整個畫面」了。整個畫面抓的是整台電腦的混音，四場會混在一起。
+        回去重選成「Chrome 分頁」。</span></div>
+      <div><b>某一場完全沒聲音</b><span>分享時忘了勾「同時分享分頁音訊」。檢查會擋下來，硬按開始就會錄到啞的。</span></div>
+      <div><b>選錯分頁</b><span>選完後那一格會顯示來源，名字對不上就按「重新選擇」。四場一起選很容易挑錯，每格選完看一眼。</span></div>
+      <div><b>中途把會議分頁關掉</b><span>那一場立刻斷。四場同時，誤觸機率是四倍。錄製期間不要整理分頁。</span></div>
     </div>
 
     <p class="note">⚠ 四場同時錄我只用合成訊號測過（沒有掉格），<b>真實會議的上限還沒驗證</b>。
