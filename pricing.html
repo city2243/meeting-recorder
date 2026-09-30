@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方案與升級 · 會議錄影守門員</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="rail">
+    <div class="rail-id">
+      <span class="rec-dot"></span>
+      <span class="rail-name">會議錄影守門員</span>
+    </div>
+    <div class="rail-state"><a class="link" href="./">回到工具</a></div>
+  </div>
+</header>
+
+<main>
+  <p class="lede">
+    錄影本身完全在你自己的電腦上跑，影像和聲音不會上傳到任何地方。
+    <strong>免費版就有完整的三道驗證</strong> —— 開錄前、錄製中、錄完後各驗一次。
+    付費解鎖的是同時錄多場與無人看管保護。
+  </p>
+
+  <div class="plans">
+    <section class="plan">
+      <span class="eyebrow">免費</span>
+      <div class="price">NT$0</div>
+      <ul class="feat">
+        <li>同時錄 <b>1 場</b></li>
+        <li>錄製長度不限</li>
+        <li>開錄前試錄解碼驗證</li>
+        <li>錄製中 watchdog 與警報</li>
+        <li>錄完驗證與健康紀錄</li>
+        <li>當機不掉檔、救援取回</li>
+        <li>純音訊備份檔</li>
+      </ul>
+      <a class="btn" href="./">直接使用</a>
+    </section>
+
+    <section class="plan hot">
+      <span class="eyebrow">Pro</span>
+      <div class="price">NT$299<span>/月</span></div>
+      <ul class="feat">
+        <li>免費版的全部，加上：</li>
+        <li>同時錄 <b>最多 4 場</b>，每場獨立音軌</li>
+        <li><b>無人看管保護</b>：靜音自動收檔、最長時數上限、確定錄不到時自動收檔</li>
+        <li>最多 3 台裝置</li>
+        <li>隨時可取消，取消後用到當期結束</li>
+      </ul>
+
+      <form class="buy" id="buyForm">
+        <label for="email">Email（授權碼會顯示在付款完成頁，也請留著這個信箱供聯絡）</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email">
+        <button type="submit" class="btn accent lg" id="buyBtn">用信用卡訂閱</button>
+        <p class="note" id="buyMsg"></p>
+      </form>
+    </section>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="eyebrow">誠實說明</span>
+      <h2>你付費前應該知道的事</h2>
+    </div>
+    <div class="pitfalls">
+      <div><b>付費項目是「方便」，不是「不可破解的保護」</b><span>錄影完全在你的瀏覽器裡發生，
+        方案差異是由網頁上的程式判斷的。懂技術的人改幾行就能繞過去。我們沒有把這件事包裝成別的樣子。</span></div>
+      <div><b>目前是測試金流環境</b><span>本站目前接的是綠界測試環境，不會真的扣款，
+        也不會產生有效的訂閱。正式開賣前會換成正式商店代號並公告。</span></div>
+      <div><b>錄製他人會議請先取得同意</b><span>各地法規不同，使用前請自行確認。
+        本工具不會替你取得任何人的同意。</span></div>
+      <div><b>iPhone 上錄不到會議聲音</b><span>iOS 不讓任何 App 取得通話音訊，這是系統限制。
+        用手機開會時，請讓電腦也加入同一場會議來錄。</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <span class="eyebrow">常見問題</span>
+      <h2>Q&amp;A</h2>
+    </div>
+    <div class="qa">
+      <div><b>可以同時錄超過 4 場嗎？</b><span>介面不設硬上限，但 Pro 的授權是 4 場。
+        而且同時錄很多場的真實負載我還沒用真實會議驗證過，超過 4 場請自行評估。</span></div>
+      <div><b>錄的檔案會上傳嗎？</b><span>不會。整個工具是純前端，檔案只寫進你自己選的資料夾。
+        伺服器只處理授權碼與付款，碰不到你的錄影內容。</span></div>
+      <div><b>怎麼取消訂閱？</b><span>定期定額由綠界代為扣款，取消請來信，我們會停止後續扣款。
+        已扣款的當期可以用到結束。</span></div>
+      <div><b>換電腦怎麼辦？</b><span>在新電腦貼上同一組授權碼即可，最多 3 台。</span></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>付款由綠界科技 ECPay 處理，本站不會接觸到你的信用卡資料。</p>
+  </footer>
+</main>
+
+<script type="module">
+const form = document.getElementById('buyForm');
+const msg = document.getElementById('buyMsg');
+const btn = document.getElementById('buyBtn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  btn.disabled = true;
+  msg.textContent = '建立訂單中…';
+  try {
+    const r = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, plan: 'pro' }),
+    });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.error || ('建立訂單失敗（' + r.status + '）'));
+    }
+    // 後端回傳一張自動送出的綠界表單，直接換掉整頁
+    document.open();
+    document.write(await r.text());
+    document.close();
+  } catch (err) {
+    btn.disabled = false;
+    msg.textContent = err.message;
+  }
+});
+</script>
+</body>
+</html>

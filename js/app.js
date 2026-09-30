@@ -8,6 +8,7 @@
 import * as S from './storage.js';
 import * as M from './media.js';
 import * as C from './checks.js';
+import * as L from './license.js';
 
 /* ---------------- DOM ---------------- */
 const $ = (id) => document.getElementById(id);
@@ -303,11 +304,38 @@ async function init() {
     if (st.seg) { e.preventDefault(); e.returnValue = '錄影還在進行中，離開會中斷錄影。'; return e.returnValue; }
   });
 
+  st.plan = await L.getPlan();
+  L.mountLicenseBox(document.querySelector('main'), (ent) => { st.plan = ent; applyPlan(); });
+  applyPlan();
+
   el.sourceMode.addEventListener('change', renderMode);
   el.optUnattended.addEventListener('change', renderMode);
   renderMode();
   setStep(1);
   setStatus('尚未開始', '');
+}
+
+/**
+ * 依方案開關功能。單場錄影免費版就完整可用；Pro 解鎖的是無人看管保護。
+ * 這一層是產品分級，不是安全機制 —— 見 license.js 開頭的說明。
+ */
+function applyPlan() {
+  const pro = st.plan && st.plan.unattended;
+  el.optUnattended.disabled = !pro;
+  if (!pro && el.optUnattended.checked) el.optUnattended.checked = false;
+  const wrap = el.optUnattended.closest('label');
+  if (wrap) {
+    wrap.classList.toggle('locked', !pro);
+    let tag = wrap.querySelector('.pro-tag');
+    if (!pro && !tag) {
+      tag = document.createElement('a');
+      tag.className = 'pro-tag';
+      tag.href = './pricing.html';
+      tag.textContent = 'Pro';
+      wrap.appendChild(tag);
+    } else if (pro && tag) tag.remove();
+  }
+  renderMode();
 }
 
 /** 兩種來源模式的說明與提示要跟著換，不然指示會反過來害人選錯 */

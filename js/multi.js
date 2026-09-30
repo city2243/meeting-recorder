@@ -10,6 +10,7 @@ import * as S from './storage.js';
 import * as M from './media.js';
 import * as C from './checks.js';
 import { Slot } from './slot.js';
+import * as L from './license.js';
 
 const $ = (id) => document.getElementById(id);
 const el = {
@@ -22,7 +23,7 @@ const el = {
   qualitySelect: $('qualitySelect'), expectMinutes: $('expectMinutes'),
   optVideo: $('optVideo'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
   budget: $('budget'),
-  slotsCard: $('slotsCard'), slotList: $('slotList'), btnAddSlot: $('btnAddSlot'),
+  slotsCard: $('slotsCard'), slotList: $('slotList'), btnAddSlot: $('btnAddSlot'), planNote: $('planNote'),
   slotHint: $('slotHint'), btnStartAll: $('btnStartAll'),
   doneCard: $('doneCard'), doneList: $('doneList'), btnAgain: $('btnAgain'),
   logBox: $('logBox'),
@@ -197,7 +198,24 @@ async function useSavedDir() {
 /* ================================================================
    場次卡片
    ================================================================ */
+function slotLimit() { return (st.plan && st.plan.slots) || 1; }
+
+function applyPlan() {
+  const max = slotLimit();
+  const n = st.slots.length;
+  el.btnAddSlot.disabled = n >= max;
+  el.btnAddSlot.textContent = n >= max ? `已達 ${max} 場上限` : '＋ 加一場';
+  const pro = st.plan && st.plan.plan !== 'free';
+  el.planNote.hidden = pro && max >= 4;
+  el.planNote.innerHTML = pro
+    ? `你的方案可同時錄 ${max} 場。`
+    : `免費版一次只能錄 <b>1 場</b>。要同時錄多場請<a class="link" href="./pricing.html">升級 Pro</a>（同時 4 場）。`;
+  // 超過上限的槽直接移掉，避免降級後還留著
+  while (st.slots.length > max) removeSlot(st.slots[st.slots.length - 1]);
+}
+
 function addSlot() {
+  if (st.slots.length >= slotLimit()) { applyPlan(); return; }
   const p = prefs();
   const id = st.nextId++;
   const slot = new Slot(id, {
@@ -216,6 +234,7 @@ function addSlot() {
   buildSlotCard(slot);
   refreshStartButton();
   renderBudget();
+  applyPlan();
 }
 
 function buildSlotCard(slot) {
@@ -268,6 +287,7 @@ function removeSlot(slot) {
   st.slots = st.slots.filter((s) => s !== slot);
   slot.ui.card.remove();
   refreshStartButton();
+  if (el.btnAddSlot) applyPlan();
   renderBudget();
   renderAlerts();
 }
@@ -628,8 +648,11 @@ async function init() {
     if (st.phase === 'recording') { e.preventDefault(); e.returnValue = '還在錄影中，離開會中斷。'; return e.returnValue; }
   });
 
+  st.plan = await L.getPlan();
+  L.mountLicenseBox(document.querySelector('main'), (ent) => { st.plan = ent; applyPlan(); });
   addSlot();
-  addSlot();          // 多場版預設就給兩格
+  if (slotLimit() >= 2) addSlot();   // 有額度就預設給兩格
+  applyPlan();
   await renderBudget();
   setStatus('尚未開始', '');
   log('info', '多場模式就緒。每一場請選一個瀏覽器分頁，並記得勾「分享分頁音訊」。');
