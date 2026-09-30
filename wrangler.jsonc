@@ -8,6 +8,9 @@
   "d1_databases": [
     { "binding": "DB", "database_name": "meeting-recorder", "database_id": "79dd800a-cb6a-4cfd-9f9c-db5717a3e563" }
   ],
+  // 每 30 分鐘主動向綠界補查：綠界第二期起的扣款通知「每期只送一次」，
+  // 而且它的伺服器通知可能被 Cloudflare 的瀏覽器完整性檢查擋掉，不能只靠它。
+  "triggers": { "crons": ["*/30 * * * *"] },
   "vars": {
     "ECPAY_ENV": "stage",
     "ECPAY_MERCHANT_ID": "3002607"

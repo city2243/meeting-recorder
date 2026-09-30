@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的訂閱 · 會議錄影守門員</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="rail">
+    <div class="rail-id">
+      <span class="rec-dot"></span>
+      <span class="rail-name">會議錄影守門員</span>
+    </div>
+    <div class="modeswitch" role="group" aria-label="錄製模式">
+      <a class="ms" href="./"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="13" rx="2.2"/><circle cx="12" cy="11.5" r="3"/></svg><span>錄一場</span></a>
+      <a class="ms" href="./multi.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="8" height="6.6" rx="1.5"/><rect x="13" y="4.5" width="8" height="6.6" rx="1.5"/><rect x="3" y="12.9" width="8" height="6.6" rx="1.5"/><rect x="13" y="12.9" width="8" height="6.6" rx="1.5"/></svg><span>同時錄多場</span></a>
+    </div>
+    <div class="rail-right"><a class="link" href="./pricing.html">方案</a></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="panel-head">
+      <span class="eyebrow">我的訂閱</span>
+      <h2>查詢、取消、管理裝置</h2>
+    </div>
+    <p class="note">輸入授權碼和付款時填的 Email。兩個都對才會顯示資料 —— 只有授權碼的人（例如你借給別人用）不能幫你取消。</p>
+    <form id="lookup" class="grid-2">
+      <div class="field">
+        <label for="key">授權碼</label>
+        <input type="text" id="key" placeholder="MR-XXXX-XXXX-XXXX" maxlength="17" spellcheck="false" autocomplete="off" class="mono-in">
+      </div>
+      <div class="field">
+        <label for="email">付款時填的 Email</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email" class="mono-in">
+      </div>
+      <div class="row"><button type="submit" class="btn accent" id="go">查詢</button><span class="note" id="msg"></span></div>
+    </form>
+  </section>
+
+  <section class="panel" id="result" hidden>
+    <div class="panel-head">
+      <span class="eyebrow">狀態</span>
+      <h2 id="rTitle"></h2>
+    </div>
+    <div class="acct-grid">
+      <div><span>方案</span><b id="rPlan"></b></div>
+      <div><span>狀態</span><b id="rStatus"></b></div>
+      <div><span>可以使用到</span><b id="rUntil"></b></div>
+      <div><span>下次扣款</span><b id="rNext"></b></div>
+      <div><span>已成功扣款</span><b id="rTimes"></b></div>
+    </div>
+    <p class="note" id="rReason"></p>
+
+    <h3 class="howto-h">付款紀錄</h3>
+    <div class="tbl-wrap"><table class="acct-table"><thead><tr><th>時間</th><th>項目</th><th>金額</th><th>結果</th></tr></thead><tbody id="rPays"></tbody></table></div>
+
+    <h3 class="howto-h">已啟用的裝置</h3>
+    <p class="note" id="rDevNote"></p>
+    <div class="tbl-wrap"><table class="acct-table"><thead><tr><th>裝置</th><th>最後使用</th><th>佔名額</th></tr></thead><tbody id="rDevs"></tbody></table></div>
+
+    <div class="row">
+      <button type="button" class="btn" id="resetDev">清空所有裝置</button>
+      <button type="button" class="btn danger-ghost" id="cancel">取消訂閱</button>
+    </div>
+    <p class="note" id="actMsg"></p>
+  </section>
+
+  <footer class="foot">
+    <p><a class="link" href="./terms.html">服務條款與隱私權政策</a></p>
+  </footer>
+</main>
+
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const fmt = (ms) => ms ? new Date(ms).toLocaleString('zh-TW', { hour12: false }) : '—';
+const fmtD = (ms) => ms ? new Date(ms).toLocaleDateString('zh-TW') : '—';
+const kindName = { first: '首期', 'first-sync': '首期（補查）', period: '每月續扣', 'period-sync': '每月續扣（補查）', cancel: '取消訂閱' };
+let creds = null;
+
+try { $('key').value = localStorage.getItem('meetingRecorder.licenseKey') || ''; } catch (e) {}
+
+async function post(path, body) {
+  const r = await fetch(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || ('發生錯誤（' + r.status + '）'));
+  return j;
+}
+
+function statusPill(a) {
+  if (a.plan === 'owner') return '<span class="pill ok">站主授權</span>';
+  if (a.status === 'active' && a.usable) return '<span class="pill ok">付費中</span>';
+  if (a.status === 'cancelled' && a.usable) return '<span class="pill warn">已取消，期滿停用</span>';
+  if (a.status === 'pending') return '<span class="pill warn">付款確認中</span>';
+  return '<span class="pill bad">已停用</span>';
+}
+
+function render(a) {
+  $('result').hidden = false;
+  $('rTitle').textContent = a.key + '（' + a.email + '）';
+  $('rPlan').textContent = a.planName + (a.amount ? `｜NT$${a.amount}/月` : '');
+  $('rStatus').innerHTML = statusPill(a);
+  $('rUntil').textContent = a.plan === 'owner' ? '不會過期' : fmtD(a.expiresAt);
+  $('rNext').textContent = a.nextCharge ? fmtD(a.nextCharge) + ` NT$${a.amount}` : (a.status === 'cancelled' ? '不會再扣款' : '—');
+  $('rTimes').textContent = (a.successTimes || 0) + ' 期';
+  $('rReason').textContent = a.usable ? '' : (a.reason || '');
+
+  $('rPays').innerHTML = a.payments.length ? a.payments.map((p) =>
+    `<tr><td>${fmt(p.at)}</td><td>${kindName[p.kind] || p.kind}</td><td>${p.amount ? 'NT$' + p.amount : '—'}</td>` +
+    `<td>${p.ok ? '<span class="pill ok">成功</span>' : '<span class="pill bad">未成功</span>'}</td></tr>`).join('')
+    : '<tr><td colspan="4">還沒有付款紀錄</td></tr>';
+
+  const counted = a.devices.filter((d) => d.counted).length;
+  $('rDevNote').textContent = `最近 30 天使用過的裝置才佔名額，目前 ${counted} / ${a.maxDevices} 台。`;
+  $('rDevs').innerHTML = a.devices.length ? a.devices.map((d) =>
+    `<tr><td class="mono">${d.id}</td><td>${fmt(d.lastSeen)}</td><td>${d.counted ? '是' : '否（超過 30 天）'}</td></tr>`).join('')
+    : '<tr><td colspan="3">沒有已啟用的裝置</td></tr>';
+
+  $('cancel').hidden = a.plan === 'owner' || a.status === 'cancelled' || !['active', 'pending'].includes(a.status);
+}
+
+$('lookup').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  creds = { key: $('key').value.trim(), email: $('email').value.trim() };
+  $('go').disabled = true; $('msg').textContent = '查詢中…'; $('actMsg').textContent = '';
+  try { render(await post('/api/account', creds)); $('msg').textContent = ''; }
+  catch (err) { $('msg').textContent = err.message; $('result').hidden = true; }
+  $('go').disabled = false;
+});
+
+$('cancel').addEventListener('click', async () => {
+  if (!creds) return;
+  if (!confirm('確定要取消訂閱？\n\n系統會通知綠界停止之後的扣款。已經付款的這一期可以繼續用到期滿，不會按比例退款。')) return;
+  $('cancel').disabled = true; $('actMsg').textContent = '正在通知綠界…';
+  try {
+    const r = await post('/api/account/cancel', creds);
+    $('actMsg').textContent = r.usableUntil
+      ? `已取消。綠界不會再扣款，Pro 功能可以用到 ${fmtD(r.usableUntil)}。`
+      : '已取消。';
+    render(await post('/api/account', creds));
+  } catch (err) { $('actMsg').textContent = err.message; }
+  $('cancel').disabled = false;
+});
+
+$('resetDev').addEventListener('click', async () => {
+  if (!creds) return;
+  if (!confirm('清空所有已啟用的裝置？之後每台電腦重新打開工具時會自動重新啟用。')) return;
+  try {
+    const r = await post('/api/account/reset-devices', creds);
+    $('actMsg').textContent = `已清空 ${r.removed} 台裝置。`;
+    try { localStorage.removeItem('meetingRecorder.entitlement'); } catch (e) {}
+    render(await post('/api/account', creds));
+  } catch (err) { $('actMsg').textContent = err.message; }
+});
+</script>
+</body>
+</html>

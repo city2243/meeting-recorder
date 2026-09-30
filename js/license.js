@@ -50,6 +50,14 @@ function readCache() {
   return null;
 }
 
+/** 不管 12 小時 TTL，拿最後一次的結果（離線時用） */
+function readCacheAny() {
+  try {
+    const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    return c ? c.ent : null;
+  } catch (e) { return null; }
+}
+
 function writeCache(ent) {
   try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), ent })); } catch (e) {}
 }
@@ -72,8 +80,10 @@ export async function getPlan(force) {
     writeCache(ent);
     return ent;
   } catch (e) {
-    // 連不上就沿用上次的結果，不要因為網路斷掉把付費使用者降級
-    const c = readCache();
+    // 連不上伺服器時，只要上次確認過的授權還沒到期就照用 ——
+    // 不能因為網路斷掉、或快取超過 12 小時，就把付了錢的人降級
+    const c = readCacheAny();
+    if (c && c.plan !== 'free' && c.expiresAt && c.expiresAt > Date.now()) return c;
     return c || { ...FREE, reason: '連不上授權伺服器' };
   }
 }
@@ -109,6 +119,7 @@ export function mountLicenseBox(container, onChange) {
       <button type="button" class="btn accent" id="licApply">啟用</button>
       <button type="button" class="btn ghost sm" id="licForget" hidden>移除授權碼</button>
       <a class="btn" href="./pricing.html">看方案與升級</a>
+      <a class="btn ghost" href="./account.html">我的訂閱</a>
     </div>
     <p class="note" id="licMsg"></p>`;
   container.appendChild(box);
@@ -121,8 +132,10 @@ export function mountLicenseBox(container, onChange) {
     const pro = ent.plan !== 'free';
     title.textContent = ent.plan === 'owner' ? '目前：站主授權' : pro ? '目前：Pro' : '目前：免費版';
     desc.textContent = pro
-      ? `同時最多 ${ent.slots} 場、可用無人看管保護` +
-        (ent.expiresAt ? `。有效至 ${new Date(ent.expiresAt).toLocaleDateString('zh-TW')}` : '')
+      ? (ent.plan === 'owner'
+          ? '不限場數、不限裝置、不會過期。'
+          : `同時最多 ${ent.slots} 場、可用無人看管保護` +
+            (ent.expiresAt ? `。${ent.cancelled ? '已取消訂閱，可用到' : '有效至'} ${new Date(ent.expiresAt).toLocaleDateString('zh-TW')}` : ''))
       : '同時 1 場、無人看管保護未開放。升級後可同時錄 4 場。';
     input.value = pro ? savedKey() : '';
     input.hidden = pro;

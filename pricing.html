@@ -60,11 +60,25 @@
       </ul>
 
       <form class="buy" id="buyForm">
-        <label for="email">Email（授權碼會顯示在付款完成頁，也請留著這個信箱供聯絡）</label>
+        <label for="email">Email（取消訂閱、查詢訂閱狀態時要用，請填你收得到信的信箱）</label>
         <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email">
+        <label class="check consent" for="consent">
+          <input type="checkbox" id="consent" required>
+          <span>我已閱讀並同意<a class="link" href="./terms.html" target="_blank">服務條款與退款政策</a>。
+            我了解本服務為線上數位服務，<b>付款後立即開通</b>，依消費者保護法及
+            《通訊交易解除權合理例外情事適用準則》，<b>開通後不適用七日無條件解除權</b>。</span>
+        </label>
         <button type="submit" class="btn accent lg" id="buyBtn">用信用卡訂閱</button>
         <p class="note" id="buyMsg"></p>
       </form>
+
+      <div class="handoff" id="handoff" hidden>
+        <b>先記下你的授權碼</b>
+        <p class="k" id="handoffKey"></p>
+        <p class="note">已自動存進這個瀏覽器。付款完成後就算直接關掉分頁，下次打開工具也會自動生效。
+          換電腦時要用它，請另外抄下來。</p>
+        <button type="button" class="btn accent lg" id="goPay">我記下了，前往綠界付款</button>
+      </div>
     </section>
   </div>
 
@@ -76,8 +90,8 @@
     <div class="pitfalls">
       <div><b>付費項目是「方便」，不是「不可破解的保護」</b><span>錄影完全在你的瀏覽器裡發生，
         方案差異是由網頁上的程式判斷的。懂技術的人改幾行就能繞過去。我們沒有把這件事包裝成別的樣子。</span></div>
-      <div><b>目前是測試金流環境</b><span>本站目前接的是綠界測試環境，不會真的扣款，
-        也不會產生有效的訂閱。正式開賣前會換成正式商店代號並公告。</span></div>
+      <div><b>取消不用寫信</b><span>到「<a class="link" href="./account.html">我的訂閱</a>」輸入授權碼和 Email，
+        按一下就會直接通知綠界停止後續扣款。已付的這一期可以用到期滿。</span></div>
       <div><b>錄製他人會議請先取得同意</b><span>各地法規不同，使用前請自行確認。
         本工具不會替你取得任何人的同意。</span></div>
       <div><b>iPhone 上錄不到會議聲音</b><span>iOS 不讓任何 App 取得通話音訊，這是系統限制。
@@ -95,53 +109,91 @@
         而且同時錄很多場的真實負載我還沒用真實會議驗證過，超過 4 場請自行評估。</span></div>
       <div><b>錄的檔案會上傳嗎？</b><span>不會。整個工具是純前端，檔案只寫進你自己選的資料夾。
         伺服器只處理授權碼與付款，碰不到你的錄影內容。</span></div>
-      <div><b>怎麼取消訂閱？</b><span>定期定額由綠界代為扣款，取消請來信，我們會停止後續扣款。
-        已扣款的當期可以用到結束。</span></div>
-      <div><b>換電腦怎麼辦？</b><span>在新電腦貼上同一組授權碼即可，最多 3 台。</span></div>
+      <div><b>怎麼取消訂閱？</b><span>到「<a class="link" href="./account.html">我的訂閱</a>」自己按取消，
+        系統會直接通知綠界停止扣款。已付的這一期照樣可以用到結束，不會按比例退款（詳見服務條款）。</span></div>
+      <div><b>換電腦怎麼辦？</b><span>在新電腦貼上同一組授權碼即可。同時最多 3 台；
+        30 天沒用的裝置會自動讓出名額，也可以在「我的訂閱」自己清空。</span></div>
+      <div><b>付了錢但沒解鎖？</b><span>信用卡通常幾秒內確認；系統也會每 30 分鐘主動向綠界補查。
+        超過一小時還沒解鎖，請到「我的訂閱」查看狀態。</span></div>
     </div>
   </section>
 
   <footer class="foot">
     <p>付款由綠界科技 ECPay 處理，本站不會接觸到你的信用卡資料。</p>
+    <p><a class="link" href="./account.html">我的訂閱（查詢／取消）</a>　·　<a class="link" href="./terms.html">服務條款與隱私權政策</a></p>
   </footer>
 </main>
 
 <script type="module">
 const PAID_HOST = 'meeting-recorder.etfswing-site.workers.dev';
-const form = document.getElementById('buyForm');
-const msg = document.getElementById('buyMsg');
-const btn = document.getElementById('buyBtn');
+const KEY_KEY = 'meetingRecorder.licenseKey';
+const $ = (id) => document.getElementById(id);
+const form = $('buyForm'), msg = $('buyMsg'), btn = $('buyBtn');
+
+function closeCheckout(html) {
+  btn.disabled = true;
+  [...form.querySelectorAll('input')].forEach((i) => i.disabled = true);
+  msg.innerHTML = html;
+}
+
+// 使用者在綠界頁按了「返回」
+if (new URLSearchParams(location.search).get('back')) {
+  msg.textContent = '你從綠界返回了，這次沒有扣款。想訂閱的話再按一次就好。';
+}
+
+// 測試通行碼：只給站主做真實流程測試用。正式上線（綠界正式帳號）後不需要。
+const testToken = new URLSearchParams(location.search).get('test') || '';
 
 if (location.host !== PAID_HOST) {
-  // 這份是自用／鏡像站，沒有後端可以收單
-  document.getElementById('buyBtn').disabled = true;
-  document.getElementById('buyMsg').innerHTML =
-    '這個網址是自用版，沒有接金流。要訂閱請到 <a class="link" href="https://' + PAID_HOST + '/pricing.html">正式站</a>。';
+  closeCheckout('這個網址是自用版，沒有接金流。要訂閱請到 <a class="link" href="https://' + PAID_HOST + '/pricing.html">正式站</a>。');
+} else {
+  fetch('/api/health', { cache: 'no-store' }).then((r) => r.json()).then((h) => {
+    if (!h.checkoutOpen && !testToken) closeCheckout('<b>付費方案即將開放。</b>目前可以免費使用單場錄影的全部功能。');
+  }).catch(() => {});
 }
+
+let pending = null;
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById('email').value.trim();
+  const email = $('email').value.trim();
+  if (!$('consent').checked) { msg.textContent = '請先勾選同意服務條款。'; return; }
   btn.disabled = true;
   msg.textContent = '建立訂單中…';
   try {
+    const headers = { 'content-type': 'application/json' };
+    if (testToken) headers['x-test-token'] = testToken;
     const r = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ email, plan: 'pro' }),
+      method: 'POST', headers, body: JSON.stringify({ email, plan: 'pro', consent: true }),
     });
-    if (!r.ok) {
-      const j = await r.json().catch(() => ({}));
-      throw new Error(j.error || ('建立訂單失敗（' + r.status + '）'));
-    }
-    // 後端回傳一張自動送出的綠界表單，直接換掉整頁
-    document.open();
-    document.write(await r.text());
-    document.close();
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || ('建立訂單失敗（' + r.status + '）'));
+
+    // 先把授權碼存進瀏覽器並顯示 —— 付完款直接關分頁也不會弄丟
+    try { localStorage.setItem(KEY_KEY, j.key); localStorage.removeItem('meetingRecorder.entitlement'); } catch (err) {}
+    pending = j;
+    $('handoffKey').textContent = j.key;
+    form.hidden = true;
+    $('handoff').hidden = false;
+    $('goPay').focus();
   } catch (err) {
     btn.disabled = false;
     msg.textContent = err.message;
   }
+});
+
+$('goPay').addEventListener('click', () => {
+  if (!pending) return;
+  const f = document.createElement('form');
+  f.method = 'POST';
+  f.action = pending.action;
+  for (const [k, v] of Object.entries(pending.params)) {
+    const i = document.createElement('input');
+    i.type = 'hidden'; i.name = k; i.value = String(v);
+    f.appendChild(i);
+  }
+  document.body.appendChild(f);
+  f.submit();
 });
 </script>
 </body>

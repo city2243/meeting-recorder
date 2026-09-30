@@ -10,3 +10,4 @@ __pycache__/
 dist/
 .wrangler/
 .owner_key.txt
+.test_token.txt
