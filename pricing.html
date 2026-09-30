@@ -103,9 +103,17 @@
 </main>
 
 <script type="module">
+const PAID_HOST = 'meeting-recorder.etfswing-site.workers.dev';
 const form = document.getElementById('buyForm');
 const msg = document.getElementById('buyMsg');
 const btn = document.getElementById('buyBtn');
+
+if (location.host !== PAID_HOST) {
+  // 這份是自用／鏡像站，沒有後端可以收單
+  document.getElementById('buyBtn').disabled = true;
+  document.getElementById('buyMsg').innerHTML =
+    '這個網址是自用版，沒有接金流。要訂閱請到 <a class="link" href="https://' + PAID_HOST + '/pricing.html">正式站</a>。';
+}
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();

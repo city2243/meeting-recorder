@@ -15,6 +15,15 @@ const TTL = 12 * 3600 * 1000;   // 12 小時內不重打 API，離線也還能�
 
 export const FREE = { plan: 'free', slots: 1, unattended: false };
 
+/**
+ * 只有商用站才套方案限制。本機、GitHub Pages 那份是使用者自己要用的，
+ * 不擋任何東西、也不顯示授權碼欄位。
+ */
+const PAID_HOSTS = ['meeting-recorder.etfswing-site.workers.dev'];
+const OWNER = { plan: 'owner', slots: 99, unattended: true };
+
+export function isGated() { return PAID_HOSTS.includes(location.host); }
+
 function deviceId() {
   let d = null;
   try { d = localStorage.getItem(DEVICE_KEY); } catch (e) {}
@@ -50,6 +59,7 @@ function writeCache(ent) {
  * @param force 略過快取，直接問伺服器（使用者剛貼上授權碼時用）
  */
 export async function getPlan(force) {
+  if (!isGated()) return { ...OWNER };
   const key = savedKey();
   if (!key) return { ...FREE };
   if (!force) {
@@ -85,6 +95,7 @@ export async function applyKey(raw) {
 
 /** 在頁面底部掛一塊「方案 / 我有授權碼」的區塊，兩個頁面共用 */
 export function mountLicenseBox(container, onChange) {
+  if (!isGated()) return null;   // 自用版不顯示方案區塊
   const box = document.createElement('section');
   box.className = 'panel license-box';
   box.innerHTML = `
