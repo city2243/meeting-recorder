@@ -200,22 +200,29 @@ async function useSavedDir() {
    ================================================================ */
 function slotLimit() { return (st.plan && st.plan.slots) || 1; }
 
+function activeSlots() { return st.slots.filter((x) => x.state !== 'done'); }
+
 function applyPlan() {
   const max = slotLimit();
-  const n = st.slots.length;
+  const n = activeSlots().length;
   el.btnAddSlot.disabled = n >= max;
-  el.btnAddSlot.textContent = n >= max ? `已達 ${max} 場上限` : '＋ 加一場';
+  el.btnAddSlot.textContent = n >= max ? `已達同時 ${max} 場上限` : '＋ 加一場';
   const pro = st.plan && st.plan.plan !== 'free';
   el.planNote.hidden = pro && max >= 4;
   el.planNote.innerHTML = pro
     ? `你的方案可同時錄 ${max} 場。`
     : `免費版一次只能錄 <b>1 場</b>。要同時錄多場請<a class="link" href="./pricing.html">升級 Pro</a>（同時 4 場）。`;
-  // 超過上限的槽直接移掉，避免降級後還留著
-  while (st.slots.length > max) removeSlot(st.slots[st.slots.length - 1]);
+  // 降級時移掉多出來、而且沒在錄的格子（正在錄的絕不動）
+  let extra = activeSlots().length - max;
+  for (let i = st.slots.length - 1; i >= 0 && extra > 0; i--) {
+    const x = st.slots[i];
+    if (x.state === 'done' || x.state === 'recording' || x.state === 'finishing') continue;
+    removeSlot(x); extra--;
+  }
 }
 
 function addSlot() {
-  if (st.slots.length >= slotLimit()) { applyPlan(); return; }
+  if (activeSlots().length >= slotLimit()) { applyPlan(); return; }
   const p = prefs();
   const id = st.nextId++;
   const slot = new Slot(id, {
@@ -247,7 +254,10 @@ function buildSlotCard(slot) {
       <button type="button" class="btn sm ghost sc-remove">移除</button>
     </div>
     <div class="row sc-actions">
-      <button type="button" class="btn accent sm sc-pick">選擇這場的分頁</button>
+      <button type="button" class="btn sm sc-pick">選擇這場的分頁</button>
+      <button type="button" class="btn accent sc-start" hidden>開始錄這一場</button>
+      <button type="button" class="btn stop sc-stop" hidden>停止這一場</button>
+      <span class="sc-timer mono" hidden>00:00</span>
     </div>
     <div class="checks sc-checks"></div>
     <div class="sc-gauges" hidden>
@@ -258,7 +268,8 @@ function buildSlotCard(slot) {
         <div class="meter"><div class="meter-fill sc-meter"></div><div class="meter-zone"></div></div>
       </div>
       <div class="sc-g"><span class="sc-gl">已安全落地</span><span class="sc-gv mono sc-bytes">0 KB</span></div>
-    </div>`;
+    </div>
+    <div class="sc-result" hidden></div>`;
   el.slotList.appendChild(card);
 
   const u = slot.ui;
@@ -273,16 +284,22 @@ function buildSlotCard(slot) {
   u.db = card.querySelector('.sc-db');
   u.meter = card.querySelector('.sc-meter');
   u.bytes = card.querySelector('.sc-bytes');
+  u.start = card.querySelector('.sc-start');
+  u.stop = card.querySelector('.sc-stop');
+  u.timer = card.querySelector('.sc-timer');
+  u.result = card.querySelector('.sc-result');
 
   u.name.value = slot.name.startsWith('會議 ') ? '' : slot.name;
   u.name.oninput = () => { slot.name = u.name.value.trim() || `會議 ${slot.id}`; };
   u.remove.onclick = () => removeSlot(slot);
   u.pick.onclick = () => pickSource(slot);
+  u.start.onclick = () => startSlot(slot);
+  u.stop.onclick = () => stopSlot(slot);
   renderSlot(slot);
 }
 
 function removeSlot(slot) {
-  if (slot.state === 'recording') { log('warn', `${slot.name} 正在錄，不能移除。`); return; }
+  if (slot.state === 'recording' || slot.state === 'finishing') { log('warn', `${slot.name} 正在錄或收檔，不能移除。`); return; }
   slot.release();
   st.slots = st.slots.filter((s) => s !== slot);
   slot.ui.card.remove();
@@ -332,59 +349,125 @@ function renderSlot(slot) {
   if (!u || !u.card) return;
   const labels = {
     empty: '尚未選擇來源', acquiring: '等待你選擇分頁…', checking: '檢查中／未通過',
-    ready: '準備好了', recording: '錄製中', finishing: '收檔中…', done: '已完成',
+    ready: '準備好了', recording: '錄製中', finishing: '收檔與驗證中…', done: '已完成',
   };
+  const busy = slot.state === 'recording' || slot.state === 'finishing';
   u.state.textContent = labels[slot.state] || slot.state;
   u.card.dataset.state = slot.state;
+
   u.pick.textContent = slot.stream ? '重新選擇' : '選擇這場的分頁';
-  u.pick.disabled = slot.state === 'recording' || slot.state === 'finishing';
-  u.remove.disabled = slot.state === 'recording' || slot.state === 'finishing';
-  u.name.disabled = slot.state === 'recording' || slot.state === 'finishing';
-  u.gauges.hidden = !(slot.state === 'recording' || slot.state === 'finishing' || slot.state === 'done');
+  u.pick.hidden = busy || slot.state === 'done';
+  u.pick.classList.toggle('accent', slot.state === 'empty');   // 只切換，不能覆寫整個 class（會把 sc-pick 洗掉）
+  u.start.hidden = slot.state !== 'ready';
+  u.stop.hidden = slot.state !== 'recording';
+  u.stop.disabled = false;
+  u.timer.hidden = !busy;
+  u.remove.disabled = busy;
+  u.remove.textContent = slot.state === 'done' ? '清除這一格' : '移除';
+  u.name.disabled = busy || slot.state === 'done';
+  u.checks.hidden = busy || slot.state === 'done';
+  u.gauges.hidden = !busy;
+  u.result.hidden = slot.state !== 'done' && slot.state !== 'finishing';
 }
 
 function refreshStartButton() {
-  const ready = st.slots.filter((s) => s.state === 'ready').length;
-  const bad = st.slots.filter((s) => s.stream && s.state === 'checking').length;
-  el.btnStartAll.disabled = ready === 0 || st.phase !== 'setup';
-  el.btnStartAll.textContent = ready ? `開始錄製 ${ready} 場` : '開始錄製全部';
+  const ready = st.slots.filter((x) => x.state === 'ready').length;
+  const rec = recordingCount();
+  const bad = st.slots.filter((x) => x.stream && x.state === 'checking').length;
+  el.btnStartAll.disabled = ready === 0;
+  el.btnStartAll.textContent = ready > 1 ? `準備好的 ${ready} 場一起開始` : '準備好的一起開始';
+  el.btnStartAll.hidden = ready < 2;   // 只有一場準備好時，用那一格自己的按鈕就好
   el.slotHint.textContent = st.slots.length === 0
     ? '先加一場，然後選它要錄哪個分頁。'
-    : bad ? `有 ${bad} 場沒通過檢查，過不了的不會開始錄。`
-    : `${ready} 場準備好了。`;
+    : bad ? `有 ${bad} 場沒通過檢查，要先修好才能開始。`
+    : rec ? `${rec} 場錄製中。每一格可以各自停止；也可以隨時再加一場、各自開始。`
+    : ready ? '每一格準備好就可以各自按「開始錄這一場」。'
+    : '替每一格選好分頁，檢查通過就能開始。';
+  renderRail();
 }
 
 /* ================================================================
-   錄製
+   錄製（每一格各自開始、各自停止）
    ================================================================ */
-async function startAll() {
-  const ready = st.slots.filter((s) => s.state === 'ready');
-  if (!ready.length) return;
+function recordingCount() { return st.slots.filter((x) => x.state === 'recording').length; }
+function anyBusy() { return st.slots.some((x) => x.state === 'recording' || x.state === 'finishing'); }
 
+/** 頂欄：有任何一場在錄，就顯示「幾場錄製中」、標記鍵與全部停止 */
+function renderRail() {
+  const n = recordingCount();
+  el.timer.hidden = true;
+  el.btnStopAll.hidden = n === 0;
+  el.btnStopAll.disabled = false;
+  el.btnStopAll.textContent = n > 1 ? `全部停止（${n} 場）` : '全部停止';
+  el.btnMark.hidden = n === 0;
+  if (n) setStatus(`錄製中 · ${n} 場`, 'rec');
+  else if (st.slots.some((x) => x.state === 'finishing')) setStatus('收檔中', 'warn');
+  else if (st.slots.some((x) => x.state === 'done')) setStatus('已完成的場次在下方', 'ok');
+  else setStatus('尚未開始', '');
+}
+
+async function startSlot(slot) {
+  if (slot.state !== 'ready') return;
+  if (recordingCount() >= slotLimit()) {
+    log('warn', `你的方案同時最多錄 ${slotLimit()} 場。`);
+    return;
+  }
   try {
     if (el.optNotify.checked && window.Notification && Notification.permission === 'default') {
       await Notification.requestPermission();
     }
   } catch (e) {}
 
-  st.phase = 'recording';
-  st.sid = stamp();
-  st.startedAt = Date.now();
-  st.maxLagMs = 0;
-  el.btnStartAll.disabled = true;
-  el.timer.hidden = false;
-  el.btnStopAll.hidden = false;
-  el.btnMark.hidden = false;
-  el.setupCard.hidden = true;
-
-  log('info', `開始錄製 ${ready.length} 場（畫質 ${prefs().quality}${prefs().optVideo ? '' : '，只錄音訊'}）`);
-  for (const s of ready) {
-    try { await s.start(st.sid); } catch (e) { log('fail', `${s.name} 啟動失敗：${e.message}`); }
-    renderSlot(s);
+  // 每一場用自己開始的時間命名 —— 各場本來就不一定同時開始
+  slot.sid = stamp();
+  slot.ui.start.disabled = true;
+  try {
+    await slot.start(slot.sid);
+  } catch (e) {
+    log('fail', `${slot.name} 啟動失敗：${e.message}`);
+    slot.ui.start.disabled = false;
+    renderSlot(slot); refreshStartButton();
+    return;
   }
+  slot.ui.start.disabled = false;
+  renderSlot(slot);
+  ensureHeartbeat();
   await acquireWakeLock();
-  startHeartbeat();
-  setStatus(`錄製中 · ${ready.length} 場`, 'rec');
+  refreshStartButton();
+}
+
+async function startAllReady() {
+  const ready = st.slots.filter((x) => x.state === 'ready');
+  for (const x of ready) await startSlot(x);
+}
+
+async function stopSlot(slot) {
+  if (slot.state !== 'recording') return;
+  slot.ui.stop.disabled = true;
+  log('info', `停止「${slot.name}」`);
+  await slot.stop();                // → finishing → done（Slot 內部）
+  slot.state = 'finishing';         // 收檔完先維持「驗證中」，驗證完才算 done
+  renderSlot(slot);
+  refreshStartButton();
+  maybeStopHeartbeat();
+
+  slot.ui.result.hidden = false;
+  slot.ui.result.innerHTML = '<p class="note">正在驗證這一場的檔案…</p>';
+
+  const r = await slot.verify();
+  slot.release();                   // 放掉這個分頁的擷取，Chrome 的「正在共用」提示列也會消失
+  slot.state = 'done';
+  renderSlot(slot);
+  renderResult(slot, r);
+  await exportSlot(slot, r);
+  refreshStartButton();
+}
+
+async function stopAllRecording() {
+  const rec = st.slots.filter((x) => x.state === 'recording');
+  if (!rec.length) return;
+  el.btnStopAll.disabled = true;
+  await Promise.all(rec.map((x) => stopSlot(x)));
 }
 
 function heartbeat() {
@@ -394,24 +477,24 @@ function heartbeat() {
     if (lag > st.maxLagMs) st.maxLagMs = lag;
   }
   st.lastTickAt = now;
-
-  el.timer.textContent = fmtDur((now - st.startedAt) / 1000);
   const hidden = document.hidden;
 
-  for (const s of st.slots) {
-    const m = s.tick(now, hidden);
+  for (const x of st.slots) {
+    const m = x.tick(now, hidden);
     if (!m) continue;
-    const u = s.ui;
-    u.fps.textContent = s.withVideo ? m.fps.toFixed(1) + ' fps' : '未錄影像';
+    const u = x.ui;
+    u.timer.textContent = fmtDur(m.elapsed);
+    u.fps.textContent = x.withVideo ? m.fps.toFixed(1) + ' fps' : '未錄影像';
     const db = m.rms > 1e-5 ? 20 * Math.log10(m.rms) : -Infinity;
     u.db.innerHTML = (db === -Infinity ? '−∞' : db.toFixed(1).replace('-', '−')) + ' <i>dBFS</i>';
     u.meter.style.width = (db === -Infinity ? 0 : Math.max(0, Math.min(100, (db + 60) / 60 * 100))) + '%';
     u.bytes.textContent = fmtBytes(m.bytes);
-    u.card.dataset.trouble = s.worstAlert ? s.worstAlert.level : '';
+    u.card.dataset.trouble = x.worstAlert ? x.worstAlert.level : '';
   }
 }
 
-function startHeartbeat() {
+function ensureHeartbeat() {
+  if (st.ticker || st.fallbackTimer) return;
   st.lastTickAt = 0;
   try {
     st.ticker = new Worker('./js/ticker-worker.js');
@@ -426,85 +509,63 @@ function startHeartbeat() {
     st.fallbackTimer = setInterval(heartbeat, 1000);
   }
 }
-function stopHeartbeat() {
+function maybeStopHeartbeat() {
+  if (recordingCount() > 0) return;
   if (st.ticker) { try { st.ticker.postMessage({ type: 'stop' }); st.ticker.terminate(); } catch (e) {} st.ticker = null; }
   if (st.fallbackTimer) { clearInterval(st.fallbackTimer); st.fallbackTimer = null; }
+  releaseWakeLock();
 }
 
 function markAll() {
   const label = document.hidden ? '（此頁在背景）' : '（此頁在前景）';
-  for (const s of st.slots) s.mark(label);
+  for (const x of st.slots) x.mark(label);
   log('info', '已標記這一刻 ' + label);
 }
 
 /* ================================================================
-   停止 · 驗證 · 匯出
+   單場收檔：驗證 → 存檔 → 結果直接顯示在那一格
    ================================================================ */
-async function stopAll() {
-  if (st.phase !== 'recording') return;
-  st.phase = 'done';
-  el.btnStopAll.disabled = true;
-  el.btnStopAll.textContent = '收檔中…';
-  el.btnMark.hidden = true;
-  setStatus('收檔中', 'warn');
-  stopHeartbeat();
-  releaseWakeLock();
-  log('info', '停止全部錄製');
+async function exportSlot(slot, r) {
+  const base = `${slot.sid}_${slot.name.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40)}`;
+  const reportName = `${base}_實測報告.txt`;
+  const report = buildReport(slot, r);
+  const box = slot.ui.result.querySelector('.sc-files');
 
-  const recording = st.slots.filter((s) => s.state === 'recording');
-  for (const s of recording) { await s.stop(); renderSlot(s); }
-
-  el.slotsCard.hidden = true;
-  el.doneCard.hidden = false;
-  el.doneList.innerHTML = '<p class="note">正在驗證檔案…</p>';
-
-  const totalSec = (Date.now() - st.startedAt) / 1000;
-  const results = [];
-  for (const s of recording) {
-    const r = await s.verify();
-    results.push({ slot: s, ...r });
-    s.release();
-  }
-
-  el.doneList.innerHTML = '';
-  for (const r of results) renderResult(r);
-  renderStressBlock(results, totalSec);
-
-  // 匯出
-  const reportText = buildReport(results, totalSec);
   if (st.dirHandle) {
-    for (const r of results) {
-      if (r.vFile) await exportOne(r.slot.vTarget, r.vFile);
-      if (r.aFile) await exportOne(r.slot.aTarget, r.aFile);
-    }
+    const lines = [];
+    if (r.vFile) lines.push(await exportOne(slot.vTarget, r.vFile));
+    if (r.aFile) lines.push(await exportOne(slot.aTarget, r.aFile));
     try {
-      await S.writeTextToDir(st.dirHandle, `${st.sid}_多場實測報告.txt`, reportText);
-      log('ok', `已存檔：${st.sid}_多場實測報告.txt`);
-    } catch (e) { log('warn', '報告存檔失敗：' + e.message); }
+      await S.writeTextToDir(st.dirHandle, reportName, report);
+      lines.push(`✓ ${reportName}`);
+    } catch (e) { lines.push(`✕ ${reportName}：${e.message}`); }
+    box.innerHTML = `<p class="note">已存進「${escapeHtml(st.dirHandle.name)}」：</p>` +
+      lines.map((l) => `<div class="mono sc-fileline">${escapeHtml(l)}</div>`).join('');
   } else {
-    const box = document.createElement('div');
-    box.className = 'rows';
-    for (const r of results) {
-      if (r.vFile) box.appendChild(dlRow(r.slot.vTarget, r.vFile));
-      if (r.aFile) box.appendChild(dlRow(r.slot.aTarget, r.aFile));
-    }
+    box.innerHTML = '';
+    const rows = document.createElement('div');
+    rows.className = 'rows';
+    if (r.vFile) rows.appendChild(dlRow(slot.vTarget, r.vFile));
+    if (r.aFile) rows.appendChild(dlRow(slot.aTarget, r.aFile));
     const b = document.createElement('button');
     b.className = 'btn sm'; b.type = 'button'; b.textContent = '下載實測報告';
-    b.onclick = () => S.downloadText(`${st.sid}_多場實測報告.txt`, reportText);
-    box.appendChild(b);
-    el.doneList.appendChild(box);
+    b.onclick = () => S.downloadText(reportName, report);
+    rows.appendChild(b);
+    box.appendChild(rows);
   }
-
-  setStatus('完成', 'ok');
-  el.btnStopAll.hidden = true;
 }
 
 async function exportOne(name, file) {
   try {
     await S.exportFileToDir(st.dirHandle, file, name);
     log('ok', `已存檔：${name}（${fmtBytes(file.size)}）`);
-  } catch (e) { log('fail', `${name} 存檔失敗：${e.message}`); }
+    return `✓ ${name}（${fmtBytes(file.size)}）`;
+  } catch (e) {
+    log('fail', `${name} 存檔失敗：${e.message}`);
+    return `✕ ${name}：${e.message}`;
+  }
 }
+
 function dlRow(name, file) {
   const d = document.createElement('div');
   d.innerHTML = '<span class="fn"></span><span class="meta"></span>';
@@ -517,14 +578,19 @@ function dlRow(name, file) {
   return d;
 }
 
-function renderResult(r) {
-  const wrap = document.createElement('div');
-  wrap.className = 'result';
+function renderResult(slot, r) {
   const bad = !r.report.pass;
-  wrap.innerHTML = `<div class="verdict ${bad ? 'bad' : (r.report.warn ? 'warn' : 'ok')}"></div><div class="checks"></div>`;
-  wrap.querySelector('.verdict').textContent =
-    `${r.slot.name} — ${fmtDur(r.seconds)}` + (bad ? '：驗證發現問題' : (r.report.warn ? '：有提醒' : '：全部通過'));
-  const cbox = wrap.querySelector('.checks');
+  const s = r.stress;
+  const f = (o) => o ? `中位 ${o.median}／最低 ${o.min}` : '—';
+  slot.ui.result.hidden = false;
+  slot.ui.result.innerHTML = `
+    <div class="verdict ${bad ? 'bad' : (r.report.warn ? 'warn' : 'ok')}">
+      ${escapeHtml(fmtDur(r.seconds))}${bad ? '　驗證發現問題，請看下面哪一項沒過' : (r.report.warn ? '　有提醒' : '　全部通過')}
+    </div>
+    <div class="checks sc-verify"></div>
+    ${s ? `<div class="sc-stress mono">fps 目標 ${s.targetFps}｜前景 ${f(s.visible)}｜背景 ${f(s.hidden)}｜低於一半 ${s.lowFpsPct}%｜靜音 ${s.quietPct}%</div>` : ''}
+    <div class="sc-files"><p class="note">存檔中…</p></div>`;
+  const box = slot.ui.result.querySelector('.sc-verify');
   for (const it of r.report.items) {
     const row = document.createElement('div');
     row.className = 'ci ci-' + it.level;
@@ -532,88 +598,56 @@ function renderResult(r) {
     row.querySelector('.ci-mark').textContent = it.level === 'pass' ? '✓' : it.level === 'fail' ? '✕' : '!';
     row.querySelector('.ci-name').textContent = it.name;
     row.querySelector('.ci-detail').textContent = it.detail || '';
-    cbox.appendChild(row);
+    box.appendChild(row);
   }
-  el.doneList.appendChild(wrap);
 }
 
-/** 這一版的重點：把「多場到底撐不撐得住」量成數字攤出來 */
-function renderStressBlock(results, totalSec) {
-  const box = document.createElement('div');
-  box.className = 'stress';
-  const rows = [];
-  rows.push(`<div class="st-line"><span>同時錄製場數</span><b>${results.length} 場</b></div>`);
-  rows.push(`<div class="st-line"><span>總長度</span><b>${fmtDur(totalSec)}</b></div>`);
-  rows.push(`<div class="st-line"><span>監看心跳最大延遲</span><b>${st.maxLagMs} ms</b><span class="st-note">超過 1000 ms 代表主執行緒被拖住</span></div>`);
-  for (const r of results) {
-    const s = r.stress;
-    if (!s) continue;
-    const f = (o) => o ? `中位 ${o.median} / 最低 ${o.min}` : '沒有樣本';
-    rows.push(`<div class="st-block">
-      <div class="st-name">${escapeHtml(r.slot.name)}</div>
-      <div class="st-line"><span>目標 fps</span><b>${s.targetFps}</b></div>
-      <div class="st-line"><span>此頁在前景時</span><b>${f(s.visible)}</b></div>
-      <div class="st-line"><span>此頁在背景時</span><b>${f(s.hidden)}</b></div>
-      <div class="st-line"><span>fps 低於目標一半的秒數</span><b>${s.lowFpsSeconds} 秒（${s.lowFpsPct}%）</b></div>
-      <div class="st-line"><span>靜音秒數佔比</span><b>${s.quietPct}%</b></div>
-      <div class="st-line"><span>標記點</span><b>${s.marks.length ? s.marks.map((m) => m.t + 's').join('、') : '無'}</b></div>
-    </div>`);
-  }
-  box.innerHTML = `<h3>實測數據</h3>${rows.join('')}`;
-  el.doneList.appendChild(box);
-}
+function escapeHtml(x) { return String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
-function escapeHtml(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
-
-function buildReport(results, totalSec) {
+function buildReport(slot, r) {
+  const s = r.stress;
   const L = [];
-  L.push('多場同時錄製 實測報告');
+  L.push('多場錄製 單場實測報告');
   L.push('='.repeat(64));
-  L.push('場次編號：' + st.sid);
-  L.push('開始時間：' + new Date(st.startedAt).toLocaleString('zh-TW'));
-  L.push('總長度：' + fmtDur(totalSec));
-  L.push('同時錄製：' + results.length + ' 場');
-  L.push('畫質設定：' + prefs().quality + (prefs().optVideo ? '' : '（只錄音訊）'));
-  L.push('監看心跳最大延遲：' + st.maxLagMs + ' ms');
+  L.push('場次：' + slot.name);
+  L.push('場次編號：' + slot.sid);
+  L.push('開始時間：' + new Date(slot.startedAt).toLocaleString('zh-TW'));
+  L.push('長度：' + fmtDur(r.seconds));
+  L.push('來源：' + slot.surfaceLabel);
+  L.push('畫質設定：' + slot.quality + (slot.withVideo ? '' : '（只錄音訊）'));
+  L.push('整頁監看心跳最大延遲：' + st.maxLagMs + ' ms');
   L.push('');
-  for (const r of results) {
-    const s = r.stress;
-    L.push('-'.repeat(64));
-    L.push('【' + r.slot.name + '】');
-    L.push('  來源：' + r.slot.surfaceLabel);
-    L.push('  檔案：' + r.slot.vTarget + (r.vFile ? ` (${fmtBytes(r.vFile.size)})` : ' (未錄影像)'));
-    L.push('        ' + r.slot.aTarget + (r.aFile ? ` (${fmtBytes(r.aFile.size)})` : ''));
-    L.push('  驗證：');
-    for (const it of r.report.items) L.push(`    [${it.level.toUpperCase()}] ${it.name}：${it.detail}`);
-    if (s) {
-      L.push('  實測：');
-      L.push(`    目標 fps ${s.targetFps}`);
-      L.push(`    前景 fps ${s.visible ? `中位 ${s.visible.median} 最低 ${s.visible.min} p10 ${s.visible.p10}（${s.visible.n} 秒）` : '無樣本'}`);
-      L.push(`    背景 fps ${s.hidden ? `中位 ${s.hidden.median} 最低 ${s.hidden.min} p10 ${s.hidden.p10}（${s.hidden.n} 秒）` : '無樣本'}`);
-      L.push(`    fps 低於目標一半：${s.lowFpsSeconds} 秒（${s.lowFpsPct}%）`);
-      L.push(`    靜音秒數佔比：${s.quietPct}%`);
-      if (s.marks.length) L.push('    標記：' + s.marks.map((m) => `${m.t}s ${m.label}`).join('、'));
-    }
-    L.push('  事件紀錄：');
-    r.slot.log.forEach((x) => L.push('    ' + x));
+  L.push('檔案：' + slot.vTarget + (r.vFile ? ` (${fmtBytes(r.vFile.size)})` : ' (未錄影像)'));
+  L.push('      ' + slot.aTarget + (r.aFile ? ` (${fmtBytes(r.aFile.size)})` : ''));
+  L.push('');
+  L.push('驗證：');
+  for (const it of r.report.items) L.push(`  [${it.level.toUpperCase()}] ${it.name}：${it.detail}`);
+  if (s) {
     L.push('');
+    L.push('實測：');
+    L.push(`  目標 fps ${s.targetFps}`);
+    L.push(`  前景 fps ${s.visible ? `中位 ${s.visible.median} 最低 ${s.visible.min} p10 ${s.visible.p10}（${s.visible.n} 秒）` : '無樣本'}`);
+    L.push(`  背景 fps ${s.hidden ? `中位 ${s.hidden.median} 最低 ${s.hidden.min} p10 ${s.hidden.p10}（${s.hidden.n} 秒）` : '無樣本'}`);
+    L.push(`  fps 低於目標一半：${s.lowFpsSeconds} 秒（${s.lowFpsPct}%）`);
+    L.push(`  靜音秒數佔比：${s.quietPct}%`);
+    if (s.marks.length) L.push('  標記：' + s.marks.map((m) => `${m.t}s ${m.label}`).join('、'));
   }
-  L.push('-'.repeat(64));
-  L.push('全域事件紀錄');
-  globalLog.forEach((x) => L.push('  ' + x));
+  L.push('');
+  L.push('事件紀錄：');
+  slot.log.forEach((x) => L.push('  ' + x));
   return L.join('\r\n');
 }
 
 /* ---------------- 螢幕不休眠 ---------------- */
 let wakeLock = null;
 async function acquireWakeLock() {
-  if (!navigator.wakeLock) return;
+  if (!navigator.wakeLock || wakeLock) return;
   try { wakeLock = await navigator.wakeLock.request('screen'); }
   catch (e) { log('warn', '無法鎖定螢幕不休眠：' + e.message); }
 }
 function releaseWakeLock() { if (wakeLock) { try { wakeLock.release(); } catch (e) {} wakeLock = null; } }
 document.addEventListener('visibilitychange', async () => {
-  if (document.visibilityState === 'visible' && st.phase === 'recording' && !wakeLock) await acquireWakeLock();
+  if (document.visibilityState === 'visible' && recordingCount() > 0 && !wakeLock) await acquireWakeLock();
 });
 
 /* ================================================================
@@ -636,16 +670,16 @@ async function init() {
   el.btnPickDir.onclick = pickDir;
   el.btnUseSaved.onclick = useSavedDir;
   el.btnAddSlot.onclick = addSlot;
-  el.btnStartAll.onclick = startAll;
-  el.btnStopAll.onclick = stopAll;
+  el.btnStartAll.onclick = startAllReady;
+  el.btnStopAll.onclick = stopAllRecording;
   el.btnMark.onclick = markAll;
-  el.btnAgain.onclick = () => location.reload();
+  if (el.btnAgain) el.btnAgain.onclick = () => location.reload();
   el.alertMute.onclick = () => { st.muted = !st.muted; el.alertMute.textContent = st.muted ? '恢復提示音' : '靜音提示'; };
   [el.qualitySelect, el.expectMinutes, el.optVideo, el.optAlarm, el.optNotify].forEach((n) =>
     n.addEventListener('change', () => { savePrefs(); renderBudget(); }));
 
   window.addEventListener('beforeunload', (e) => {
-    if (st.phase === 'recording') { e.preventDefault(); e.returnValue = '還在錄影中，離開會中斷。'; return e.returnValue; }
+    if (anyBusy()) { e.preventDefault(); e.returnValue = '還有場次在錄影或收檔，離開會中斷。'; return e.returnValue; }
   });
 
   st.plan = await L.getPlan();
