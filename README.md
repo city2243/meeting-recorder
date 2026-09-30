@@ -9,7 +9,9 @@
 
 ## 網址
 
-**https://city2243.github.io/meeting-recorder/**
+**https://meeting-recorder.etfswing-site.workers.dev/**（Cloudflare，主要網址）
+
+備用：https://city2243.github.io/meeting-recorder/ （GitHub Pages，同一份內容）
 
 用 Chrome 或 Edge 打開就能用，不用安裝、不用登入。
 第一次打開時，頁面最上面會自己跑一輪環境檢查，告訴你這台電腦做得到什麼。
@@ -89,7 +91,7 @@
 1. **先把電腦的電源設定改掉。**設定 → 系統 → 電源與電池 → 螢幕與睡眠 →
    「插電時，讓裝置睡眠」設為**永不**。電腦睡著錄影就停了。（螢幕關掉沒關係。）
 2. 用 Chrome 開會議的**網頁版**加入會議，**麥克風關、鏡頭關**（用另一個名字入會，避免跟手機那邊撞）。
-3. 另開一個分頁到 https://city2243.github.io/meeting-recorder/
+3. 另開一個分頁到 https://meeting-recorder.etfswing-site.workers.dev/
 4. 「要錄什麼」選 **「瀏覽器裡的會議」**。
 5. 勾 **「錄的時候電腦不要把聲音放出來」** —— 不勾的話電腦喇叭會放出會議聲音，
    被手機麥克風收回去造成回授。
@@ -117,7 +119,7 @@
 
 ## 同時錄多場（實測版）
 
-**https://city2243.github.io/meeting-recorder/multi.html**
+**https://meeting-recorder.etfswing-site.workers.dev/multi**
 
 一場抓一個**瀏覽器分頁**。分頁擷取拿到的音訊只有那個分頁的，所以每場都是乾淨的獨立音軌，
 逐字稿不會被別場的聲音污染。
@@ -135,6 +137,9 @@
 
 錄製中有一顆「標記這一刻」，按下去會在所有場次的紀錄裡留一個時間戳 —— 做壓力測試時
 用來標「我現在把分頁切到背景了」。
+
+**四場的完整操作教學直接寫在那一頁上**（開始之前 4 條、正式步驟 10 步、最容易出錯的 4 件事），
+不用對照文件，照著頁面按就好。
 
 ### 合成訊號實測（2026-09-24，非真實會議）
 

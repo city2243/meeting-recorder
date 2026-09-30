@@ -1,0 +1,7 @@
+{
+  // Cloudflare 部署設定。只上傳 dist/（build.py 產生的純網頁檔），
+  // 不要上傳整個工作目錄 —— 否則 .git/、README、腳本都會被公開下載。
+  "name": "meeting-recorder",
+  "compatibility_date": "2026-09-30",
+  "assets": { "directory": "./dist" }
+}

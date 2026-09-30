@@ -51,7 +51,7 @@ const el = {
 /* ---------------- 狀態 ---------------- */
 // 可以真正錄影的公開版。claude.ai 的 artifact 被放在沙箱 iframe 裡，
 // 瀏覽器政策禁止它擷取螢幕，所以那邊只能把人導到這個網址。
-const PUBLIC_URL = 'https://city2243.github.io/meeting-recorder/';
+const PUBLIC_URL = 'https://meeting-recorder.etfswing-site.workers.dev/';
 
 const MAN_KEY = 'meetingRecorder.manifest';
 const PREF_KEY = 'meetingRecorder.prefs';
