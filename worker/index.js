@@ -18,6 +18,8 @@
 
 const PLANS = {
   pro: { amount: 299, name: '會議錄影守門員 Pro', slots: 4, unattended: true, maxDevices: 3 },
+  // 站主自用：不限場數、不限裝置、不會過期。只手動發放，不經過金流。
+  owner: { amount: 0, name: '站主授權', slots: 99, unattended: true, maxDevices: 99 },
 };
 const FREE = { plan: 'free', slots: 1, unattended: false };
 

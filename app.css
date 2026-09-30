@@ -507,3 +507,34 @@ label.check.locked{opacity:.55}
 .illus .screen-thumb{fill:#16323C;stroke:var(--accent);stroke-width:1}
 .illus .screen-thumb.dim{fill:#1A212B;stroke:var(--line)}
 .callout .illus{margin-top:6px}
+
+/* ═════════ 錄一場 / 多場 切換 ═════════ */
+.switcher{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sw{
+  display:grid;grid-template-columns:22px 1fr;grid-template-rows:auto auto;
+  column-gap:11px;row-gap:3px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 17px;text-decoration:none;
+  transition:border-color .12s,background .12s,transform .12s;
+}
+.sw:hover{border-color:#44566B;background:var(--raise);transform:translateY(-1px)}
+.sw svg{grid-row:1/3;width:22px;height:22px;fill:none;stroke:var(--ink-dim);
+  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sw-t{font-size:15px;font-weight:600;color:var(--ink-mid);display:flex;align-items:center;gap:8px}
+.sw-d{font-size:12.5px;line-height:1.55;color:var(--ink-dim)}
+.sw .now{display:none}
+
+.sw.on{
+  background:#12303A;border-color:var(--accent);
+  box-shadow:inset 3px 0 0 var(--accent);
+  cursor:default;pointer-events:none;
+}
+.sw.on svg{stroke:var(--accent)}
+.sw.on .sw-t{color:var(--ink)}
+.sw.on .sw-d{color:var(--ink-mid)}
+.sw.on .now{
+  display:inline-block;font-style:normal;
+  font-family:"IBM Plex Mono",Consolas,monospace;font-size:9.5px;letter-spacing:.1em;
+  padding:2px 6px;border-radius:4px;background:var(--accent);color:var(--accent-ink);font-weight:600;
+}
+@media (max-width:560px){.switcher{grid-template-columns:1fr}}

@@ -119,7 +119,7 @@ export function mountLicenseBox(container, onChange) {
 
   function paint(ent) {
     const pro = ent.plan !== 'free';
-    title.textContent = pro ? '目前：Pro' : '目前：免費版';
+    title.textContent = ent.plan === 'owner' ? '目前：站主授權' : pro ? '目前：Pro' : '目前：免費版';
     desc.textContent = pro
       ? `同時最多 ${ent.slots} 場、可用無人看管保護` +
         (ent.expiresAt ? `。有效至 ${new Date(ent.expiresAt).toLocaleDateString('zh-TW')}` : '')

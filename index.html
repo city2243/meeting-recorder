@@ -45,8 +45,20 @@
     錄 Webex、Zoom、Teams 這類會議軟體的螢幕與聲音。全部在你自己的瀏覽器裡跑，
     影像和聲音不會離開這台電腦。它跟一般錄影工具的差別只有一件事：
     <strong>它會在開錄前、錄製中、錄完後各驗一次，不讓你錄完才發現沒錄到。</strong>
-    <a class="link" href="./multi.html">要同時錄好幾場？用多場版</a>
   </p>
+
+  <nav class="switcher" aria-label="錄製模式">
+    <a class="sw on" href="./" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="14" rx="2"/><path d="M8 21.5h8"/><circle cx="12" cy="11.5" r="3.2"/></svg>
+      <span class="sw-t">錄一場<i class="now">目前</i></span>
+      <span class="sw-d">單場會議。桌面版會議軟體也可以錄。</span>
+    </a>
+    <a class="sw" href="./multi.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="3.5" width="9" height="7.5" rx="1.6"/><rect x="12.5" y="3.5" width="9" height="7.5" rx="1.6"/><rect x="2.5" y="13" width="9" height="7.5" rx="1.6"/><rect x="12.5" y="13" width="9" height="7.5" rx="1.6"/></svg>
+      <span class="sw-t">同時錄多場</span>
+      <span class="sw-d">一場一個瀏覽器分頁，每場獨立乾淨的音軌。</span>
+    </a>
+  </nav>
 
   <!-- ── 環境自檢 ── -->
   <section class="panel" id="envCard">
