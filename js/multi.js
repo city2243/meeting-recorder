@@ -349,7 +349,7 @@ function renderSlot(slot) {
   const u = slot.ui;
   if (!u || !u.card) return;
   const labels = {
-    empty: '尚未選擇來源', acquiring: '等待你選擇分頁…', checking: '檢查中／未通過',
+    empty: '尚未選擇來源', acquiring: '等待你選擇分頁…', checking: '檢查中…', failed: '未通過檢查',
     ready: '準備好了', recording: '錄製中', finishing: '收檔與驗證中…', done: '已完成',
   };
   const busy = slot.state === 'recording' || slot.state === 'finishing';
@@ -358,8 +358,13 @@ function renderSlot(slot) {
 
   u.pick.textContent = slot.stream ? '重新選擇' : '選擇這場的分頁';
   u.pick.hidden = busy || slot.state === 'done';
-  u.pick.classList.toggle('accent', slot.state === 'empty');   // 只切換，不能覆寫整個 class（會把 sc-pick 洗掉）
-  u.start.hidden = slot.state !== 'ready';
+  u.pick.classList.toggle('accent', slot.state === 'empty' || slot.state === 'failed');   // 沒通過時，該按的就是「重新選擇」   // 只切換，不能覆寫整個 class（會把 sc-pick 洗掉）
+  // 選過分頁之後，開始鈕一直留在原位：沒通過時變灰、寫明原因，不要整顆消失讓人找不到
+  u.start.hidden = !slot.stream || busy || slot.state === 'done';
+  u.start.disabled = slot.state !== 'ready';
+  u.start.textContent = slot.state === 'ready' ? '開始錄這一場'
+    : slot.state === 'failed' ? '還不能開始：先修好下面打 ✕ 的項目'
+    : '檢查中…';
   u.stop.hidden = slot.state !== 'recording';
   u.stop.disabled = false;
   u.timer.hidden = !busy;
@@ -374,7 +379,7 @@ function renderSlot(slot) {
 function refreshStartButton() {
   const ready = st.slots.filter((x) => x.state === 'ready').length;
   const rec = recordingCount();
-  const bad = st.slots.filter((x) => x.stream && x.state === 'checking').length;
+  const bad = st.slots.filter((x) => x.stream && x.state === 'failed').length;
   el.btnStartAll.disabled = ready === 0;
   el.btnStartAll.textContent = ready > 1 ? `準備好的 ${ready} 場一起開始` : '準備好的一起開始';
   el.btnStartAll.hidden = ready < 2;   // 只有一場準備好時，用那一格自己的按鈕就好

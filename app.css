@@ -382,6 +382,8 @@ label.check input{margin:5px 0 0; flex:none; accent-color:var(--accent)}
 .sc-name:disabled{opacity:.7}
 .sc-state{font-size:11.5px; color:var(--ink-dim); white-space:nowrap}
 .slot-card[data-state="ready"] .sc-state{color:var(--ok)}
+.slot-card[data-state="failed"]{border-color:#5A2A2E}
+.slot-card[data-state="failed"] .sc-state{color:var(--fail)}
 .slot-card[data-state="recording"] .sc-state{color:var(--accent)}
 
 .sc-checks .ci{padding:8px 0}

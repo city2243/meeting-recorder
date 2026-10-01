@@ -32,6 +32,11 @@ MANUAL = {
     '正式站': 'official site',
     # multi.js 用 innerHTML 產生的輸入框提示，原本抽取時整個標籤被略過
     '這場叫什麼？例如「台積電法說」': 'Name this meeting, e.g. "TSMC earnings call"',
+    # 2026-10-01：沒通過檢查時，開始鈕改成變灰＋寫原因
+    '未通過檢查': 'Check failed',
+    '還不能開始：先修好下面打 ✕ 的項目': "Can't start yet: fix the items marked ✕ below",
+    '先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。':
+        'Fix "Audio for this meeting" above first: choose again and select "Also share tab audio". The test recording will run again automatically.',
 }
 
 

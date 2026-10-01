@@ -189,7 +189,10 @@ export class Slot {
 
     if (avBlob) {
       if (avBlob.size < 5000) {
-        add('fail', '試錄並解碼驗證', `只產出 ${avBlob.size} bytes，等於沒錄到`, '換一個畫質再試。');
+        // 沒帶到音訊時試錄常常整個是 0 bytes；這時真正的原因是聲音，不是畫質
+        const noAudio = items.some((x) => x.level === 'fail' && x.name === '這一場的聲音');
+        add('fail', '試錄並解碼驗證', `只產出 ${avBlob.size} bytes，等於沒錄到`,
+          noAudio ? '先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。' : '換一個畫質再試。');
       } else {
         const meta = await C.probeVideoMeta(avBlob);
         if (!meta.ok) add('fail', '試錄並解碼驗證', '試錄檔無法解碼：' + meta.error, '換一個畫質再試。');
@@ -233,7 +236,7 @@ export class Slot {
     this.checks = items;
     const fails = items.filter((x) => x.level === 'fail').length;
     const warns = items.filter((x) => x.level === 'warn').length;
-    this._set(fails ? 'checking' : 'ready');
+    this._set(fails ? 'failed' : 'ready');
     return { items, fails, warns };
   }
 

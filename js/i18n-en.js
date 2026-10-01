@@ -738,7 +738,10 @@ export const EXACT = {
 "英文版僅為方便閱讀的翻譯，內容如有歧義，以中文版為準。": "This English version is a translation for convenience only. If anything is unclear or inconsistent, the Chinese version prevails.",
 "這個網址是自用版，沒有接金流。要訂閱請到": "This is the personal copy and has no payment set up. To subscribe, go to the",
 "正式站": "official site",
-"這場叫什麼？例如「台積電法說」": "Name this meeting, e.g. \"TSMC earnings call\""
+"這場叫什麼？例如「台積電法說」": "Name this meeting, e.g. \"TSMC earnings call\"",
+"未通過檢查": "Check failed",
+"還不能開始：先修好下面打 ✕ 的項目": "Can't start yet: fix the items marked ✕ below",
+"先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。": "Fix \"Audio for this meeting\" above first: choose again and select \"Also share tab audio\". The test recording will run again automatically."
 };
 export const PATTERNS = [
 [
