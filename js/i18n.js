@@ -45,7 +45,15 @@ export function getLang() { return lang; }
 /* ─────────── 翻譯表 ─────────── */
 async function loadDict() {
   if (EXACT) return;
-  const mod = await import('./i18n-en.js');
+  // 網路抖一下翻譯表就載不到，整頁會停在中文。實測兩種：連線被重設（直接失敗），
+  // 以及請求卡住永遠不回（import 一直 pending）。所以每次都限時 4 秒，失敗或逾時就換網址重試，最多四次。
+  const limit = (pr, ms) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error('i18n dict timeout')), ms))]);
+  let mod = null, lastErr = null;
+  for (let i = 0; i < 4 && !mod; i++) {
+    try { mod = await limit(import(i ? `./i18n-en.js?retry=${i}_${Date.now()}` : './i18n-en.js'), 4000); }
+    catch (e) { lastErr = e; await new Promise((r) => setTimeout(r, 300 * (i + 1))); }
+  }
+  if (!mod) throw lastErr;
   EXACT = new Map(Object.entries(mod.EXACT));
   PIECES = [...EXACT.entries()].filter(([zh]) => zh.length >= 2)
     .map(([zh, en]) => [zh, /[：:]$/.test(zh) && !/\s$/.test(en) ? en + ' ' : en])
@@ -151,7 +159,7 @@ export function t(s) { return tr(s); }
  */
 const FILE_WORDS = {
   '會議錄影': 'Meeting', '音訊備份': 'audio-backup', '健康紀錄': 'health-log',
-  '音訊': 'audio', '實測報告': 'test-report',
+  '音訊': 'audio', '實測報告': 'test-report', '會議': 'Meeting',
 };
 export function fw(zh) { return lang === 'en' ? (FILE_WORDS[zh] || zh) : zh; }
 export function partSuffix(n) { return lang === 'en' ? `_part${n}` : `_第${n}段`; }
@@ -202,9 +210,10 @@ function doAttrs(el) {
       if (wrote[a] === cur) continue;               // 自己剛寫的
       if (!CJK.test(cur)) continue;
       const en = tr(cur);
+      if (en === cur) continue;   // 沒翻到（例如翻譯表還在載）就不要記成「處理過」，翻譯表到了之後還要再翻
       saved[a] = cur; origAttr.set(el, saved);
-      wrote[a] = en; wroteAttr.set(el, wrote);
-      if (en !== cur) el.setAttribute(a, en);
+      wrote[a] = en; wroteAttr.set(el, wrote);   // 記住是自己寫的：setAttribute 會再觸發 observer，靠這個擋掉無限迴圈
+      el.setAttribute(a, en);
     } else if (saved[a] != null) {
       const zh = saved[a];
       delete saved[a]; delete wrote[a];

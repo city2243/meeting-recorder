@@ -741,6 +741,13 @@ export const EXACT = {
 "這場叫什麼？例如「台積電法說」": "Name this meeting, e.g. \"TSMC earnings call\"",
 "未通過檢查": "Check failed",
 "還不能開始：先修好下面打 ✕ 的項目": "Can't start yet: fix the items marked ✕ below",
+"還存在瀏覽器本機儲存區裡。可能是上次當掉或關掉頁面，也可能是匯出後沒清掉。標「尚未匯出」的請先另存。": "These are still in browser storage, from a crash, a closed page, or an export that was not cleared. Save anything marked \"Not exported\" first.",
+"有檔案沒存進資料夾，請按下面的「下載」另存：": "Some files did not save to the folder. Use \"Download\" below to save them:",
+"分享已經結束（分頁被關掉，或按了「停止共用」）": "Sharing has ended (the tab closed, or someone selected \"Stop sharing\")",
+"按「重新選擇」再挑一次這場的分頁。": "Select \"Choose again\" and pick this meeting's tab again.",
+"開始錄之前分享就結束了，需要重新選擇分頁": "Sharing ended before recording started. Choose the tab again.",
+"分頁被關掉、或有人按了「停止共用」。已經錄到的內容會自動收檔保存。": "The tab closed or someone selected \"Stop sharing\". What was already recorded will be saved automatically.",
+"只刪掉「已匯出過」的暫存副本，尚未匯出的會留著。請先確認資料夾裡的檔案可以正常播放。": "Only temporary copies marked \"Exported\" will be deleted. Anything not exported is kept. First check that the files in your folder play correctly.",
 "先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。": "Fix \"Audio for this meeting\" above first: choose again and select \"Also share tab audio\". The test recording will run again automatically."
 };
 export const PATTERNS = [
@@ -1267,5 +1274,21 @@ export const PATTERNS = [
 [
 "這組授權碼最近 30 天已在 {1} 台裝置使用，達到 {2} 台上限。",
 "This license key was used on {1} devices in the last 30 days, reaching the limit of {2}."
+],
+[
+"「{1}」的分享已中斷，自動停止並保存已錄到的內容",
+"Sharing for \"{1}\" was interrupted. Stopping automatically and saving what was recorded"
+],
+[
+"清除已匯出過的 {1} 個暫存檔",
+"Clear {1} exported temporary files"
+],
+[
+"【嚴重】{1} — {2}",
+"[Critical] {1} — {2}"
+],
+[
+"【注意】{1} — {2}",
+"[Attention] {1} — {2}"
 ]
 ];

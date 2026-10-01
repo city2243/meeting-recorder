@@ -11,6 +11,7 @@ import * as M from './media.js';
 import * as C from './checks.js';
 import { Slot } from './slot.js';
 import * as L from './license.js';
+import * as R from './recovery.js';
 import { t, tText, fw, fmtWhen } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
@@ -232,7 +233,18 @@ function addSlot() {
     withVideo: p.optVideo,
     audioCtx: st.audioCtx,
     on: {
-      state: (s) => { renderSlot(s); refreshStartButton(); },
+      state: (s) => {
+        if (s.state === 'failed' && s.checks.length) renderChecks(s, { items: s.checks });
+        renderSlot(s); refreshStartButton();
+      },
+      sourceEnded: (s) => {
+        // 分頁關了就不可能再錄到東西：等 3 秒讓最後一段資料寫完，然後自動收檔保存
+        setTimeout(() => {
+          if (s.state !== 'recording') return;
+          log('warn', `「${s.name}」的分享已中斷，自動停止並保存已錄到的內容`);
+          stopSlot(s);
+        }, 3000);
+      },
       log: (s, kind, line) => log(kind, `${s.name}｜${line.replace(/^\[[^\]]+\]\s*/, '')}`),
       alert: () => renderAlerts(),
     },
@@ -291,7 +303,7 @@ function buildSlotCard(slot) {
   u.result = card.querySelector('.sc-result');
 
   u.name.value = slot.name.startsWith('會議 ') ? '' : slot.name;
-  u.name.oninput = () => { slot.name = u.name.value.trim() || `會議 ${slot.id}`; };
+  u.name.oninput = () => { slot.name = u.name.value.trim() || `會議 ${slot.id}`; slot.named = !!u.name.value.trim(); };
   u.remove.onclick = () => removeSlot(slot);
   u.pick.onclick = () => pickSource(slot);
   u.start.onclick = () => startSlot(slot);
@@ -311,6 +323,7 @@ function removeSlot(slot) {
 }
 
 async function pickSource(slot) {
+  if (slot.state === 'acquiring' || slot.state === 'checking') return;   // 上一輪還沒跑完
   const p = prefs();
   slot.quality = p.quality;
   slot.withVideo = p.optVideo;
@@ -323,8 +336,10 @@ async function pickSource(slot) {
     renderSlot(slot);
     return;
   }
+  if (!st.slots.includes(slot)) { slot.release(); return; }   // 選分頁的時候這格被移除了
   renderSlot(slot);
   const res = await slot.runChecks(p.expectMinutes);
+  if (!res || !st.slots.includes(slot)) return;               // 這輪檢查作廢（重選、移除、分享已結束）
   renderChecks(slot, res);
   renderSlot(slot);
   refreshStartButton();
@@ -358,6 +373,7 @@ function renderSlot(slot) {
 
   u.pick.textContent = slot.stream ? '重新選擇' : '選擇這場的分頁';
   u.pick.hidden = busy || slot.state === 'done';
+  u.pick.disabled = slot.state === 'acquiring' || slot.state === 'checking';
   u.pick.classList.toggle('accent', slot.state === 'empty' || slot.state === 'failed');   // 沒通過時，該按的就是「重新選擇」   // 只切換，不能覆寫整個 class（會把 sc-pick 洗掉）
   // 選過分頁之後，開始鈕一直留在原位：沒通過時變灰、寫明原因，不要整顆消失讓人找不到
   u.start.hidden = !slot.stream || busy || slot.state === 'done';
@@ -418,11 +434,13 @@ async function startSlot(slot) {
     log('warn', `你的方案同時最多錄 ${slotLimit()} 場。`);
     return;
   }
-  try {
-    if (el.optNotify.checked && window.Notification && Notification.permission === 'default') {
-      await Notification.requestPermission();
-    }
-  } catch (e) {}
+  // 通知權限絕對不能 await 在開錄前面：Chrome 會跳出詢問泡泡，使用者沒回答之前錄影就一直不開始
+  // （實測多場時每按一場都排隊等，頭幾秒全部沒錄到）。先開錄，再在背景問。
+  const askNotify = () => {
+    try {
+      if (el.optNotify.checked && window.Notification && Notification.permission === 'default') Notification.requestPermission().catch(() => {});
+    } catch (e) {}
+  };
 
   // 每一場用自己開始的時間命名 —— 各場本來就不一定同時開始
   slot.sid = stamp();
@@ -436,8 +454,20 @@ async function startSlot(slot) {
     return;
   }
   slot.ui.start.disabled = false;
+  const taken = new Set(st.slots.filter((x) => x !== slot && x.vTarget).flatMap((x) => [x.vTarget, x.aTarget]));
+  if (taken.has(slot.vTarget) || taken.has(slot.aTarget)) {
+    slot.vTarget = slot.vTarget.replace(/\.webm$/, `_${slot.id}.webm`);
+    slot.aTarget = slot.aTarget.replace(/\.webm$/, `_${slot.id}.webm`);
+  }
+  if (slot.aWriter && slot.aWriter.durable) {
+    R.registerFiles(slot.sid, slot.startedAt, [
+      ...(slot.vWriter ? [{ opfs: slot.vOpfs, target: slot.vTarget, kind: 'video' }] : []),
+      { opfs: slot.aOpfs, target: slot.aTarget, kind: 'audio' },
+    ]);
+  }
   renderSlot(slot);
   ensureHeartbeat();
+  askNotify();
   await acquireWakeLock();
   refreshStartButton();
 }
@@ -532,27 +562,46 @@ function markAll() {
    單場收檔：驗證 → 存檔 → 結果直接顯示在那一格
    ================================================================ */
 async function exportSlot(slot, r) {
-  const base = `${slot.sid}_${slot.name.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40)}`;
+  const base = slot.vTarget.replace(/\.webm$/, '');
   const reportName = `${base}_${fw('實測報告')}.txt`;
   const report = tText(buildReport(slot, r));
   const box = slot.ui.result.querySelector('.sc-files');
 
   if (st.dirHandle) {
-    const lines = [];
-    if (r.vFile) lines.push(await exportOne(slot.vTarget, r.vFile));
-    if (r.aFile) lines.push(await exportOne(slot.aTarget, r.aFile));
+    const lines = [], failed = [];
+    for (const [name, file] of [[slot.vTarget, r.vFile], [slot.aTarget, r.aFile]]) {
+      if (!file) continue;
+      const res = await exportOne(name, file);
+      lines.push(res.line);
+      if (!res.ok) failed.push([name, file]);
+    }
     try {
       await S.writeTextToDir(st.dirHandle, reportName, report);
       lines.push(`✓ ${reportName}`);
     } catch (e) { lines.push(`✕ ${reportName}：${e.message}`); }
     box.innerHTML = `<p class="note">已存進「${escapeHtml(st.dirHandle.name)}」：</p>` +
       lines.map((l) => `<div class="mono sc-fileline">${escapeHtml(l)}</div>`).join('');
+    if (failed.length) {
+      // 存進資料夾失敗（權限被收回、磁碟滿…）：檔案還在瀏覽器裡，改給下載鈕，不能讓這場就這樣不見
+      const p = document.createElement('p');
+      p.className = 'note bad-text';
+      p.textContent = '有檔案沒存進資料夾，請按下面的「下載」另存：';
+      const rows = document.createElement('div');
+      rows.className = 'rows';
+      for (const [name, file] of failed) rows.appendChild(dlRow(name, file));
+      box.appendChild(p); box.appendChild(rows);
+    } else {
+      R.markExported(slot.sid);
+    }
   } else {
     box.innerHTML = '';
     const rows = document.createElement('div');
     rows.className = 'rows';
-    if (r.vFile) rows.appendChild(dlRow(slot.vTarget, r.vFile));
-    if (r.aFile) rows.appendChild(dlRow(slot.aTarget, r.aFile));
+    // 每個檔都按過下載，才標記成「已匯出」（之後救援清單裡才可以一鍵清掉）
+    const want = [r.vFile, r.aFile].filter(Boolean).length, got = new Set();
+    const onDl = (name) => { got.add(name); if (got.size >= want) R.markExported(slot.sid); };
+    if (r.vFile) rows.appendChild(dlRow(slot.vTarget, r.vFile, onDl));
+    if (r.aFile) rows.appendChild(dlRow(slot.aTarget, r.aFile, onDl));
     const b = document.createElement('button');
     b.className = 'btn sm'; b.type = 'button'; b.textContent = '下載實測報告';
     b.onclick = () => S.downloadText(reportName, report);
@@ -565,21 +614,21 @@ async function exportOne(name, file) {
   try {
     await S.exportFileToDir(st.dirHandle, file, name);
     log('ok', `已存檔：${name}（${fmtBytes(file.size)}）`);
-    return `✓ ${name}（${fmtBytes(file.size)}）`;
+    return { ok: true, line: `✓ ${name}（${fmtBytes(file.size)}）` };
   } catch (e) {
     log('fail', `${name} 存檔失敗：${e.message}`);
-    return `✕ ${name}：${e.message}`;
+    return { ok: false, line: `✕ ${name}：${e.message}` };
   }
 }
 
-function dlRow(name, file) {
+function dlRow(name, file, onDl) {
   const d = document.createElement('div');
   d.innerHTML = '<span class="fn"></span><span class="meta"></span>';
   d.querySelector('.fn').textContent = name;
   d.querySelector('.meta').textContent = fmtBytes(file.size);
   const b = document.createElement('button');
   b.className = 'btn sm accent'; b.type = 'button'; b.textContent = '下載';
-  b.onclick = () => S.downloadFile(file, name);
+  b.onclick = () => { S.downloadFile(file, name); if (onDl) onDl(name); };
   d.appendChild(b);
   return d;
 }
@@ -672,6 +721,11 @@ async function init() {
   st.audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000, latencyHint: 'playback' });
   await S.probeDurableWrite();
   await restoreDir();
+  await R.renderRecovery({
+    card: $('recoveryCard'), list: $('recoveryList'),
+    getDir: () => st.dirHandle, pickDir,
+    skip: new Set(st.slots.flatMap((x) => [x.vOpfs, x.aOpfs]).filter(Boolean)),
+  });
 
   el.btnPickDir.onclick = pickDir;
   el.btnUseSaved.onclick = useSavedDir;

@@ -69,7 +69,7 @@ function fromHTML(html, file) {
 }
 
 const HTML = ['artifact.html', 'multi.html', 'pricing.html', 'account.html', 'terms.html'];
-const JS = ['js/app.js', 'js/multi.js', 'js/slot.js', 'js/checks.js', 'js/media.js', 'js/storage.js', 'js/license.js', 'worker/index.js'];
+const JS = ['js/app.js', 'js/multi.js', 'js/slot.js', 'js/checks.js', 'js/media.js', 'js/storage.js', 'js/license.js', 'js/recovery.js', 'worker/index.js'];
 
 for (const f of HTML) fromHTML(readFileSync(ROOT + f, 'utf8'), f);
 for (const f of JS) fromJS(readFileSync(ROOT + f, 'utf8'), f);

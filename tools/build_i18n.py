@@ -35,9 +35,29 @@ MANUAL = {
     # 2026-10-01：沒通過檢查時，開始鈕改成變灰＋寫原因
     '未通過檢查': 'Check failed',
     '還不能開始：先修好下面打 ✕ 的項目': "Can't start yet: fix the items marked ✕ below",
+    # 2026-10-01：多場版全面檢查後新增（救援清單、分享中斷自動收檔、存檔失敗改下載）
+    '還存在瀏覽器本機儲存區裡。可能是上次當掉或關掉頁面，也可能是匯出後沒清掉。標「尚未匯出」的請先另存。':
+        'These are still in browser storage, from a crash, a closed page, or an export that was not cleared. Save anything marked "Not exported" first.',
+    '有檔案沒存進資料夾，請按下面的「下載」另存：': 'Some files did not save to the folder. Use "Download" below to save them:',
+    '分享已經結束（分頁被關掉，或按了「停止共用」）': 'Sharing has ended (the tab closed, or someone selected "Stop sharing")',
+    '按「重新選擇」再挑一次這場的分頁。': 'Select "Choose again" and pick this meeting\'s tab again.',
+    '開始錄之前分享就結束了，需要重新選擇分頁': 'Sharing ended before recording started. Choose the tab again.',
+    '分頁被關掉、或有人按了「停止共用」。已經錄到的內容會自動收檔保存。':
+        'The tab closed or someone selected "Stop sharing". What was already recorded will be saved automatically.',
+    '只刪掉「已匯出過」的暫存副本，尚未匯出的會留著。請先確認資料夾裡的檔案可以正常播放。':
+        'Only temporary copies marked "Exported" will be deleted. Anything not exported is kept. First check that the files in your folder play correctly.',
     '先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。':
         'Fix "Audio for this meeting" above first: choose again and select "Also share tab audio". The test recording will run again automatically.',
 }
+
+# 執行時才組出來、帶變數的句子（抽取後還沒進 en.json 的）
+MANUAL_PATTERNS = [
+    ['「{1}」的分享已中斷，自動停止並保存已錄到的內容', 'Sharing for "{1}" was interrupted. Stopping automatically and saving what was recorded'],
+    ['清除已匯出過的 {1} 個暫存檔', 'Clear {1} exported temporary files'],
+    # 警示寫進事件紀錄的格式（slot.js raise）：整句先比對，標題與說明再各自翻，不要被片段替換切碎
+    ['【嚴重】{1} — {2}', '[Critical] {1} — {2}'],
+    ['【注意】{1} — {2}', '[Attention] {1} — {2}'],
+]
 
 
 def main():
@@ -68,6 +88,10 @@ def main():
     for zh, e in MANUAL.items():
         if CJK.search(e): errs.append(f'MANUAL 殘留中文：{zh}')
         exact[zh] = e
+    for zh, e in MANUAL_PATTERNS:
+        if CJK.search(e): errs.append(f'MANUAL_PATTERNS 殘留中文：{zh}')
+        if Counter(re.findall(r'\{\d+\}', zh)) != Counter(re.findall(r'\{\d+\}', e)): errs.append(f'MANUAL_PATTERNS 佔位不一致：{zh}')
+        if not any(x[0] == zh for x in patterns): patterns.append([zh, e])
 
     if errs:
         print('\n'.join('✕ ' + x for x in errs[:40]))

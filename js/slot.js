@@ -33,6 +33,7 @@ export class Slot {
   constructor(id, opts) {
     this.id = id;
     this.name = (opts.name || '').trim() || `會議 ${id}`;
+    this.named = !!(opts.name || '').trim();
     this.quality = opts.quality || '720p15';
     this.withVideo = opts.withVideo !== false;
     this.audioCtx = opts.audioCtx || null;
@@ -123,13 +124,22 @@ export class Slot {
   get videoTrack() { return this.stream ? this.stream.getVideoTracks()[0] : null; }
 
   _onSourceEnded() {
+    // 開始錄之前分享就結束了：直接改成未通過，不要讓人按開始錄到空的
+    if (this.state === 'ready' || this.state === 'failed' || this.state === 'checking') {
+      this.checks = [{ level: 'fail', name: '畫面來源', detail: '分享已經結束（分頁被關掉，或按了「停止共用」）', fix: '按「重新選擇」再挑一次這場的分頁。' }];
+      this.say('warn', '開始錄之前分享就結束了，需要重新選擇分頁');
+      this._set('failed');
+      return;
+    }
     if (this.state !== 'recording') return;
     this.raise('source', 'fatal', `「${this.name}」的分享已中斷`,
-      '分頁被關掉、或有人按了「停止共用」。這一場的畫面已經停了，請盡快按停止保住現有內容。');
+      '分頁被關掉、或有人按了「停止共用」。已經錄到的內容會自動收檔保存。');
+    this._emit('sourceEnded');
   }
 
   /* ---------- 開錄前檢查（不放測試音） ---------- */
   async runChecks(expectMinutes) {
+    const stream0 = this.stream;
     const items = [];
     const add = (level, name, detail, fix) => items.push({ level, name, detail, fix });
 
@@ -161,8 +171,12 @@ export class Slot {
     const f0 = this.watch.frames;
     await C.sleep(2200);
     const df = this.watch.frames - f0;
-    if (df < 3) add('fail', '畫面正在更新', `2.2 秒只收到 ${df} 張畫格（感測器 ${this.watch.sensorInfo}）`, '來源可能已經停了，請重新選擇。');
-    else add('pass', '畫面正在更新', `2.2 秒收到 ${df} 張（約 ${(df / 2.2).toFixed(1)} fps）`);
+    // 實測（2026-10-01，真的 Chrome 分頁擷取）：內容靜止的分頁 2.2 秒只來 1 張畫格。
+    // 這不是故障 —— 以前這裡判失敗，會議還沒開始的分頁就永遠過不了檢查、開始鈕出不來。
+    // 只有「單一視窗」來源畫格停了才可能是視窗被最小化，那才算問題。
+    if (df >= 3) add('pass', '畫面正在更新', `2.2 秒收到 ${df} 張（約 ${(df / 2.2).toFixed(1)} fps）`);
+    else if (this.surface === 'window') add('fail', '畫面正在更新', `2.2 秒只收到 ${df} 張畫格（感測器 ${this.watch.sensorInfo}）`, '分享的視窗可能被最小化了，把它還原後按「重新選擇」。');
+    else add('warn', '畫面正在更新', `目前畫面沒有變化（2.2 秒收到 ${df} 張）`, '分頁或畫面內容沒在動的時候，Chrome 不會送新畫格（例如會議還沒開始、停在一張投影片），這是正常的。下面的試錄會確認影像真的錄得到。');
 
     // 4. 試錄並解碼 —— 這一項才是真的證據
     let peak = 0;
@@ -233,6 +247,7 @@ export class Slot {
     else if (est.free < need) add('fail', '儲存空間', `剩 ${(est.free / 1073741824).toFixed(1)} GB，這一場預估要 ${(need / 1073741824).toFixed(1)} GB`, '降畫質、縮短預計長度，或關掉其中一場。');
     else add('pass', '儲存空間', `剩 ${(est.free / 1073741824).toFixed(1)} GB（所有場次共用），這一場預估 ${(need / 1048576).toFixed(0)} MB`);
 
+    if (this.stream !== stream0 || this.state !== 'checking') return null;   // 中途重選、移除或分享已結束，這輪作廢
     this.checks = items;
     const fails = items.filter((x) => x.level === 'fail').length;
     const warns = items.filter((x) => x.level === 'warn').length;
@@ -243,7 +258,9 @@ export class Slot {
   /* ---------- 開始 ---------- */
   async start(sid) {
     const q = M.QUALITY[this.quality];
-    const safe = this.name.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40);
+    // 沒取名時用語系版的「會議 1」，英文模式的檔名才不會出現中文
+    const shown = this.named ? this.name : `${fw('會議')} ${this.id}`;
+    const safe = shown.replace(/[\\/:*?"<>|]/g, '_').slice(0, 40);
     const u = uid();
 
     this.vTarget = `${sid}_${safe}.webm`;
@@ -307,9 +324,14 @@ export class Slot {
     if (this.withVideo) {
       if (!vt || vt.readyState !== 'live') {
         this.raise('source', 'fatal', `「${this.name}」的分享已中斷`, '分頁被關掉或按了「停止共用」，請盡快停止保住現有內容。');
-      } else if (this.watch.staleSeconds > 6) {
+      } else if (this.surface === 'window' && this.watch.staleSeconds > 6) {
+        // 單一視窗：畫格停了多半是視窗被最小化，那段畫面真的會錄不到
         this.raise('video', 'fatal', `「${this.name}」畫面停止更新`,
-          `已經 ${this.watch.staleSeconds.toFixed(0)} 秒沒有新畫格（感測器 ${this.watch.sensorInfo}）。`);
+          `已經 ${this.watch.staleSeconds.toFixed(0)} 秒沒有新畫格，分享的視窗可能被最小化了。`);
+      } else if (this.watch.staleSeconds > 300) {
+        // 分頁／整個畫面：內容靜止就不會有新畫格（例如一直停在同一張投影片），不是故障，只輕提醒
+        this.raise('video', 'warn', `「${this.name}」畫面 5 分鐘沒有變化`,
+          '如果會議一直停在同一張投影片，可以忽略；聲音照常在錄。');
       } else {
         this.clear('video');
       }
@@ -357,6 +379,8 @@ export class Slot {
     if (this.vWriter) await this.vWriter.close();
     if (this.aWriter) await this.aWriter.close();
     this.say('ok', `收檔完成：影像 ${fmtB(this.vWriter ? this.vWriter.bytesOnDisk : 0)}、音訊 ${fmtB(this.aWriter.bytesOnDisk)}`);
+    // 收檔完把這一場的警示清掉（紀錄與報告裡還在），頂端紅條、提示音與標題閃爍才會停
+    if (this.alerts.size) { this.alerts.clear(); this._emit('alert'); }
     this._set('done');
   }
 

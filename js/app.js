@@ -716,9 +716,13 @@ async function runChecks() {
     const f0 = st.videoWatch.frames;
     await C.sleep(2500);
     const df = st.videoWatch.frames - f0;
-    if (df < 3) {
+    const surf = (st.videoWatch.settings || {}).displaySurface;
+    if (df < 3 && surf === 'window') {
       r.set('fail', `2.5 秒只收到 ${df} 張畫格（感測器 ${st.videoWatch.sensorInfo}）`,
-        '畫面來源可能被最小化或已停止分享。按「重新檢查」重選。'); rec('fail');
+        '分享的視窗可能被最小化了。把它還原後按「重新檢查」。'); rec('fail');
+    } else if (df < 3) {
+      // 內容靜止的分頁／畫面本來就不送新畫格（2026-10-01 真的分頁擷取實測），不能判失敗，靠下面的試錄確認
+      r.set('warn', `目前畫面沒有變化（2.5 秒收到 ${df} 張）`, '分頁或畫面內容沒在動的時候，Chrome 不會送新畫格（例如會議還沒開始、停在一張投影片），這是正常的。下面的試錄會確認影像真的錄得到。'); rec('warn');
     } else {
       r.set('pass', `2.5 秒收到 ${df} 張畫格（約 ${(df / 2.5).toFixed(1)} fps）`); rec('pass');
     }
@@ -1076,10 +1080,14 @@ function watchdogTick() {
     raiseAlert('video', 'fatal', '畫面分享已中斷',
       '有人按了 Chrome 的「停止共用」，或來源視窗關了。聲音仍在錄；按「重新接上畫面」可以接著錄新的一段。');
     el.btnReattach.hidden = false;
-  } else if (st.videoWatch.staleSeconds > 6) {
+  } else if ((st.videoWatch.settings || {}).displaySurface === 'window' && st.videoWatch.staleSeconds > 6) {
     el.gVideo.className = 'slot bad';
     raiseAlert('video', 'fatal', '畫面停止更新',
       `已經 ${st.videoWatch.staleSeconds.toFixed(0)} 秒沒有新畫格（感測器 ${st.videoWatch.sensorInfo}）。分享來源可能被最小化了。`);
+  } else if (st.videoWatch.staleSeconds > 300) {
+    // 分頁／整個畫面：內容靜止就沒有新畫格（停在同一張投影片），不是故障，只輕提醒
+    el.gVideo.className = 'slot soft';
+    raiseAlert('video', 'warn', '畫面 5 分鐘沒有變化', '如果會議一直停在同一張投影片，可以忽略；聲音照常在錄。');
   } else if (st.videoWatch.staleSeconds > 2.5) {
     el.gVideo.className = 'slot soft';
   } else {
