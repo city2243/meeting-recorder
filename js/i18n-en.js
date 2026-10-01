@@ -733,6 +733,20 @@ export const EXACT = {
 "取消失敗：": "Cancellation failed:",
 "綠界沒有確認取消，後續扣款可能還會發生。請稍後再試一次；若持續失敗請來信，我們會人工處理並退還取消後被扣的款項。": "ECPay didn’t confirm the cancellation, so future charges may still occur. Try again later. If it keeps failing, email us and we’ll handle it manually and refund any charges after cancellation.",
 "伺服器發生錯誤，請稍後再試。": "Server error. Try again later.",
+"有聲音，但這是整台電腦的混音（不是這個分頁專屬的），其他會議也會被錄進來": "There is audio, but it is the whole computer's mix (not this tab's own), so other meetings will be recorded too",
+"瀏覽器會跳出分享視窗，照下圖的兩個位置操作（圖是 Chrome；Edge 的位置一樣，只是名稱不同）：": "Your browser opens a share window. Use the two spots shown below (the picture shows Chrome; Edge has them in the same places with different names):",
+"切到「Chrome 分頁」（Edge 叫「Microsoft Edge 索引標籤」），挑會議那一個。": "Switch to \"Chrome Tab\" (in Edge: \"Microsoft Edge tab\") and pick the meeting.",
+"不要選「整個畫面」或「視窗」——那是整台電腦的聲音，所有會議會混在一起": "Do not pick \"Entire Screen\" or \"Window\". Those capture all of the computer's sound, so every meeting gets mixed together",
+"左下角勾「同時分享分頁音訊」（Edge 寫「索引標籤音訊」）——": "At the bottom left, select \"Also share tab audio\" (in Edge it mentions \"tab audio\"). ",
+"你選成「整個畫面」或「視窗」了。那抓的是整台電腦的混音，四場會混在一起。 現在檢查會直接擋下來；按「重新選擇」改成「Chrome 分頁」（Edge 是「Microsoft Edge 索引標籤」）。": "You picked \"Entire Screen\" or \"Window\". That captures all of the computer's sound, so the four meetings get mixed. The check now blocks this. Select \"Choose again\" and pick \"Chrome Tab\" (in Edge: \"Microsoft Edge tab\").",
+"四場一起選很容易挑錯。開錄後看每一格的「這場的聲音」音量條：跟你聽到的那場會議同時跳動就對了；對不上就停止那一格、按「清除這一格」，再「＋ 加一場」重選。": "It is easy to pick the wrong tab when setting up four. After recording starts, watch each slot's \"Audio for this meeting\" meter: it should move together with the meeting you hear. If it doesn't, stop that slot, select \"Clear this slot\", then \"+ Add a meeting\" and choose again.",
+"分享的視窗可能被最小化了。把它還原後按「重新檢查」。": "The shared window may be minimized. Restore it, then select \"Check again\".",
+"分頁或畫面內容沒在動的時候，Chrome 不會送新畫格（例如會議還沒開始、停在一張投影片），這是正常的。下面的試錄會確認影像真的錄得到。": "When nothing on the tab or screen is moving (for example, the meeting hasn't started or is paused on a slide), Chrome sends no new frames. This is normal. The test recording below confirms that video really records.",
+"畫面 5 分鐘沒有變化": "Video unchanged for 5 minutes",
+"如果會議一直停在同一張投影片，可以忽略；聲音照常在錄。": "If the meeting has stayed on the same slide, you can ignore this. Audio is still recording.",
+"按「重新選擇」，在分享視窗上方切到分頁那一欄（Chrome 叫「Chrome 分頁」，Edge 叫「Microsoft Edge 索引標籤」），點這場會議的分頁。桌面版會議軟體請改用「錄一場」。": "Select \"Choose again\", switch to the tabs section at the top of the share window (\"Chrome Tab\" in Chrome, \"Microsoft Edge tab\" in Edge), and click this meeting's tab. For desktop meeting apps, use \"Single meeting\" instead.",
+"重新選擇時，在分享視窗左下角把分享音訊的選項勾起來（Chrome 寫「分享分頁音訊」，Edge 寫「分享索引標籤音訊」）。沒勾就只有畫面沒聲音。": "When choosing again, select the audio option at the bottom left of the share window (\"Also share tab audio\"). Without it you get video but no audio.",
+"分享的視窗可能被最小化了，把它還原後按「重新選擇」。": "The shared window may be minimized. Restore it, then select \"Choose again\".",
 "確定要取消訂閱？": "Cancel your subscription?",
 "系統會通知綠界停止之後的扣款。已經付款的這一期可以繼續用到期滿，不會按比例退款。": "We'll tell ECPay to stop future charges. The period you've already paid for stays active until it ends and isn't refunded pro rata.",
 "英文版僅為方便閱讀的翻譯，內容如有歧義，以中文版為準。": "This English version is a translation for convenience only. If anything is unclear or inconsistent, the Chinese version prevails.",
@@ -1274,6 +1288,26 @@ export const PATTERNS = [
 [
 "這組授權碼最近 30 天已在 {1} 台裝置使用，達到 {2} 台上限。",
 "This license key was used on {1} devices in the last 30 days, reaching the limit of {2}."
+],
+[
+"目前畫面沒有變化（2.5 秒收到 {1} 張）",
+"Video is not changing right now ({1} frames in 2.5 seconds)"
+],
+[
+"目前畫面沒有變化（2.2 秒收到 {1} 張）",
+"Video is not changing right now ({1} frames in 2.2 seconds)"
+],
+[
+"{1}（不是分頁）—— 錄到的會是整台電腦的聲音，所有會議會混在一起",
+"{1} (not a tab). This records all of the computer's sound, so every meeting gets mixed together"
+],
+[
+"已經 {1} 秒沒有新畫格，分享的視窗可能被最小化了。",
+"No new frames for {1} seconds. The shared window may be minimized."
+],
+[
+"「{1}」畫面 5 分鐘沒有變化",
+"Video for \"{1}\" unchanged for 5 minutes"
 ],
 [
 "「{1}」的分享已中斷，自動停止並保存已錄到的內容",
