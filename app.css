@@ -180,29 +180,30 @@ label.check input[type=number]{width:62px; margin:0 4px; padding:3px 8px; font-s
 /* ───────── 按鈕 ─────────
  * 2026-10-02 使用者要求「可以按的按鈕要不同顏色、明顯一點」。原本一般按鈕是深灰底配深灰面板，看起來像標籤；
  * 而且按不下去的按鈕跟可以按的長得一模一樣（錄影中的「移除」被誤會成可以按）。現在分四種：
- *   主要動作 accent（青色實心）／一般按鈕（藍色實心＋亮藍框）／次要 ghost（亮框線）／停止 stop（紅色）
- *   按不下去的一律退成同一種扁平灰、游標變禁止，跟以上四種都分得開。
+ *   主要動作 accent（青色）／一般按鈕（亮藍）／次要 ghost（灰色實心，例如移除）／停止 stop（紅色）
+ *   按不下去的一律變成透明＋虛線框＋暗字、游標變禁止。
+ *   （第一版用深藍 #1D3A5C，在深色背景上跟原本差不多，使用者看不出來，改成亮藍）
  */
 .btn{
-  background:#1D3A5C; color:#E3EEFF;
-  border:1px solid #4A86C8; border-radius:8px;
+  background:#2F6FDB; color:#fff;
+  border:1px solid #5B93F0; border-radius:8px;
   padding:9px 16px; font:inherit; font-size:14px; font-weight:600;
   cursor:pointer; transition:border-color .12s, background .12s, box-shadow .12s;
   box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 2px 6px rgba(0,0,0,.25);
 }
-.btn:hover{background:#25497A; border-color:#6AA6E8}
+.btn:hover{background:#3D80F0; border-color:#8DB6F7}
 .btn:active{transform:translateY(1px)}
 .btn.accent{background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:700}
 .btn.accent:hover{background:#6FD5E3; border-color:#6FD5E3}
 .btn.stop{background:var(--fail); border-color:var(--fail); color:#fff; font-weight:700}
 .btn.stop:hover{background:#F0585D}
 .btn.amber{background:var(--warn); border-color:var(--warn); color:#1E1500; font-weight:700}
-.btn.ghost{background:transparent; color:var(--ink); border-color:#56677D; box-shadow:none; font-weight:500}
-.btn.ghost:hover{background:#222C39; border-color:#8395AD}
+.btn.ghost{background:#4A5568; color:#fff; border-color:#718096; font-weight:600}
+.btn.ghost:hover{background:#5A6578; border-color:#A0AEC0}
 a.btn{text-decoration:none; display:inline-block; text-align:center}
 /* 按不下去：不論原本是哪一種，都退成同一種扁平灰 */
 .btn:disabled,.btn.accent:disabled,.btn.stop:disabled,.btn.amber:disabled,.btn.ghost:disabled,.btn.danger-ghost:disabled{
-  background:#1A2029; border-color:#262E3A; color:#5A6576; box-shadow:none; cursor:not-allowed; transform:none}
+  background:transparent; border:1px dashed #333D4B; color:#566173; box-shadow:none; cursor:not-allowed; transform:none}
 .btn.lg{padding:12px 24px; font-size:15px}
 .btn.sm{padding:5px 11px; font-size:12.5px}
 
