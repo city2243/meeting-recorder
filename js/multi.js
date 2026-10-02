@@ -24,6 +24,7 @@ const el = {
   savedName: $('savedName'), dirLabel: $('dirLabel'),
   qualitySelect: $('qualitySelect'), expectMinutes: $('expectMinutes'),
   optVideo: $('optVideo'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
+  optAutoQuiet: $('optAutoQuiet'), quietMin: $('quietMin'),
   budget: $('budget'),
   slotsCard: $('slotsCard'), slotList: $('slotList'), btnAddSlot: $('btnAddSlot'), planNote: $('planNote'),
   slotHint: $('slotHint'), btnStartAll: $('btnStartAll'),
@@ -131,6 +132,8 @@ function prefs() {
     optVideo: el.optVideo.checked,
     optAlarm: el.optAlarm.checked,
     optNotify: el.optNotify.checked,
+    autoQuiet: el.optAutoQuiet.checked,
+    quietMin: Math.max(3, Number(el.quietMin.value) || 10),
   };
 }
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs())); } catch (e) {} }
@@ -140,6 +143,8 @@ function loadPrefs() {
     if (p.quality) el.qualitySelect.value = p.quality;
     if (p.expectMinutes) el.expectMinutes.value = p.expectMinutes;
     ['optVideo', 'optAlarm', 'optNotify'].forEach((k) => { if (typeof p[k] === 'boolean') el[k].checked = p[k]; });
+    if (typeof p.autoQuiet === 'boolean') el.optAutoQuiet.checked = p.autoQuiet;
+    if (p.quietMin) el.quietMin.value = p.quietMin;
   } catch (e) {}
 }
 
@@ -211,6 +216,17 @@ function applyPlan() {
   el.btnAddSlot.textContent = n >= max ? `已達同時 ${max} 場上限` : '＋ 加一場';
   const pro = st.plan && st.plan.plan !== 'free';
   el.planNote.hidden = pro && max >= 4;
+  // 靜音自動收檔屬於 Pro 的「無人看管保護」（方案頁寫的），免費版鎖起來並標 Pro
+  const una = !!(st.plan && st.plan.unattended);
+  el.optAutoQuiet.disabled = !una; el.quietMin.disabled = !una;
+  if (!una) el.optAutoQuiet.checked = false;
+  {
+    const w = el.optAutoQuiet.closest('label');
+    let tag = w && w.querySelector('.pro-tag');
+    if (w) w.classList.toggle('locked', !una);
+    if (w && !una && !tag) { tag = document.createElement('a'); tag.className = 'pro-tag'; tag.href = './pricing.html'; tag.textContent = 'Pro'; w.appendChild(tag); }
+    else if (una && tag) tag.remove();
+  }
   el.planNote.innerHTML = pro
     ? `你的方案可同時錄 ${max} 場。`
     : `免費版一次只能錄 <b>1 場</b>。要同時錄多場請<a class="link" href="./pricing.html">升級 Pro</a>（同時 4 場）。`;
@@ -236,14 +252,6 @@ function addSlot() {
       state: (s) => {
         if (s.state === 'failed' && s.checks.length) renderChecks(s, { items: s.checks });
         renderSlot(s); refreshStartButton();
-      },
-      sourceEnded: (s) => {
-        // 分頁關了就不可能再錄到東西：等 3 秒讓最後一段資料寫完，然後自動收檔保存
-        setTimeout(() => {
-          if (s.state !== 'recording') return;
-          log('warn', `「${s.name}」的分享已中斷，自動停止並保存已錄到的內容`);
-          stopSlot(s);
-        }, 3000);
       },
       log: (s, kind, line) => log(kind, `${s.name}｜${line.replace(/^\[[^\]]+\]\s*/, '')}`),
       alert: () => renderAlerts(),
@@ -515,9 +523,22 @@ function heartbeat() {
   st.lastTickAt = now;
   const hidden = document.hidden;
 
+  const pro = !!(st.plan && st.plan.unattended);
+  const p = prefs();
   for (const x of st.slots) {
     const m = x.tick(now, hidden);
     if (!m) continue;
+    // 會議結束自動收檔：分頁關掉（等 3 秒讓最後一段資料寫完）；或分頁還開著但連續 N 分鐘完全沒聲音
+    if (x.sourceEndedAt && now - x.sourceEndedAt > 3000) {
+      log('warn', `「${x.name}」的分享已中斷，自動停止並保存已錄到的內容`);
+      stopSlot(x);
+      continue;
+    }
+    if (pro && p.autoQuiet && m.quiet > p.quietMin * 60) {
+      log('warn', `「${x.name}」連續 ${p.quietMin} 分鐘沒有聲音，判定會議已結束，自動停止並存檔`);
+      stopSlot(x);
+      continue;
+    }
     const u = x.ui;
     u.timer.textContent = fmtDur(m.elapsed);
     u.fps.textContent = x.withVideo ? m.fps.toFixed(1) + ' fps' : '未錄影像';
@@ -735,7 +756,7 @@ async function init() {
   el.btnMark.onclick = markAll;
   if (el.btnAgain) el.btnAgain.onclick = () => location.reload();
   el.alertMute.onclick = () => { st.muted = !st.muted; el.alertMute.textContent = st.muted ? '恢復提示音' : '靜音提示'; };
-  [el.qualitySelect, el.expectMinutes, el.optVideo, el.optAlarm, el.optNotify].forEach((n) =>
+  [el.qualitySelect, el.expectMinutes, el.optVideo, el.optAlarm, el.optNotify, el.optAutoQuiet, el.quietMin].forEach((n) =>
     n.addEventListener('change', () => { savePrefs(); renderBudget(); }));
 
   window.addEventListener('beforeunload', (e) => {
@@ -749,7 +770,7 @@ async function init() {
   applyPlan();
   await renderBudget();
   setStatus('尚未開始', '');
-  log('info', '多場模式就緒。每一場請選一個瀏覽器分頁，並記得勾「分享分頁音訊」。');
+  log('info', '多場模式就緒。每一場請選一個瀏覽器分頁，並確認分享視窗底部「分享分頁音訊」的開關是開的。');
 }
 
 init();

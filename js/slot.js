@@ -134,7 +134,7 @@ export class Slot {
     if (this.state !== 'recording') return;
     this.raise('source', 'fatal', `「${this.name}」的分享已中斷`,
       '分頁被關掉、或有人按了「停止共用」。已經錄到的內容會自動收檔保存。');
-    this._emit('sourceEnded');
+    this.sourceEndedAt = Date.now();   // multi.js 的心跳看到超過 3 秒就自動收檔
   }
 
   /* ---------- 開錄前檢查（不放測試音） ---------- */
@@ -162,7 +162,7 @@ export class Slot {
     // 2. 音訊軌（分頁模式下這是硬條件）
     if (!at) {
       add('fail', '這一場的聲音', '這次分享沒有帶音訊',
-        '重新選擇時，在分享視窗左下角把分享音訊的選項勾起來（Chrome 寫「分享分頁音訊」，Edge 寫「分享索引標籤音訊」）。沒勾就只有畫面沒聲音。');
+        '按「重新選擇」，在分享視窗底部確認「分享分頁音訊」（Edge 叫「共用索引標籤音訊」）的開關是開的。關掉就只有畫面沒聲音。');
     } else if (at.readyState !== 'live') {
       add('fail', '這一場的聲音', '音訊軌已中斷', '按「重新選擇」再挑一次。');
     } else if (this.surface !== 'browser') {
@@ -210,7 +210,7 @@ export class Slot {
         // 沒帶到音訊時試錄常常整個是 0 bytes；這時真正的原因是聲音，不是畫質
         const noAudio = items.some((x) => x.level === 'fail' && x.name === '這一場的聲音');
         add('fail', '試錄並解碼驗證', `只產出 ${avBlob.size} bytes，等於沒錄到`,
-          noAudio ? '先解決上面「這一場的聲音」：重新選擇時把「分享分頁音訊」勾起來，會自動再試錄一次。' : '換一個畫質再試。');
+          noAudio ? '先解決上面「這一場的聲音」：按「重新選擇」，確認底部「分享分頁音訊」的開關是開的，會自動再試錄一次。' : '換一個畫質再試。');
       } else {
         const meta = await C.probeVideoMeta(avBlob);
         if (!meta.ok) add('fail', '試錄並解碼驗證', '試錄檔無法解碼：' + meta.error, '換一個畫質再試。');
@@ -232,7 +232,7 @@ export class Slot {
           } else { note = '；沒有可驗證的音訊樣本'; lv = 'warn'; }
 
           const detail = `影像 ${meta.width}×${meta.height}、${(avBlob.size / 1024).toFixed(0)} KB / 4 秒${note}`;
-          if (lv === 'fail') add('fail', '試錄並解碼驗證', detail, '檢查分享時有沒有勾「分享分頁音訊」。');
+          if (lv === 'fail') add('fail', '試錄並解碼驗證', detail, '檢查分享視窗底部「分享分頁音訊」的開關是不是開的。');
           else if (lv === 'quiet') {
             // 會議可能只是剛好沒人講話 —— 這是提醒，不是失敗。開錄後會持續盯。
             add('warn', '試錄並解碼驗證', detail,

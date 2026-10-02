@@ -47,11 +47,16 @@ async function loadDict() {
   if (EXACT) return;
   // 網路抖一下翻譯表就載不到，整頁會停在中文。實測兩種：連線被重設（直接失敗），
   // 以及請求卡住永遠不回（import 一直 pending）。所以每次都限時 4 秒，失敗或逾時就換網址重試，最多四次。
+  // 第一次只等 1.5 秒（正常 0.1–0.4 秒就到），趕在 2 秒保險顯示之前重試；之後越等越久，慢網路也有機會載完。
+  // 前幾次還沒回來的請求不丟掉，跟新的一起比，誰先到用誰。
   const limit = (pr, ms) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error('i18n dict timeout')), ms))]);
+  const WAIT = [1500, 4000, 8000, 12000];
+  const tries = [];
   let mod = null, lastErr = null;
-  for (let i = 0; i < 4 && !mod; i++) {
-    try { mod = await limit(import(i ? `./i18n-en.js?retry=${i}_${Date.now()}` : './i18n-en.js'), 4000); }
-    catch (e) { lastErr = e; await new Promise((r) => setTimeout(r, 300 * (i + 1))); }
+  for (let i = 0; i < WAIT.length && !mod; i++) {
+    tries.push(import(i ? `./i18n-en.js?retry=${i}_${Date.now()}` : './i18n-en.js'));
+    try { mod = await limit(Promise.any(tries), WAIT[i]); }
+    catch (e) { lastErr = e; }
   }
   if (!mod) throw lastErr;
   EXACT = new Map(Object.entries(mod.EXACT));

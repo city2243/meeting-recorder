@@ -187,8 +187,8 @@ function prefs() {
     optSilent: el.optSilent.checked,
     optUnattended: el.optUnattended.checked,
     optAutoStopFatal: el.optAutoStopFatal.checked,
-    optAutoStopQuiet: el.optAutoStopQuiet.checked,
-    quietMin: Number(el.quietMin.value) || 20,
+    autoEndQuiet: el.optAutoStopQuiet.checked,
+    endQuietMin: Math.max(3, Number(el.quietMin.value) || 10),
     maxHours: Number(el.maxHours.value) || 4,
   };
 }
@@ -201,10 +201,12 @@ function loadPrefs() {
     if (p.quality) el.qualitySelect.value = p.quality;
     if (p.expectMinutes) el.expectMinutes.value = p.expectMinutes;
     if (p.sourceMode) el.sourceMode.value = p.sourceMode;
-    if (p.quietMin) el.quietMin.value = p.quietMin;
+    // 2026-10-02 起「靜音自動收檔」預設開、改用新鍵名（舊鍵 optAutoStopQuiet／quietMin 是預設關的時代存的，不沿用）
+    if (p.endQuietMin) el.quietMin.value = p.endQuietMin;
+    if (typeof p.autoEndQuiet === 'boolean') el.optAutoStopQuiet.checked = p.autoEndQuiet;
     if (p.maxHours) el.maxHours.value = p.maxHours;
     ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep', 'optAutoStart',
-     'optSilent', 'optUnattended', 'optAutoStopFatal', 'optAutoStopQuiet'].forEach((k) => {
+     'optSilent', 'optUnattended', 'optAutoStopFatal'].forEach((k) => {
       if (typeof p[k] === 'boolean') el[k].checked = p[k];
     });
     return p;
@@ -324,6 +326,16 @@ function applyPlan() {
   const pro = st.plan && st.plan.unattended;
   el.optUnattended.disabled = !pro;
   if (!pro && el.optUnattended.checked) el.optUnattended.checked = false;
+  el.optAutoStopQuiet.disabled = !pro;
+  el.quietMin.disabled = !pro;
+  if (!pro) el.optAutoStopQuiet.checked = false;
+  {
+    const w2 = el.optAutoStopQuiet.closest('label');
+    let t2 = w2 && w2.querySelector('.pro-tag');
+    if (w2) w2.classList.toggle('locked', !pro);
+    if (w2 && !pro && !t2) { t2 = document.createElement('a'); t2.className = 'pro-tag'; t2.href = './pricing.html'; t2.textContent = 'Pro'; w2.appendChild(t2); }
+    else if (pro && t2) t2.remove();
+  }
   const wrap = el.optUnattended.closest('label');
   if (wrap) {
     wrap.classList.toggle('locked', !pro);
@@ -735,8 +747,8 @@ async function runChecks() {
     if (!sysTrack) {
       r.set('fail', '這次分享沒有帶任何音訊',
         mode === 'browser'
-          ? '按「重新檢查」重選，在 Chrome 的分享視窗裡切到「Chrome 分頁」，並把「同時分享分頁音訊」勾起來。'
-          : '按「重新檢查」重選，在 Chrome 的分享視窗裡選「整個畫面」，並勾選左下角的「同時分享系統音訊」。');
+          ? '按「重新檢查」重選：分享視窗上方點「Chrome 分頁」（Edge 叫「Microsoft Edge 索引標籤」），確認底部「分享分頁音訊」的開關是開的。'
+          : '按「重新檢查」重選：分享視窗上方點「整個螢幕畫面」，並把底部「分享系統音訊」的開關打開（它預設是關的）。');
       rec('fail');
     } else if (sysTrack.readyState !== 'live') {
       r.set('fail', '音訊軌已中斷', '按「重新檢查」重選。'); rec('fail');
@@ -802,7 +814,9 @@ async function runChecks() {
             else { audioNote = '；聲音解碼失敗（' + stt.error + '）'; audioLevel = 'warn'; }
           } else if (stt.peak < 0.005) {
             audioNote = `；但聲音是一片數位靜音（峰值 ${stt.peak < 1e-6 ? stt.peak.toExponential(1) : stt.peak.toFixed(5)}）`;
-            audioLevel = 'fail';
+            // 分頁模式：音軌確實拿到了（上面「這個分頁的聲音」已驗），只是分頁這 4 秒沒出聲 ——
+            // 會議還沒開始、沒人講話都會這樣，不能擋（多場版同樣處理）。整個螢幕模式有放測試音，沒聲音才是真的壞。
+            audioLevel = prefs().sourceMode === 'browser' && sysOk ? 'quiet' : 'fail';
           } else {
             audioNote = `；聲音峰值 ${stt.peak.toFixed(3)}`;
           }
@@ -813,6 +827,9 @@ async function runChecks() {
           rTrial.set('fail', detail,
             '影像有了但聲音是空的。檢查：①分享時有沒有勾「同時分享系統音訊」 ②Windows 音量混音器裡瀏覽器有沒有被靜音。');
           rec('fail');
+        } else if (audioLevel === 'quiet') {
+          rTrial.set('warn', detail, '影像沒問題，這個分頁這 4 秒剛好沒出聲。如果會議還沒開始或沒人講話，可以照樣開始，錄製中會繼續盯著；如果它正在講話，代表音訊沒抓到。');
+          rec('warn');
         } else if (audioLevel === 'warn') { rTrial.set('warn', detail, '聲音沒驗證成功，開錄後請盯著音量條確認有跳動。'); rec('warn'); }
         else { rTrial.set('pass', detail); rec('pass'); }
       }
@@ -831,7 +848,7 @@ async function runChecks() {
     else {
       rTone.set('warn', `這 4 秒沒有收到聲音（峰值 ${trialLevels.sys.toFixed(4)}）`,
         mode === 'browser'
-          ? '如果會議現在本來就安靜，可以照樣開始；如果它正在講話，代表分享時沒勾「同時分享分頁音訊」。讓那個分頁發出聲音再按下面重測。'
+          ? '如果會議現在本來就安靜，可以照樣開始；如果它正在講話，代表分享時把底部「分享分頁音訊」的開關關掉了。讓那個分頁發出聲音再按下面重測。'
           : '可能是這台電腦的喇叭音量太小或瀏覽器被靜音。請在會議軟體裡放一段聲音，然後按下面的按鈕重測 8 秒。');
       rec('warn');
       rTone.addButton('重測 8 秒（請讓它發出聲音）', async (ev) => {
@@ -906,6 +923,7 @@ async function startRecording() {
   const sid = stamp();
   st.session = { sid, uid: uid(), startedAt: Date.now(), segments: [], log: [], frames0: st.videoWatch.frames, deepChecks: [] };
   st.stopping = false;
+  st.screenEndedAt = 0;
   cancelCountdown();
   el.preflightCard.hidden = true;
   el.liveCard.hidden = false;
@@ -918,7 +936,7 @@ async function startRecording() {
   if (P0.optSilent) log('info', '這台電腦不會把聲音放出來（避免與手機回授）');
   if (P0.optUnattended) {
     log('ok', `無人看管保護已開啟：最長 ${P0.maxHours} 小時` +
-      (P0.optAutoStopQuiet ? `、連續靜音 ${P0.quietMin} 分鐘收檔` : '') +
+
       (P0.optAutoStopFatal ? '、確定錄不到時自動收檔' : ''));
   }
 
@@ -1077,8 +1095,11 @@ function watchdogTick() {
 
   if (!vt || vt.readyState !== 'live') {
     el.gVideo.className = 'slot bad';
-    raiseAlert('video', 'fatal', '畫面分享已中斷',
-      '有人按了 Chrome 的「停止共用」，或來源視窗關了。聲音仍在錄；按「重新接上畫面」可以接著錄新的一段。');
+    if (!st.reattaching) {
+      if (!st.screenEndedAt) st.screenEndedAt = now;   // 沒收到 ended 事件也一樣開始倒數
+      raiseAlert('video', 'fatal', '畫面分享已中斷',
+        '會議分頁被關掉，或按了「停止共用」。10 秒後自動停止並存檔；要接著錄，請在那之前按「重新接上畫面」。');
+    }
     el.btnReattach.hidden = false;
   } else if ((st.videoWatch.settings || {}).displaySurface === 'window' && st.videoWatch.staleSeconds > 6) {
     el.gVideo.className = 'slot bad';
@@ -1154,6 +1175,24 @@ function watchdogTick() {
     raiseAlert('write', 'fatal', '寫檔發生錯誤', seg.writer.failed.message);
   }
 
+  /* --- 會議結束：分享被關掉 → 10 秒後收檔；畫面還開著但一直沒聲音 → 收檔 ---
+   * 用心跳（Worker 驅動）計時，不用 setTimeout：錄影頁通常在背景，背景分頁的計時器會被節流。 */
+  if (st.screenEndedAt && now - st.screenEndedAt > 10000) {
+    stopRecording('會議分享已結束（分頁被關掉或按了停止共用），自動停止並存檔');
+    return;
+  }
+  {
+    const up = prefs();
+    const pro = st.plan && st.plan.unattended;
+    if (pro && up.autoEndQuiet && up.endQuietMin > 0) {
+      const quietSec = (now - (seg.lastSysSound || seg.startedAt)) / 1000;
+      if (quietSec > up.endQuietMin * 60) {
+        stopRecording(`連續 ${up.endQuietMin} 分鐘沒有會議聲音，判定會議已結束，自動停止並存檔`);
+        return;
+      }
+    }
+  }
+
   /* --- 無人看管：沒人盯著的時候，watchdog 要會自己收手 --- */
   if (prefs().optUnattended) {
     const up = prefs();
@@ -1161,14 +1200,6 @@ function watchdogTick() {
     if (up.maxHours > 0 && recSec > up.maxHours * 3600) {
       stopRecording(`無人看管：達到最長錄製時間 ${up.maxHours} 小時，自動收檔`);
       return;
-    }
-
-    if (up.optAutoStopQuiet && up.quietMin > 0) {
-      const quietSec = (now - (seg.lastSysSound || seg.startedAt)) / 1000;
-      if (quietSec > up.quietMin * 60) {
-        stopRecording(`無人看管：連續靜音 ${up.quietMin} 分鐘，判定會議已結束，自動收檔`);
-        return;
-      }
     }
 
     // 只在「確定什麼都沒錄到」時自動收檔。
@@ -1201,14 +1232,18 @@ async function runDeepCheck() {
 }
 
 function onScreenEnded() {
-  if (st.stopping || !st.seg) return;
-  raiseAlert('video', 'fatal', '畫面分享已停止',
-    '聲音還在錄。按「重新接上畫面」可以選新的畫面、接著錄成第 ' + (st.seg.idx + 1) + ' 段。');
+  if (st.stopping || !st.seg || st.reattaching) return;
+  st.screenEndedAt = Date.now();   // 心跳看到超過 10 秒就自動收檔
+  raiseAlert('video', 'fatal', '畫面分享已中斷',
+    '會議分頁被關掉，或按了「停止共用」。10 秒後自動停止並存檔；要接著錄，請在那之前按「重新接上畫面」。');
   el.btnReattach.hidden = false;
 }
 
 async function reattachScreen() {
   if (!st.seg) return;
+  const endedAt = st.screenEndedAt;
+  st.screenEndedAt = 0;              // 正在重新選畫面，先暫停自動收檔倒數
+  st.reattaching = true;
   el.btnReattach.disabled = true;
   try {
     const newStream = await M.getScreen(prefs().quality, prefs().sourceMode, { silent: prefs().optSilent });
@@ -1237,7 +1272,13 @@ async function reattachScreen() {
   } catch (e) {
     log('fail', '重新接上畫面失敗：' + e.message);
     toast('重新接上畫面失敗', e.message);
+    // 沒接上（多半是在分享視窗按了取消）：原本的分享已經結束，重新開始 10 秒倒數後自動收檔
+    if (endedAt) {
+      st.screenEndedAt = Date.now();
+      log('warn', '沒有重新接上畫面，10 秒後自動停止並存檔');
+    }
   }
+  st.reattaching = false;
   el.btnReattach.disabled = false;
 }
 

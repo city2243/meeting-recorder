@@ -72,7 +72,7 @@
     <h3>用之前先知道三件事</h3>
     <p><strong>會議必須用網頁版參加。</strong>Zoom、Webex 的桌面程式沒辦法單獨抓聲音，
        它們的聲音只存在於整台電腦的混音裡，多場會糊在一起。</p>
-    <p><strong>選分頁時一定要勾「分享分頁音訊」。</strong>沒勾就只有畫面沒聲音，
+    <p><strong>選分頁時，底部的「分享分頁音訊」開關要是開的（預設就是開的，不要關掉）。</strong>關掉就只有畫面沒聲音，
        下一步會擋住不讓你開始。</p>
     <p><strong>這一版預設不錄麥克風。</strong>你的麥克風會同時收到所有場次的喇叭聲，
        混進去只會讓每一軌都變髒。建議戴耳機。</p>
@@ -139,44 +139,47 @@
       </div>
       <div class="step wide"><span class="n">5</span>
         <svg class="ic"><use href="#i-share"/></svg>
-        <div><b>第一格按「選擇這場的分頁」</b><span>瀏覽器會跳出分享視窗，照下圖的兩個位置操作（圖是 Chrome；Edge 的位置一樣，只是名稱不同）：</span>
+        <div><b>第一格按「選擇這場的分頁」</b><span>瀏覽器會跳出分享視窗，照下圖的兩個位置確認（圖是 Chrome；Edge 長得一樣，只是名稱不同）：</span>
           
 <figure class="illus">
-  <svg viewBox="0 0 620 330" role="img" aria-label="Chrome 分享視窗示意圖：選擇 Chrome 分頁，並勾選同時分享分頁音訊">
+  <svg viewBox="0 0 620 330" role="img" aria-label="分享視窗示意圖：選上方的 Chrome 分頁，確認底部的分享分頁音訊開關是開的">
     <rect x="14" y="14" width="592" height="302" rx="12" class="dlg"/>
-    <text x="34" y="46" class="t-title">選擇要分享的內容</text>
-    <text x="34" y="66" class="t-dim">meeting-recorder 想要分享你的畫面</text>
-
-    <rect x="34" y="84" width="148" height="30" rx="7" class="tab"/>
-    <text x="108" y="104" class="t-tab" text-anchor="middle">整個畫面</text>
-    <rect x="190" y="84" width="122" height="30" rx="7" class="tab"/>
-    <text x="251" y="104" class="t-tab" text-anchor="middle">視窗</text>
-    <rect x="320" y="84" width="150" height="30" rx="7" class="tab on"/>
-    <text x="395" y="104" class="t-tab on" text-anchor="middle">Chrome 分頁</text>
-    <circle cx="500" cy="99" r="12" class="pin"/><text x="500" y="104" class="t-pin" text-anchor="middle">1</text>
-
-    <rect x="34" y="128" width="436" height="34" rx="7" class="row on"/>
-    <rect x="46" y="138" width="14" height="14" rx="3" class="fav"/>
-    <text x="70" y="150" class="t-row on">Zoom Meeting — 台積電法說</text>
-    <rect x="34" y="168" width="436" height="30" rx="7" class="row"/>
-    <text x="70" y="188" class="t-row">Webex — 內部週會</text>
-    <rect x="34" y="204" width="436" height="30" rx="7" class="row"/>
-    <text x="70" y="224" class="t-row">Google Meet — 客戶訪談</text>
-
-    <rect x="34" y="250" width="232" height="32" rx="7" class="chk on"/>
-    <rect x="46" y="258" width="16" height="16" rx="4" class="box on"/>
-    <path d="M50 266l4 4 7-8" class="tick"/>
-    <text x="72" y="271" class="t-chk on">同時分享分頁音訊</text>
-    <circle cx="292" cy="266" r="12" class="pin"/><text x="292" y="271" class="t-pin" text-anchor="middle">2</text>
-
-    <rect x="406" y="250" width="64" height="32" rx="7" class="btn-ghost"/>
-    <text x="438" y="271" class="t-btn" text-anchor="middle">取消</text>
-    <rect x="482" y="250" width="86" height="32" rx="7" class="btn-go"/>
-    <text x="525" y="271" class="t-go" text-anchor="middle">分享</text>
+    <text x="34" y="44" class="t-title">選擇要與這個網站分享的內容</text>
+    <text x="34" y="63" class="t-dim">網站將能查看你的畫面內容</text>
+    <text x="150" y="92" class="t-tab on" text-anchor="middle">Chrome 分頁</text>
+    <text x="310" y="92" class="t-tab" text-anchor="middle">視窗</text>
+    <text x="470" y="92" class="t-tab" text-anchor="middle">整個螢幕畫面</text>
+    <line x1="34" y1="104" x2="586" y2="104" class="rule"/>
+    <rect x="70" y="102" width="160" height="3" rx="1.5" class="ul"/>
+    <circle cx="246" cy="88" r="12" class="pin"/><text x="246" y="93" class="t-pin" text-anchor="middle">1</text>
+    <rect x="34" y="114" width="300" height="112" rx="8" class="pane"/>
+    <rect x="42" y="122" width="284" height="28" rx="6" class="row on"/>
+    <rect x="52" y="130" width="12" height="12" rx="3" class="fav"/>
+    <text x="72" y="140" class="t-row on">Zoom Meeting — 台積電法說</text>
+    <rect x="42" y="156" width="284" height="28" rx="6" class="row"/>
+    <rect x="52" y="164" width="12" height="12" rx="3" class="fav"/>
+    <text x="72" y="174" class="t-row">Webex — 內部週會</text>
+    <rect x="42" y="190" width="284" height="28" rx="6" class="row"/>
+    <rect x="52" y="198" width="12" height="12" rx="3" class="fav"/>
+    <text x="72" y="208" class="t-row">Google Meet — 客戶訪談</text>
+    <rect x="346" y="114" width="240" height="112" rx="8" class="preview"/>
+    <text x="466" y="174" class="t-dim" text-anchor="middle">預覽</text>
+    <rect x="34" y="236" width="552" height="34" rx="8" class="abar on"/>
+    <path d="M50 249h5l6-5v18l-6-5h-5z" class="spk"/>
+    <path d="M65 247a7 7 0 0 1 0 12" class="spkw"/>
+    <text x="78" y="258" class="t-chk on">分享分頁音訊</text>
+    <text x="160" y="258" class="t-dim">（預設就是開的）</text>
+    <rect x="528" y="244" width="40" height="18" rx="9" class="sw on"/>
+    <circle cx="558" cy="253" r="6.5" class="knob"/>
+    <circle cx="504" cy="253" r="12" class="pin"/><text x="504" y="258" class="t-pin" text-anchor="middle">2</text>
+    <rect x="430" y="280" width="70" height="28" rx="14" class="btn-go"/>
+    <text x="465" y="298" class="t-go" text-anchor="middle">分享</text>
+    <rect x="510" y="280" width="70" height="28" rx="14" class="btn-ghost"/>
+    <text x="545" y="298" class="t-btn" text-anchor="middle">取消</text>
   </svg>
   <figcaption>
-    <span><b class="pin-n">1</b> 切到「Chrome 分頁」（Edge 叫「Microsoft Edge 索引標籤」），挑會議那一個。<b>不要選「整個畫面」或「視窗」——那是整台電腦的聲音，所有會議會混在一起</b></span>
-    <span><b class="pin-n">2</b> 左下角勾「同時分享分頁音訊」（Edge 寫「索引標籤音訊」）——<b>沒勾就只有畫面沒聲音</b></span>
+    <span><b class="pin-n">1</b> 上方點「Chrome 分頁」（Edge 叫「Microsoft Edge 索引標籤」），再點會議那一個。<b>不要選「整個螢幕畫面」或「視窗」——那是整台電腦的聲音，所有會議會混在一起</b></span>
+    <span><b class="pin-n">2</b> 底部「分享分頁音訊」（Edge 叫「共用索引標籤音訊」）的開關<b>預設就是開的</b>，確認它是亮的、不要關掉，再按「分享」</span>
   </figcaption>
 </figure>
 
@@ -208,9 +211,9 @@
 
     <h3 class="howto-h">最容易出錯的四件事</h3>
     <div class="pitfalls">
-      <div><b>四場的聲音聽起來一樣</b><span>你選成「整個畫面」或「視窗」了。那抓的是整台電腦的混音，四場會混在一起。
+      <div><b>四場的聲音聽起來一樣</b><span>你選成「整個螢幕畫面」或「視窗」了。那抓的是整台電腦的混音，四場會混在一起。
         現在檢查會直接擋下來；按「重新選擇」改成「Chrome 分頁」（Edge 是「Microsoft Edge 索引標籤」）。</span></div>
-      <div><b>某一場完全沒聲音</b><span>分享時忘了勾「同時分享分頁音訊」。檢查會擋下來，硬按開始就會錄到啞的。</span></div>
+      <div><b>某一場完全沒聲音</b><span>分享時把底部「分享分頁音訊」的開關關掉了。檢查會擋下來，按「重新選擇」再選一次就好。</span></div>
       <div><b>選錯分頁</b><span>四場一起選很容易挑錯。開錄後看每一格的「這場的聲音」音量條：跟你聽到的那場會議同時跳動就對了；對不上就停止那一格、按「清除這一格」，再「＋ 加一場」重選。</span></div>
       <div><b>中途把會議分頁關掉</b><span>那一場立刻斷。四場同時，誤觸機率是四倍。錄製期間不要整理分頁。</span></div>
     </div>
@@ -250,6 +253,12 @@
       <label class="check" for="optVideo"><input type="checkbox" id="optVideo" checked><span>也錄影像（關掉就只留聲音，容量和 CPU 都省很多）</span></label>
       <label class="check" for="optAlarm"><input type="checkbox" id="optAlarm" checked><span>出問題時發出提示音</span></label>
       <label class="check" for="optNotify"><input type="checkbox" id="optNotify" checked><span>出問題時跳桌面通知</span></label>
+    </div>
+
+    <div class="field">
+      <span class="field-label">會議結束時自動停止並存檔</span>
+      <p class="hint">某一場的會議分頁被關掉、或按了「停止共用」：那一場 3 秒後自動停止並存檔，其他場照常錄（一律開啟）。</p>
+      <label class="check" for="optAutoQuiet"><input type="checkbox" id="optAutoQuiet" checked><span>會議結束了但分頁還開著：某一場連續 <input type="number" id="quietMin" value="10" min="3" max="120" step="1"> 分鐘完全沒有聲音，就判定那場結束，自動停止並存檔</span></label>
     </div>
 
     <div class="budget" id="budget"></div>
