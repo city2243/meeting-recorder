@@ -733,6 +733,7 @@ export const EXACT = {
 "取消失敗：": "Cancellation failed:",
 "綠界沒有確認取消，後續扣款可能還會發生。請稍後再試一次；若持續失敗請來信，我們會人工處理並退還取消後被扣的款項。": "ECPay didn’t confirm the cancellation, so future charges may still occur. Try again later. If it keeps failing, email us and we’ll handle it manually and refund any charges after cancellation.",
 "伺服器發生錯誤，請稍後再試。": "Server error. Try again later.",
+"示意圖・瀏覽器會跳出這個視窗，這裡不能按": "Illustration: your browser shows this window. Nothing here is clickable",
 "這個瀏覽器無法錄影（見最上方說明）": "This browser can't record (see the note at the top)",
 "這個瀏覽器錄不到會議聲音（見最上方說明）": "This browser can't record meeting audio (see the note at the top)",
 "這個瀏覽器無法同時錄多場": "This browser can't record several meetings",

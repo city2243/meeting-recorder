@@ -485,12 +485,12 @@ label.check.locked{opacity:.55}
 .steps.numbered .step{padding-left:13px}
 .step .n{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
   font-family:"IBM Plex Mono",Consolas,monospace;font-size:11px;font-weight:600;
-  background:var(--accent);color:var(--accent-ink);margin-top:1px}
+  background:transparent;color:var(--ink-mid);border:1.5px solid #4A5568;margin-top:1px}   /* 空心灰圈：不要像可以按的青色圓鈕 */
 .step.wide{grid-column:1/-1}
 
 /* Chrome 分享視窗示意圖 */
 .illus{margin:12px 0 2px;display:flex;flex-direction:column;gap:9px}
-.illus svg{width:100%;max-width:100%;height:auto;display:block;
+.illus > svg{width:100%;max-width:100%;height:auto;display:block;
   background:#0B0E14;border:1px solid var(--line);border-radius:10px}
 .illus figcaption{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--ink-dim)}
 .illus figcaption b{color:var(--ink)}
@@ -654,3 +654,24 @@ label.check.consent b{color:var(--ink)}
 .compat-txt h2{margin:2px 0 6px; font-size:17px}
 .compat-txt p{margin:0; font-size:14px; line-height:1.7; color:var(--ink-mid)}
 .compat-act{margin-top:12px}
+
+/* 教學裡的示意圖：2026-10-02 使用者反映示意圖裡的「分享」按鈕跟網頁上真的按鈕一樣是青色，會以為可以按。
+ * 示意圖一律改成黑白線稿，只有橘色編號標記保留顏色（代表「看這裡」）；外框虛線、上方標「示意圖・這裡不能按」，點了沒反應。
+ * 真的按鈕是亮藍／青色實心，兩者一眼分得開。 */
+.illus{position:relative}
+.illus > svg{border:1px dashed #3A4555; pointer-events:none; user-select:none}
+.illus-tag{display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
+  font-size:11.5px; color:#9AA6B6; letter-spacing:.02em;
+  padding:3px 9px 3px 7px; border:1px dashed #3A4555; border-radius:999px; background:transparent}
+.illus-ic{width:14px; height:14px; fill:none; stroke:#9AA6B6; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round}
+.illus .t-tab.on{fill:#E7ECF3}
+.illus .ul{fill:#C9D1DC}
+.illus .row.on{fill:#262E3A; stroke:#8A96A8}
+.illus .tab.on{fill:#262E3A; stroke:#8A96A8}
+.illus .fav{fill:#6B7686}
+.illus .sw.on{fill:#9AA6B6}
+.illus .knob{fill:#1A2029}
+.illus .btn-go{fill:none; stroke:#8A96A8; stroke-width:1.2}
+.illus .t-go{fill:#C9D1DC; font-weight:600}
+.illus .btn-ghost{fill:none; stroke:#3F4A5A}
+.illus .screen-thumb{fill:#2A3340; stroke:#6B7686}

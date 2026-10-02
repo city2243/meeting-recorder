@@ -22,6 +22,7 @@ CJK = re.compile(r'[㐀-鿿　-〿＀-￯]')
 
 # 程式裡刻意拆開呼叫 t() 的字串、以及後來補的，抽取時抓不到，在這裡人工補
 MANUAL = {
+    '示意圖・瀏覽器會跳出這個視窗，這裡不能按': "Illustration: your browser shows this window. Nothing here is clickable",
     # 2026-10-02：瀏覽器支援說明（compat.js）
     '這個瀏覽器無法錄影（見最上方說明）': "This browser can't record (see the note at the top)",
     '這個瀏覽器錄不到會議聲音（見最上方說明）': "This browser can't record meeting audio (see the note at the top)",
