@@ -12,6 +12,7 @@ import * as C from './checks.js';
 import { Slot } from './slot.js';
 import * as L from './license.js';
 import * as R from './recovery.js';
+import { mountNotice } from './compat.js';
 import { t, tText, fw, fmtWhen } from './i18n.js';
 
 const $ = (id) => document.getElementById(id);
@@ -731,6 +732,15 @@ document.addEventListener('visibilitychange', async () => {
    ================================================================ */
 async function init() {
   baseTitle = document.title;
+  // 多場一定要分頁聲音：Firefox／Safari／手機都不行。講清楚就停，不要往下初始化（缺 AudioContext 會整頁壞掉）
+  const env = mountNotice('multi');
+  if (env.level !== 'ok') {
+    if (el.setupCard) el.setupCard.hidden = true;
+    if (el.slotsCard) el.slotsCard.hidden = true;
+    setStatus('這個瀏覽器無法同時錄多場', '');
+    log('warn', '這個瀏覽器無法同時錄多場：請改用電腦上的 Chrome 或 Edge。');
+    return;
+  }
   for (const [k, q] of Object.entries(M.QUALITY)) {
     const o = document.createElement('option');
     o.value = k; o.textContent = q.label;

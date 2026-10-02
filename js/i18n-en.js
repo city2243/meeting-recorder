@@ -733,6 +733,26 @@ export const EXACT = {
 "取消失敗：": "Cancellation failed:",
 "綠界沒有確認取消，後續扣款可能還會發生。請稍後再試一次；若持續失敗請來信，我們會人工處理並退還取消後被扣的款項。": "ECPay didn’t confirm the cancellation, so future charges may still occur. Try again later. If it keeps failing, email us and we’ll handle it manually and refund any charges after cancellation.",
 "伺服器發生錯誤，請稍後再試。": "Server error. Try again later.",
+"這個瀏覽器無法錄影（見最上方說明）": "This browser can't record (see the note at the top)",
+"這個瀏覽器錄不到會議聲音（見最上方說明）": "This browser can't record meeting audio (see the note at the top)",
+"這個瀏覽器無法同時錄多場": "This browser can't record several meetings",
+"這個瀏覽器無法同時錄多場：請改用電腦上的 Chrome 或 Edge。": "This browser can't record several meetings. Please use Chrome or Edge on a computer.",
+"這個瀏覽器缺少錄影需要的功能": "This browser is missing features needed for recording",
+"這個瀏覽器錄不到會議的聲音": "This browser can't record meeting audio",
+"手機和平板不能用這個網頁錄影": "Phones and tablets can't record with this page",
+"手機與平板上的瀏覽器（不論 Safari、Chrome 或其他）都沒有開放網頁擷取螢幕和聲音，這是系統的限制，不是網頁壞掉。": "Browsers on phones and tablets (Safari, Chrome or any other) don't let web pages capture the screen and sound. This is a system limit, not a problem with this page.",
+"請用電腦打開這個網址，瀏覽器用 Chrome 或 Edge。": "Open this address on a computer in Chrome or Edge.",
+"這個瀏覽器沒有提供螢幕擷取或錄影的功能。": "This browser doesn't provide screen capture or recording.",
+"請改用電腦上的 Chrome 或 Edge 打開這個網址（Brave、Opera、Vivaldi、Arc 也可以）。": "Open this address in Chrome or Edge on a computer instead (Brave, Opera, Vivaldi and Arc also work).",
+"這個瀏覽器不開放網頁抓取分頁或電腦的聲音（任何網站都一樣，不是這個網頁的問題）。": "This browser doesn't let web pages capture tab or computer sound (true for every website, not a problem with this page).",
+"要錄會議，請改用 Chrome 或 Edge 打開這個網址（Brave、Opera、Vivaldi、Arc 也可以）。": "To record meetings, open this address in Chrome or Edge instead (Brave, Opera, Vivaldi and Arc also work).",
+"同時錄多場一定要分頁聲音，這個瀏覽器無法使用。": "Recording several meetings needs tab audio, so it can't be used in this browser.",
+"Mac 上錄「整個螢幕」可能抓不到系統聲音": "On a Mac, \"Entire screen\" may not capture system sound",
+"在 Mac 上，網頁版會議（Zoom、Webex、Meet、Teams 的網頁版）請把「要錄什麼」選成「瀏覽器裡的會議」，抓分頁的聲音最穩。": "On a Mac, for web meetings (the web versions of Zoom, Webex, Meet and Teams), set \"What to record\" to the browser meeting option. Tab audio is the most reliable.",
+"桌面版會議軟體在 Mac 上不一定錄得到聲音，開錄前檢查會告訴你。": "Desktop meeting apps may not record sound on a Mac. The pre-recording check will tell you.",
+"複製這個網址": "Copy this address",
+"已複製，到 Chrome 或 Edge 貼上": "Copied. Paste it into Chrome or Edge",
+"複製這個網址，到 Chrome 或 Edge 貼上：": "Copy this address and paste it into Chrome or Edge:",
 "會議結束時自動停止並存檔": "Stop and save automatically when the meeting ends",
 "會議分頁被關掉、或按了「停止共用」：10 秒後自動停止並存檔（一律開啟；10 秒內按「重新接上畫面」可以接著錄）。": "If the meeting tab closes or someone selects \"Stop sharing\", recording stops and saves after 10 seconds (always on; select \"Reconnect screen\" within 10 seconds to keep recording).",
 "會議結束了但畫面還開著：連續": "If the meeting has ended but the screen is still open: after",
@@ -1341,6 +1361,14 @@ export const PATTERNS = [
 [
 "這組授權碼最近 30 天已在 {1} 台裝置使用，達到 {2} 台上限。",
 "This license key was used on {1} devices in the last 30 days, reaching the limit of {2}."
+],
+[
+"{1} 缺少錄影需要的功能",
+"{1} is missing features needed for recording"
+],
+[
+"{1} 錄不到會議的聲音",
+"{1} can't record meeting audio"
 ],
 [
 "連續 {1} 分鐘沒有會議聲音，判定會議已結束，自動停止並存檔",

@@ -9,6 +9,7 @@ import * as S from './storage.js';
 import * as M from './media.js';
 import * as C from './checks.js';
 import * as L from './license.js';
+import { mountNotice } from './compat.js';
 import { t, tText, fw, partSuffix, fmtWhen } from './i18n.js';
 
 /* ---------------- DOM ---------------- */
@@ -244,6 +245,8 @@ function ciRow(container, name) {
    ================================================================ */
 async function init() {
   baseTitle = document.title;
+  // 不支援的瀏覽器（Firefox／Safari 錄不到會議聲音、手機不能錄）：最上方講清楚，開始鈕鎖住
+  st.env = mountNotice('single');
 
   for (const [k, q] of Object.entries(M.QUALITY)) {
     const o = document.createElement('option');
@@ -357,6 +360,10 @@ function renderMode() {
   el.calloutMonitor.hidden = browser;
   el.calloutBrowser.hidden = !browser;
   el.btnPreflight.textContent = browser ? '選擇分頁並開始檢查' : '選擇畫面並開始檢查';
+  if (st.env && st.env.level !== 'ok') {
+    el.btnPreflight.disabled = true;
+    el.btnPreflight.textContent = st.env.level === 'none' ? '這個瀏覽器無法錄影（見最上方說明）' : '這個瀏覽器錄不到會議聲音（見最上方說明）';
+  }
   el.modeHint.textContent = browser
     ? '只抓那個分頁的畫面與聲音。電腦上其他聲音（音樂、通知）不會混進來，逐字稿品質最好。'
     : '抓整個螢幕與整台電腦的混音。桌面版會議軟體只能這樣錄，但其他聲音也會被錄進去。';
