@@ -29,7 +29,7 @@ const el = {
   calloutMonitor: $('calloutMonitor'), calloutBrowser: $('calloutBrowser'),
   optSilent: $('optSilent'), optUnattended: $('optUnattended'), unattendedOpts: $('unattendedOpts'),
   optAutoStopFatal: $('optAutoStopFatal'), optAutoStopQuiet: $('optAutoStopQuiet'),
-  quietMin: $('quietMin'), maxHours: $('maxHours'),
+  quietMin: $('quietMin'), quietGraceMin: $('quietGraceMin'), maxHours: $('maxHours'),
   micSelect: $('micSelect'), btnRefreshMic: $('btnRefreshMic'), qualitySelect: $('qualitySelect'),
   expectMinutes: $('expectMinutes'),
   optBackupAudio: $('optBackupAudio'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
@@ -190,6 +190,7 @@ function prefs() {
     optAutoStopFatal: el.optAutoStopFatal.checked,
     autoEndQuiet: el.optAutoStopQuiet.checked,
     endQuietMin: Math.max(3, Number(el.quietMin.value) || 10),
+    quietGraceMin: Math.max(0, Number(el.quietGraceMin.value === '' ? 45 : el.quietGraceMin.value)),
     maxHours: Number(el.maxHours.value) || 4,
   };
 }
@@ -205,6 +206,7 @@ function loadPrefs() {
     // 2026-10-02 起「靜音自動收檔」預設開、改用新鍵名（舊鍵 optAutoStopQuiet／quietMin 是預設關的時代存的，不沿用）
     if (p.endQuietMin) el.quietMin.value = p.endQuietMin;
     if (typeof p.autoEndQuiet === 'boolean') el.optAutoStopQuiet.checked = p.autoEndQuiet;
+    if (typeof p.quietGraceMin === 'number') el.quietGraceMin.value = p.quietGraceMin;
     if (p.maxHours) el.maxHours.value = p.maxHours;
     ['optBackupAudio', 'optAlarm', 'optNotify', 'optWakeLock', 'optDeep', 'optAutoStart',
      'optSilent', 'optUnattended', 'optAutoStopFatal'].forEach((k) => {
@@ -303,7 +305,7 @@ async function init() {
   el.micGain.oninput = () => st.mix && st.mix.setGain('mic', Number(el.micGain.value));
   [el.qualitySelect, el.expectMinutes, el.optBackupAudio, el.optAlarm, el.optNotify,
    el.optWakeLock, el.optDeep, el.optAutoStart, el.sourceMode, el.optSilent,
-   el.optUnattended, el.optAutoStopFatal, el.optAutoStopQuiet, el.quietMin, el.maxHours]
+   el.optUnattended, el.optAutoStopFatal, el.optAutoStopQuiet, el.quietMin, el.quietGraceMin, el.maxHours]
     .forEach((n) => n.addEventListener('change', savePrefs));
 
   window.addEventListener('beforeunload', (e) => {
@@ -331,6 +333,7 @@ function applyPlan() {
   if (!pro && el.optUnattended.checked) el.optUnattended.checked = false;
   el.optAutoStopQuiet.disabled = !pro;
   el.quietMin.disabled = !pro;
+  el.quietGraceMin.disabled = !pro;
   if (!pro) el.optAutoStopQuiet.checked = false;
   {
     const w2 = el.optAutoStopQuiet.closest('label');
@@ -1191,7 +1194,9 @@ function watchdogTick() {
   {
     const up = prefs();
     const pro = st.plan && st.plan.unattended;
-    if (pro && up.autoEndQuiet && up.endQuietMin > 0) {
+    // 開錄後的保護期（預設 45 分）內不因沒聲音停止：早會常常提早入會、很久才開講（2026-10-22 使用者要求）
+    const sinceStart = (now - st.session.startedAt) / 1000;
+    if (pro && up.autoEndQuiet && up.endQuietMin > 0 && sinceStart > up.quietGraceMin * 60) {
       const quietSec = (now - (seg.lastSysSound || seg.startedAt)) / 1000;
       if (quietSec > up.endQuietMin * 60) {
         stopRecording(`連續 ${up.endQuietMin} 分鐘沒有會議聲音，判定會議已結束，自動停止並存檔`);

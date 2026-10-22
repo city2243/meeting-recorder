@@ -733,6 +733,9 @@ export const EXACT = {
 "取消失敗：": "Cancellation failed:",
 "綠界沒有確認取消，後續扣款可能還會發生。請稍後再試一次；若持續失敗請來信，我們會人工處理並退還取消後被扣的款項。": "ECPay didn’t confirm the cancellation, so future charges may still occur. Try again later. If it keeps failing, email us and we’ll handle it manually and refund any charges after cancellation.",
 "伺服器發生錯誤，請稍後再試。": "Server error. Try again later.",
+"開錄後": "For the first",
+"每一場開錄後": "For the first",
+"分鐘內，就算完全沒有聲音也不會自動停止（會議晚開場、開場前等很久都不會被收掉）": "minutes after recording starts, it won't stop automatically even with no sound at all (so a late start or a long wait before the meeting won't cut it off)",
 "更改": "Change",
 "每一場照三步做": "Three steps for each meeting",
 "按「選擇這場的分頁」": "Select \"Select a tab for this meeting\"",
@@ -1390,6 +1393,10 @@ export const PATTERNS = [
 [
 "這組授權碼最近 30 天已在 {1} 台裝置使用，達到 {2} 台上限。",
 "This license key was used on {1} devices in the last 30 days, reaching the limit of {2}."
+],
+[
+"開錄 {1} 分鐘後、{2} 分鐘沒聲音自動停止",
+"After the first {1} min, stops after {2} min of silence"
 ],
 [
 "存檔資料夾：{1}",

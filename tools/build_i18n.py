@@ -22,6 +22,10 @@ CJK = re.compile(r'[㐀-鿿　-〿＀-￯]')
 
 # 程式裡刻意拆開呼叫 t() 的字串、以及後來補的，抽取時抓不到，在這裡人工補
 MANUAL = {
+    # 2026-10-22：開錄後保護期（預設 45 分內不因沒聲音停止）
+    '開錄後': 'For the first',
+    '每一場開錄後': 'For the first',
+    '分鐘內，就算完全沒有聲音也不會自動停止（會議晚開場、開場前等很久都不會被收掉）': "minutes after recording starts, it won't stop automatically even with no sound at all (so a late start or a long wait before the meeting won't cut it off)",
     # 2026-10-06：多場頁版面重排（場次置頂、設定與教學收合、每格下一步提示）
     '更改': 'Change',
     '每一場照三步做': 'Three steps for each meeting',
@@ -173,6 +177,7 @@ MANUAL = {
 
 # 執行時才組出來、帶變數的句子（抽取後還沒進 en.json 的）
 MANUAL_PATTERNS = [
+    ['開錄 {1} 分鐘後、{2} 分鐘沒聲音自動停止', 'After the first {1} min, stops after {2} min of silence'],
     ['存檔資料夾：{1}', 'Save folder: {1}'],
     ['畫質：{1}', 'Quality: {1}'],
     ['{1} 分鐘沒聲音自動停止', 'Stops after {1} min of silence'],

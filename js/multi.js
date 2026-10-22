@@ -25,7 +25,7 @@ const el = {
   savedName: $('savedName'), dirLabel: $('dirLabel'),
   qualitySelect: $('qualitySelect'), expectMinutes: $('expectMinutes'),
   optVideo: $('optVideo'), optAlarm: $('optAlarm'), optNotify: $('optNotify'),
-  optAutoQuiet: $('optAutoQuiet'), quietMin: $('quietMin'),
+  optAutoQuiet: $('optAutoQuiet'), quietMin: $('quietMin'), graceMin: $('graceMin'),
   budget: $('budget'),
   slotsCard: $('slotsCard'), slotList: $('slotList'), btnAddSlot: $('btnAddSlot'), planNote: $('planNote'),
   slotHint: $('slotHint'), btnStartAll: $('btnStartAll'),
@@ -135,6 +135,7 @@ function prefs() {
     optNotify: el.optNotify.checked,
     autoQuiet: el.optAutoQuiet.checked,
     quietMin: Math.max(3, Number(el.quietMin.value) || 10),
+    graceMin: Math.max(0, Number(el.graceMin.value === '' ? 45 : el.graceMin.value)),
   };
 }
 function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs())); } catch (e) {} }
@@ -146,6 +147,7 @@ function loadPrefs() {
     ['optVideo', 'optAlarm', 'optNotify'].forEach((k) => { if (typeof p[k] === 'boolean') el[k].checked = p[k]; });
     if (typeof p.autoQuiet === 'boolean') el.optAutoQuiet.checked = p.autoQuiet;
     if (p.quietMin) el.quietMin.value = p.quietMin;
+    if (typeof p.graceMin === 'number') el.graceMin.value = p.graceMin;
   } catch (e) {}
 }
 
@@ -162,7 +164,7 @@ function renderSetupSummary() {
   dirSpan.textContent = dir ? `存檔資料夾：${dir}` : '存檔資料夾：尚未選擇（錄完要一個個按下載）';
   parts.push(dirSpan);
   for (const t of [`畫質：${q ? q.label.split('（')[0] : p.quality}`, p.optVideo ? '錄影像＋聲音' : '只錄聲音',
-    p.autoQuiet && !el.optAutoQuiet.disabled ? `${p.quietMin} 分鐘沒聲音自動停止` : '沒聲音不會自動停止']) {
+    p.autoQuiet && !el.optAutoQuiet.disabled ? `開錄 ${p.graceMin} 分鐘後、${p.quietMin} 分鐘沒聲音自動停止` : '沒聲音不會自動停止']) {
     const sp = document.createElement('span'); sp.textContent = t; parts.push(sp);
   }
   box.replaceChildren(...parts);
@@ -240,7 +242,7 @@ function applyPlan() {
   el.planNote.hidden = pro && max >= 4;
   // 靜音自動收檔屬於 Pro 的「無人看管保護」（方案頁寫的），免費版鎖起來並標 Pro
   const una = !!(st.plan && st.plan.unattended);
-  el.optAutoQuiet.disabled = !una; el.quietMin.disabled = !una;
+  el.optAutoQuiet.disabled = !una; el.quietMin.disabled = !una; el.graceMin.disabled = !una;
   if (!una) el.optAutoQuiet.checked = false;
   {
     const w = el.optAutoQuiet.closest('label');
@@ -570,7 +572,8 @@ function heartbeat() {
       stopSlot(x);
       continue;
     }
-    if (pro && p.autoQuiet && m.quiet > p.quietMin * 60) {
+    // 每一場開錄後的保護期（預設 45 分）內不因沒聲音停止（2026-10-22 使用者要求）
+    if (pro && p.autoQuiet && m.elapsed > p.graceMin * 60 && m.quiet > p.quietMin * 60) {
       log('warn', `「${x.name}」連續 ${p.quietMin} 分鐘沒有聲音，判定會議已結束，自動停止並存檔`);
       stopSlot(x);
       continue;
@@ -801,7 +804,7 @@ async function init() {
   el.btnMark.onclick = markAll;
   if (el.btnAgain) el.btnAgain.onclick = () => location.reload();
   el.alertMute.onclick = () => { st.muted = !st.muted; el.alertMute.textContent = st.muted ? '恢復提示音' : '靜音提示'; };
-  [el.qualitySelect, el.expectMinutes, el.optVideo, el.optAlarm, el.optNotify, el.optAutoQuiet, el.quietMin].forEach((n) =>
+  [el.qualitySelect, el.expectMinutes, el.optVideo, el.optAlarm, el.optNotify, el.optAutoQuiet, el.quietMin, el.graceMin].forEach((n) =>
     n.addEventListener('change', () => { savePrefs(); renderBudget(); }));
 
   window.addEventListener('beforeunload', (e) => {

@@ -139,7 +139,7 @@
     <div class="field">
       <span class="field-label">會議結束時自動停止並存檔</span>
       <p class="hint">會議分頁被關掉、或按了「停止共用」：10 秒後自動停止並存檔（一律開啟；10 秒內按「重新接上畫面」可以接著錄）。</p>
-      <label class="check" for="optAutoStopQuiet"><input type="checkbox" id="optAutoStopQuiet" checked><span>會議結束了但畫面還開著：連續 <input type="number" id="quietMin" value="10" min="3" max="120" step="1"> 分鐘完全沒有會議聲音，就判定會議結束，自動停止並存檔</span></label>
+      <label class="check" for="optAutoStopQuiet"><input type="checkbox" id="optAutoStopQuiet" checked><span>會議結束了但畫面還開著：連續 <input type="number" id="quietMin" value="10" min="3" max="120" step="1"> 分鐘完全沒有會議聲音，就判定會議結束，自動停止並存檔<br><span class="hint-inline">開錄後 <input type="number" id="quietGraceMin" value="45" min="0" max="240" step="5"> 分鐘內，就算完全沒有聲音也不會自動停止（會議晚開場、開場前等很久都不會被收掉）</span></span></label>
     </div>
 
     <div class="field">
